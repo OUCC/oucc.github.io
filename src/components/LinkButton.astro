@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types'
 
 type Props = Omit<HTMLAttributes<'a'>, 'slot'> & {
-  variant: 'primary' | 'secondary' | 'discord'
+  variant?: 'primary' | 'secondary' | 'discord'
 }
 
 const { variant = 'primary', ...attrs } = Astro.props
