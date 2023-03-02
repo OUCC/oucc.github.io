@@ -1,15 +1,18 @@
 ---
 interface Props {
-  inverted?: boolean
+  variant?: 'primary' | 'secondary'
 }
 
-const { inverted = false } = Astro.props
+const { variant = 'primary' } = Astro.props
 ---
 
 <h2
   class:list={[
     'w-full border-x-[2rem] p-2.5 text-3xl font-bold',
-    inverted ? 'border-secondary text-secondary' : 'border-primary text-black',
+    {
+      'border-primary text-black': variant === 'primary',
+      'border-secondary text-secondary': variant === 'secondary',
+    },
   ]}
 >
   <slot />

@@ -1,15 +1,16 @@
 ---
 import Section from '@/components/Section.astro'
-import Heading1 from '@/components/Heading1.astro'
 import LinkButton from '@/components/LinkButton.astro'
 ---
 
 <Section background="secondary">
-  <Heading1>よくある質問</Heading1>
-  <div class="w-full px-8 text-justify">
-    「部室はあるの？」「活動には必ず参加しないといけないの？」「部費はかかるの？」など、よくある質問はこちらから。
-  </div>
-  <div class="flex justify-center">
-    <LinkButton href="/faq">FAQページへ</LinkButton>
+  <Fragment slot="title">よくある質問</Fragment>
+  <div class="flex flex-col gap-5">
+    <div class="text-justify">
+      「部室はあるの？」「活動には必ず参加しないといけないの？」「部費はかかるの？」など、よくある質問はこちらから。
+    </div>
+    <div class="flex justify-center">
+      <LinkButton href="/faq">FAQページへ</LinkButton>
+    </div>
   </div>
 </Section>

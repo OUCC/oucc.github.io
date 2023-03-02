@@ -3,6 +3,11 @@ module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
+      maxWidth: {
+        container: '768px',
+        // 最大コンテナ幅にモバイルでの左右のパディングを足したもの
+        'padded-container': 'calc(768px + 4rem)',
+      },
       colors: {
         primary: '#1a2872',
         secondary: '#f1f2f7',

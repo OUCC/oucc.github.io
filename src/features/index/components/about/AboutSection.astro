@@ -1,6 +1,5 @@
 ---
 import Section from '@/components/Section.astro'
-import Heading1 from '@/components/Heading1.astro'
 import Image from '@/components/Image.astro'
 import MemberIcon from '@/components/icon/MemberIcon.astro'
 import TeamIcon from '@/components/icon/TeamIcon.astro'
@@ -9,11 +8,11 @@ import logoImage from '@/assets/oucc-logo.webp'
 ---
 
 <Section background="white">
-  <Heading1>
+  <Fragment slot="title">
     <span class="inline-block">OUCCって</span>
     <span class="inline-block">どんなサークル？</span>
-  </Heading1>
-  <ul class="w-full px-8 flex flex-col gap-5">
+  </Fragment>
+  <ul class="flex flex-col gap-5">
     <li>
       <AboutCard>
         <Image

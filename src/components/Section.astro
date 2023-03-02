@@ -1,4 +1,6 @@
 ---
+import Heading1 from './Heading1.astro'
+
 interface Props {
   background: 'white' | 'primary' | 'secondary'
 }
@@ -8,7 +10,7 @@ const { background } = Astro.props
 
 <section
   class:list={[
-    `flex flex-col py-8 gap-5`,
+    'py-8 flex justify-center',
     {
       'bg-white': background === 'white',
       'bg-primary': background === 'primary',
@@ -16,5 +18,16 @@ const { background } = Astro.props
     },
   ]}
 >
-  <slot />
+  <div class="max-w-padded-container flex flex-col gap-5">
+    {
+      Astro.slots.has('title') && (
+        <Heading1 variant={background === 'primary' ? 'secondary' : 'primary'}>
+          <slot name="title" />
+        </Heading1>
+      )
+    }
+    <div class="px-8">
+      <slot />
+    </div>
+  </div>
 </section>
