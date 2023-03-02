@@ -1,5 +1,7 @@
 ---
 import Section from '@/components/Section.astro'
+import Button from '@/components/Button.astro'
+import DiscordLogo from './DiscordLogo.astro'
 ---
 
 <Section background="white">
@@ -16,6 +18,21 @@ import Section from '@/components/Section.astro'
       <p>
         個人情報の登録は不要で、ハンドルネームで交流できます。以下のリンクから参加をお待ちしています。
       </p>
+    </div>
+    <div class="flex justify-center">
+      <Button
+        element="a"
+        href="https://discord.gg/jBM2NP7ZxK"
+        target="_blank"
+        variant="discord"
+      >
+        <span class="flex items-center gap-2.5">
+          <span class="w-7">
+            <DiscordLogo />
+          </span>
+          <span>公開サーバーに参加</span>
+        </span>
+      </Button>
     </div>
     <div>
       <p>
