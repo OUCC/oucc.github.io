@@ -8,6 +8,9 @@ module.exports = {
         secondary: '#f1f2f7',
         discord: '#5865F2',
       },
+      dropShadow: {
+        contrast: '0 2px 2px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
 }

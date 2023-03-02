@@ -1,0 +1,49 @@
+---
+import LargeCard from './LargeCard.astro'
+import SmallCard from './SmallCard.astro'
+---
+
+<div class="flex flex-col gap-2.5">
+  <LargeCard title="誰でも参加可能">
+    <SmallCard title="Discord 公開サーバー">
+      <p>
+        新入生はもちろん、受験生や社会人、他大生などどなたでも歓迎します。OUCCのメンバーも全員参加しています。
+      </p>
+      <ul class="list-disc list-inside">
+        <li>新歓イベント</li>
+        <li>ハッカソン</li>
+        <li>共同開発</li>
+        <li>仕事の紹介</li>
+        <li>活動に関する質問</li>
+      </ul>
+    </SmallCard>
+    <SmallCard title="いちょう祭・まちかね祭">
+      <p>
+        大阪大学の大学祭であるいちょう祭とまちかね祭に出展します。運営は部員が行っており、展示はどなたでもご覧いただけます。
+      </p>
+      <ul class="list-disc list-inside">
+        <li>制作物の展示</li>
+        <li>VR体験</li>
+        <li>食品の販売</li>
+      </ul>
+    </SmallCard>
+  </LargeCard>
+  <LargeCard title="部員のみ参加可能">
+    <SmallCard title="Discord 部内サーバー">
+      <p>部員に加え、OBOGも参加しています。</p>
+      <ul class="list-disc list-inside">
+        <li>イベントや大学祭の計画</li>
+        <li>サーバーやウェブサイトの管理</li>
+        <li>講義に関する議論や情報共有</li>
+        <li>毎月の部会</li>
+      </ul>
+    </SmallCard>
+    <SmallCard title="部室">
+      <p>豊中キャンパスの学生交流棟に位置しています。</p>
+      <ul class="list-disc list-inside">
+        <li>機材の保管</li>
+        <li>交流</li>
+      </ul>
+    </SmallCard>
+  </LargeCard>
+</div>
