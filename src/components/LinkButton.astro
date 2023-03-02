@@ -1,19 +1,14 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 
-type Props = (
-  | ({ element: 'a' } & Omit<HTMLAttributes<'a'>, 'slot'>)
-  | ({ element?: 'button' } & Omit<HTMLAttributes<'button'>, 'slot'>)
-) & { variant: 'primary' | 'secondary' | 'discord' }
+type Props = Omit<HTMLAttributes<'a'>, 'slot'> & {
+  variant: 'primary' | 'secondary' | 'discord'
+}
 
-const {
-  element: Element = 'button',
-  variant = 'primary',
-  ...attrs
-} = Astro.props
+const { variant = 'primary', ...attrs } = Astro.props
 ---
 
-<Element
+<a
   class:list={[
     'px-5 py-2.5 rounded-full font-bold',
     {
@@ -29,9 +24,7 @@ const {
     'active:translate-y-1 transition-[filter,transform] ease-in-out',
     attrs.class,
   ]}
-  {...attrs as typeof Element extends 'a'
-    ? Omit<HTMLAttributes<'a'>, 'slot'>
-    : Omit<HTMLAttributes<'button'>, 'slot'>}
+  {...attrs}
 >
   <slot />
-</Element>
+</a>

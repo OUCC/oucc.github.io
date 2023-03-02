@@ -1,7 +1,7 @@
 ---
 import Image from './Image.astro'
 import logoImage from '@/assets/oucc-logo.webp'
-import Button from './Button.astro'
+import LinkButton from './LinkButton.astro'
 
 interface Props {
   showJoinLink?: boolean
@@ -23,12 +23,6 @@ const { showJoinLink = false } = Astro.props
     /></a
   >
   <div class="flex flex-col justify-center">
-    {
-      showJoinLink && (
-        <Button element="a" href="/join">
-          Join OUCC!
-        </Button>
-      )
-    }
+    {showJoinLink && <LinkButton href="/join">Join OUCC!</LinkButton>}
   </div>
 </header>
