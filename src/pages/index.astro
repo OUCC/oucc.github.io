@@ -1,0 +1,18 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/Hero.astro'
+import AboutSection from '@/features/index/components/about/AboutSection.astro'
+import ActivitySection from '@/features/index/components/activity/ActivitySection.astro'
+import JoinSection from '@/features/index/components/join/JoinSection.astro'
+import FaqSection from '@/features/index/components/faq/FaqSection.astro'
+---
+
+<Layout showJoinLink>
+  <Hero title="OUCC" copy="デジタルの世界を共有しよう" />
+  <main>
+    <AboutSection />
+    <ActivitySection />
+    <JoinSection />
+    <FaqSection />
+  </main>
+</Layout>

@@ -1,0 +1,34 @@
+---
+import type { PictureComponentLocalImageProps } from '@astrojs/image/components'
+import TimelineIcon from '@/components/icon/TimelineIcon.astro'
+import Image from '@/components/Image.astro'
+
+interface Props {
+  title: string
+  image?: PictureComponentLocalImageProps['src']
+}
+
+const { title, image } = Astro.props
+---
+
+<div class="w-full p-2.5 flex flex-col gap-2.5">
+  <h3 class="flex gap-2.5 text-2xl font-bold">
+    <span class="w-8">
+      <TimelineIcon />
+    </span>
+    <span>{title}</span>
+  </h3>
+  {
+    image && (
+      <Image
+        class="w-full aspect-[2/1]"
+        src={image}
+        alt={`${title}の様子`}
+        sizes="100%"
+      />
+    )
+  }
+  <div class="text-justify">
+    <slot />
+  </div>
+</div>

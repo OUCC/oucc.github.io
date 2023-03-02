@@ -1,0 +1,28 @@
+---
+import Section from '@/components/Section.astro'
+import Heading1 from '@/components/Heading1.astro'
+import ActivityCard from '@/features/activity/components/ActivityCard.astro'
+import discordImage from '@/features/activity/assets/discord.webp'
+---
+
+<Section background="secondary">
+  <Heading1>イベント</Heading1>
+  <ul class="w-full px-8 flex flex-col gap-5">
+    <li>
+      <ActivityCard title="4月 講習会" image={discordImage}>
+        プログラミングの基礎、機械学習、3Dモデリングなど様々なテーマで、数カ月間にわたり講習会が開催されます。
+        新歓イベントの一環として開催しており、どなたでも参加できます。
+      </ActivityCard>
+    </li>
+    <li>
+      <ActivityCard title="6月 ハッカソン" image={discordImage}>
+        チームに分かれて数週間で共同制作を行うイベント「ハッカソン」が開催されます。
+      </ActivityCard>
+    </li>
+    <li>
+      <ActivityCard title="11月 まちかね祭" image={discordImage}>
+        大阪大学の大学祭の一つであるまちかね祭に出展し、制作物を展示します。食品を販売する模擬店も開きます。
+      </ActivityCard>
+    </li>
+  </ul>
+</Section>

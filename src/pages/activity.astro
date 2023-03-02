@@ -1,0 +1,14 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/Hero.astro'
+import EventsSection from '@/features/activity/components/EventsSection.astro'
+import DailyActivitySection from '@/features/activity/components/DailyActivitySection.astro'
+---
+
+<Layout showJoinLink>
+  <Hero title="活動紹介" copy="1年間の活動を紹介します" compact />
+  <main>
+    <DailyActivitySection />
+    <EventsSection />
+  </main>
+</Layout>

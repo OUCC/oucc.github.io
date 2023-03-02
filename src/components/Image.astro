@@ -1,0 +1,15 @@
+---
+import {
+  Picture,
+  PictureComponentLocalImageProps,
+} from '@astrojs/image/components'
+
+type Props = Omit<PictureComponentLocalImageProps, 'widths' | 'slot'> & {
+  widths?: number[]
+}
+
+const { widths = [1920, 960, 480, 240], ...attrs } = Astro.props
+const widthsWithHdpr = [...new Set(widths.flatMap((w) => [w, w * 2, w * 3]))]
+---
+
+<Picture widths={widthsWithHdpr} formats={['webp']} {...attrs} />

@@ -1,0 +1,21 @@
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependencies
+node_modules
+
+# Build output
+dist
+.output
+
+# Generated types
+.astro
+
+# WebStorm
+/.idea
+
+# macOS-specific files
+.DS_Store

@@ -1,0 +1,20 @@
+---
+interface Props {
+  background: 'white' | 'primary' | 'secondary'
+}
+
+const { background } = Astro.props
+---
+
+<section
+  class:list={[
+    `flex flex-col py-8 gap-5`,
+    {
+      'bg-white': background === 'white',
+      'bg-primary': background === 'primary',
+      'bg-secondary': background === 'secondary',
+    },
+  ]}
+>
+  <slot />
+</section>

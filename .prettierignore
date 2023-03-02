@@ -1,0 +1,7 @@
+# Generated files
+.astro
+/src/env.d.ts
+/dist
+
+# WebStorm
+/.idea

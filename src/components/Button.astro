@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = (
+  | ({ element: 'a' } & Omit<HTMLAttributes<'a'>, 'slot'>)
+  | ({ element?: 'button' } & Omit<HTMLAttributes<'button'>, 'slot'>)
+) & { inverted?: boolean }
+
+const { element: Element = 'button', inverted = false, ...attrs } = Astro.props
+---
+
+<Element
+  class:list={[
+    'px-5 py-2.5 rounded-full font-bold',
+    inverted
+      ? 'bg-white text-primary drop-shadow-[0_4px_4px_#ffffff40] hover:drop-shadow-[0_4px_4px_#ffffff80]'
+      : 'bg-primary text-white drop-shadow-[0_4px_4px_#00000040] hover:drop-shadow-[0_4px_4px_#00000080]',
+    'active:drop-shadow-none',
+    'active:translate-y-1 transition-[filter,transform] ease-in-out',
+    attrs.class,
+  ]}
+  {...(attrs as (typeof Element extends 'a' ? Omit<HTMLAttributes<'a'>, 'slot'> : Omit<HTMLAttributes<'button'>, 'slot'>))}
+>
+  <slot />
+</Element>
