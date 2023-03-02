@@ -19,7 +19,9 @@ const { element: Element = 'button', inverted = false, ...attrs } = Astro.props
     'active:translate-y-1 transition-[filter,transform] ease-in-out',
     attrs.class,
   ]}
-  {...(attrs as (typeof Element extends 'a' ? Omit<HTMLAttributes<'a'>, 'slot'> : Omit<HTMLAttributes<'button'>, 'slot'>))}
+  {...attrs as typeof Element extends 'a'
+    ? Omit<HTMLAttributes<'a'>, 'slot'>
+    : Omit<HTMLAttributes<'button'>, 'slot'>}
 >
   <slot />
 </Element>
