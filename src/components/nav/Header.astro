@@ -87,7 +87,7 @@ const { showJoinLink = false } = Astro.props
     e.preventDefault()
   })
 
-  dialog.addEventListener('transitionend', (e) => {
+  dialog.addEventListener('transitionend', () => {
     if (dialog.dataset.active === 'false') {
       dialog.close()
     }
