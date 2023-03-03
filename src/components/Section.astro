@@ -18,7 +18,7 @@ const { background } = Astro.props
     },
   ]}
 >
-  <div class="max-w-padded-container flex flex-col gap-5">
+  <div class="w-full max-w-padded-container flex flex-col gap-5">
     {
       Astro.slots.has('title') && (
         <Heading1 variant={background === 'primary' ? 'secondary' : 'primary'}>
