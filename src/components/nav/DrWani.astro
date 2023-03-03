@@ -1,0 +1,22 @@
+---
+import Image from '@/components/Image.astro'
+import drWaniImage from '@/assets/drwani_eng.png'
+---
+
+<figure
+  class:list={[
+    'p-2 flex flex-col items-center',
+    'translate-y-14 hover:translate-y-0 transition-transform ease-[cubic-bezier(0.34,1.56,0.64,1)] duration-200',
+  ]}
+>
+  <Image
+    class="w-24"
+    src={drWaniImage}
+    alt="大阪大学「ワニ博士」工学部の頃"
+    sizes="6rem"
+    widths={[96]}
+  />
+  <figcaption class="text-sm opacity-50">
+    大阪大学「ワニ博士」工学部の頃
+  </figcaption>
+</figure>

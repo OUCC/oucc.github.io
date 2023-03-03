@@ -1,0 +1,73 @@
+---
+import HamburgerIcon from '@/components/icon/HamburgerIcon.astro'
+import OuccLogoSquare from '@/components/icon/OuccLogoSquare.astro'
+import LinkButton from '@/components/LinkButton.astro'
+import Navigation from './Navigation.astro'
+
+interface Props {
+  showJoinLink?: boolean
+}
+
+const { showJoinLink = false } = Astro.props
+---
+
+<header
+  class="sticky top-0 z-10 h-16 pr-5 flex justify-between bg-white border-b"
+>
+  <div class="flex">
+    <button
+      id="navigation-menu-open"
+      class="mx-5 w-5 flex items-center text-slate-500"
+    >
+      <HamburgerIcon />
+    </button>
+    <div
+      id="navigation-menu"
+      data-visible="false"
+      class:list={[
+        'group fixed inset-0 z-10',
+        'pointer-events-none data-[visible=true]:pointer-events-auto',
+        'data-[visible=true]:backdrop-blur-sm transition-[backdrop-filter] ease-in-out',
+      ]}
+    >
+      <div
+        class:list={[
+          'w-64 h-full drop-shadow-[2px_0_4px_rgba(0,0,0,0.5)]',
+          '-translate-x-full group-data-[visible=true]:translate-x-0 transition-transform ease-in-out',
+        ]}
+      >
+        {/* TODO: focus trap */}
+        <Navigation />
+      </div>
+    </div>
+    <a href="/">
+      <div class="h-full aspect-square">
+        <OuccLogoSquare />
+      </div>
+    </a>
+  </div>
+  <div class="flex flex-col justify-center">
+    {showJoinLink && <LinkButton href="/join">Join OUCC!</LinkButton>}
+  </div>
+</header>
+
+<script>
+  const menuOpenButton = document.getElementById('navigation-menu-open')
+  const menu = document.getElementById('navigation-menu')
+
+  if (menuOpenButton === null) {
+    throw new Error('#navigation-menu-open not found')
+  }
+  if (menu === null) {
+    throw new Error('#navigation-menu not found')
+  }
+
+  menuOpenButton.addEventListener('click', () => {
+    menu.dataset.visible = 'true'
+  })
+  menu.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      menu.dataset.visible = 'false'
+    }
+  })
+</script>
