@@ -1,6 +1,5 @@
 ---
-import Image from './Image.astro'
-import logoImage from '@/assets/oucc-logo.webp'
+import OuccLogoSquare from './icon/OuccLogoSquare.astro'
 import LinkButton from './LinkButton.astro'
 
 interface Props {
@@ -14,14 +13,10 @@ const { showJoinLink = false } = Astro.props
   class="sticky top-0 z-10 h-16 px-5 flex justify-between bg-white border-b"
 >
   <a href="/">
-    <Image
-      class="h-full aspect-square"
-      src={logoImage}
-      alt="OUCC"
-      widths={[64]}
-      sizes="64px"
-    /></a
-  >
+    <div class="h-full aspect-square">
+      <OuccLogoSquare />
+    </div>
+  </a>
   <div class="flex flex-col justify-center">
     {showJoinLink && <LinkButton href="/join">Join OUCC!</LinkButton>}
   </div>
