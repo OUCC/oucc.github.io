@@ -35,13 +35,13 @@ const { showJoinLink = false } = Astro.props
     data-active="false"
     class:list={[
       'group m-0 p-0 w-full h-full max-w-none max-h-none bg-transparent',
-      'data-[active=true]:backdrop-blur-sm transition-[backdrop-filter] ease-in-out',
+      'data-[active=true]:backdrop-blur-sm transition-[backdrop-filter] ease-[cubic-bezier(0.2,0.95,0.5,1)] duration-[400ms]',
     ]}
   >
     <div
       class:list={[
         'w-64 h-full drop-shadow-[2px_0_4px_rgba(0,0,0,0.5)]',
-        '-translate-x-full group-data-[active=true]:translate-x-0 transition-transform ease-in-out',
+        '-translate-x-full group-data-[active=true]:translate-x-0 transition-transform ease-[cubic-bezier(0.2,0.95,0.5,1)] duration-[400ms]',
       ]}
     >
       <Navigation />
