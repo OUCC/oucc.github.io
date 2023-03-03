@@ -10,7 +10,7 @@ interface Item {
   description: string[]
 }
 
-const items = [
+const items: Item[] = [
   {
     icon: OuccLogoSquare,
     description: [
@@ -32,7 +32,7 @@ const items = [
       '大学院生や社会人となっているOBOGとの交流も盛んで、幅広い世代が集う活気あふれる環境です。',
     ],
   },
-] satisfies Item[] as const
+]
 ---
 
 <Section background="white">

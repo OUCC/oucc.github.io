@@ -10,7 +10,7 @@ interface Item {
   description: string
 }
 
-const items = [
+const items: Item[] = [
   {
     title: '4月 講習会',
     image: discordImage,
@@ -29,7 +29,7 @@ const items = [
     description:
       '大阪大学の大学祭の一つであるまちかね祭に出展し、制作物を展示します。食品を販売する模擬店も開きます。',
   },
-] satisfies Item[] as const
+]
 ---
 
 <Section background="secondary">

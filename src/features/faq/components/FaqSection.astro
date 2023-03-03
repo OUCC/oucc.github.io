@@ -7,7 +7,7 @@ interface Item {
   description: string[]
 }
 
-const items = [
+const items: Item[] = [
   {
     title: '必ず参加しなければいけない活動はありますか？',
     description: [
@@ -24,7 +24,7 @@ const items = [
   },
   { title: 'どのような人が所属していますか？', description: ['TODO'] },
   { title: '他にもなにか書くかも', description: ['TODO'] },
-] satisfies Item[] as const
+]
 ---
 
 <Section background="white">
