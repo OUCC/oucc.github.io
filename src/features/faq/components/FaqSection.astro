@@ -1,29 +1,46 @@
 ---
 import Section from '@/components/Section.astro'
 import FaqCard from './FaqCard.astro'
+
+interface Item {
+  title: string
+  description: string[]
+}
+
+const items = [
+  {
+    title: '必ず参加しなければいけない活動はありますか？',
+    description: [
+      '月に一度、週末に開催する部会には原則として部員全員が参加しますが、事情があれば欠席しても構いません。また、大阪大学の大学祭であるいちょう祭とまちかね祭への出展は部員全員で協力して行います。',
+      'それ以外の活動への参加は自由です。',
+    ],
+  },
+  {
+    title: '部室はありますか？',
+    description: [
+      '豊中キャンパスに部室があります。ただし現在は機材の保管にのみ使っており、活動はオンラインで行っています。',
+      '以前は学外に部室を設置していましたが、2021年に学内へ移転しています。',
+    ],
+  },
+  { title: 'どのような人が所属していますか？', description: ['TODO'] },
+  { title: '他にもなにか書くかも', description: ['TODO'] },
+] satisfies Item[] as const
 ---
 
 <Section background="white">
-  <div class="flex flex-col gap-5">
-    <FaqCard title="必ず参加しなければいけない活動はありますか？">
-      <p>
-        月に一度、週末に開催する部会には原則として部員全員が参加しますが、事情があれば欠席しても構いません。また、大阪大学の大学祭であるいちょう祭とまちかね祭への出展は部員全員で協力して行います。
-      </p>
-      <p>それ以外の活動への参加は自由です。</p>
-    </FaqCard>
-    <FaqCard title="部室はありますか？">
-      <p>
-        豊中キャンパスに部室があります。ただし現在は機材の保管にのみ使っており、活動はオンラインで行っています。
-      </p>
-      <p>
-        以前は学外に部室を設置していましたが、2021年に学内へ移転しています。
-      </p>
-    </FaqCard>
-    <FaqCard title="どのような人が所属していますか？">
-      <p>TODO</p>
-    </FaqCard>
-    <FaqCard title="他にもなにか書くかも">
-      <p>TODO</p>
-    </FaqCard>
+  <div class="flex justify-center">
+    <ul class="flex flex-wrap gap-5">
+      {
+        items.map(({ title, description }) => (
+          <li class="flex-1 min-w-[18rem]">
+            <FaqCard title={title}>
+              {description.map((x) => (
+                <p>{x}</p>
+              ))}
+            </FaqCard>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </Section>
