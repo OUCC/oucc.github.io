@@ -24,9 +24,10 @@ import DrWani from './DrWani.astro'
   <div class="grow relative [container-type:size]">
     <div
       class:list={[
-        'absolute w-full h-full flex items-end justify-center',
+        'absolute w-full h-full overflow-hidden flex items-end justify-center',
         // <DrWani>の高さが132pxなので、コンテナの高さが132px未満の場合は表示しない
-        '[@container_not_(min-height:132px)]:pointer-events-none [@container_not_(min-height:132px)]:opacity-0 transition-opacity',
+        'invisible [@container(min-height:132px)]:visible',
+        'opacity-0 [@container(min-height:132px)]:opacity-100 transition-[visibility,opacity]',
       ]}
     >
       <DrWani />

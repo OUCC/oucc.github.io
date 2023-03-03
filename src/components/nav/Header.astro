@@ -16,7 +16,7 @@ const { showJoinLink = false } = Astro.props
 >
   <div class="flex">
     <button
-      id="navigation-menu-open"
+      id="navigation-dialog-open"
       class="mx-5 w-5 flex items-center text-slate-500"
     >
       <HamburgerIcon />
@@ -30,12 +30,11 @@ const { showJoinLink = false } = Astro.props
   <div class="flex flex-col justify-center">
     {showJoinLink && <LinkButton href="/join">Join OUCC!</LinkButton>}
   </div>
-  <div
-    id="navigation-menu"
+  <dialog
+    id="navigation-dialog"
     data-visible="false"
     class:list={[
-      'group fixed inset-0 z-10',
-      'pointer-events-none data-[visible=true]:pointer-events-auto',
+      'group m-0 p-0 w-full h-full max-w-none max-h-none bg-transparent',
       'data-[visible=true]:backdrop-blur-sm transition-[backdrop-filter] ease-in-out',
     ]}
   >
@@ -45,29 +44,52 @@ const { showJoinLink = false } = Astro.props
         '-translate-x-full group-data-[visible=true]:translate-x-0 transition-transform ease-in-out',
       ]}
     >
-      {/* TODO: focus trap */}
       <Navigation />
     </div>
-  </div>
+  </dialog>
 </header>
 
 <script>
-  const menuOpenButton = document.getElementById('navigation-menu-open')
-  const menu = document.getElementById('navigation-menu')
+  import { disableScroll, enableScroll } from '@/utils/controlScroll'
 
-  if (menuOpenButton === null) {
-    throw new Error('#navigation-menu-open not found')
+  const dialogOpenButton = document.getElementById('navigation-dialog-open')
+  const dialog = document.getElementById('navigation-dialog')
+
+  if (dialogOpenButton === null) {
+    throw new Error('#navigation-dialog-open element not found')
   }
-  if (menu === null) {
-    throw new Error('#navigation-menu not found')
+  if (dialog === null) {
+    throw new Error('#navigation-dialog element not found')
+  }
+  if (!(dialog instanceof HTMLDialogElement)) {
+    throw new Error('#navigation-dialog is not a <dialog> element')
   }
 
-  menuOpenButton.addEventListener('click', () => {
-    menu.dataset.visible = 'true'
+  const requestOpenDialog = () => {
+    dialog.showModal()
+    dialog.dataset.visible = 'true'
+    disableScroll()
+  }
+  const requestCloseDialog = () => {
+    dialog.dataset.visible = 'false'
+    enableScroll()
+  }
+
+  dialogOpenButton.addEventListener('click', requestOpenDialog)
+
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      requestCloseDialog()
+    }
   })
-  menu.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) {
-      menu.dataset.visible = 'false'
+  dialog.addEventListener('cancel', (e) => {
+    requestCloseDialog()
+    e.preventDefault()
+  })
+
+  dialog.addEventListener('transitionend', (e) => {
+    if (dialog.dataset.visible === 'false') {
+      dialog.close()
     }
   })
 </script>
