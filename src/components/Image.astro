@@ -1,15 +1,42 @@
 ---
-import {
-  Picture,
-  PictureComponentLocalImageProps,
+import type { HTMLAttributes } from 'astro/types'
+import type {
+  ImageComponentLocalImageProps,
+  ImageComponentRemoteImageProps,
 } from '@astrojs/image/components'
+import { getPicture } from '@astrojs/image'
 
-type Props = Omit<PictureComponentLocalImageProps, 'widths' | 'slot'> & {
+type Props = Omit<HTMLAttributes<'img'>, 'src' | 'srcset' | 'alt'> & {
+  src:
+    | ImageComponentLocalImageProps['src']
+    | ImageComponentRemoteImageProps['src']
+  alt: string
   widths?: number[]
 }
 
-const { widths = [1920, 960, 480, 240], ...attrs } = Astro.props
-const widthsWithHdpr = [...new Set(widths.flatMap((w) => [w, w * 2, w * 3]))]
+const {
+  src,
+  alt,
+  widths = [1920, 960, 480, 240],
+  loading = 'lazy',
+  decoding = 'async',
+  ...attrs
+} = Astro.props
+const widthsWithHdpi = [...new Set(widths.flatMap((w) => [w, w * 2, w * 3]))]
+
+const { image, sources } = await getPicture({
+  src,
+  alt,
+  widths: widthsWithHdpi,
+  formats: ['webp'],
+})
+const srcset = sources.find(({ type }) => type === 'image/webp')?.srcset
 ---
 
-<Picture widths={widthsWithHdpr} formats={['webp']} {...attrs} />
+<img
+  {...image}
+  srcset={srcset}
+  loading={loading}
+  decoding={decoding}
+  {...attrs}
+/>
