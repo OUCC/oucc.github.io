@@ -1,0 +1,30 @@
+---
+import Section from '@/components/Section.astro'
+import DiscordJoinLink from '@/components/button/DiscordJoinLink.astro'
+import TwitterLink from '@/components/button/TwitterLink.astro'
+---
+
+<Section background="white">
+  <div class="flex flex-col gap-5">
+    <div>
+      <p>
+        活動に関するご質問、ご相談等は公開Discordサーバーで受け付けております。
+      </p>
+    </div>
+    <div class="flex justify-center">
+      <DiscordJoinLink />
+    </div>
+    <div>
+      <p>
+        また、質問箱では匿名で質問を送ることができます。回答はOUCCのTwitterアカウントから発信します。
+      </p>
+    </div>
+    <div class="flex justify-center">
+      <TwitterLink />
+    </div>
+    <div>
+      <p>メールでご連絡いただくことも可能です。</p>
+      <p>oucc.formal☆gmail.com （☆をアットマークに置き換えてください）</p>
+    </div>
+  </div>
+</Section>

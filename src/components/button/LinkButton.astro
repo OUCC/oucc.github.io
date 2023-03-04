@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types'
 
 type Props = Omit<HTMLAttributes<'a'>, 'slot'> & {
-  variant?: 'primary' | 'white' | 'discord'
+  variant?: 'primary' | 'white' | 'twitter' | 'discord'
 }
 
 const { variant = 'primary', ...attrs } = Astro.props
@@ -16,6 +16,8 @@ const { variant = 'primary', ...attrs } = Astro.props
         variant === 'primary',
       'bg-white text-primary drop-shadow-white-light hover:drop-shadow-white-heavy':
         variant === 'white',
+      'bg-twitter text-white drop-shadow-twitter-light hover:drop-shadow-twitter-heavy':
+        variant === 'twitter',
       'bg-discord text-white drop-shadow-discord-light hover:drop-shadow-discord-heavy':
         variant === 'discord',
     },
