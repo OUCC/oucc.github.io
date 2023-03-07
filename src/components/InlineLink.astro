@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = Omit<HTMLAttributes<'a'>, 'slot'>
+
+const { class: className, ...attrs } = Astro.props
+---
+
+<a class:list={['text-blue-600 underline', className]} {...attrs}>
+  <slot />
+</a>
