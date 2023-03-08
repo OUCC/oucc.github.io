@@ -1,0 +1,17 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/Hero.astro'
+---
+
+<Layout title="404 Not Found" showJoinLink>
+  <div>
+    <Hero
+      title="404 Not Found"
+      copy="お探しのページは見つかりませんでした。"
+      compact
+    />
+    <main style={{ padding: '48px 0', display: 'grid', placeItems: 'center' }}>
+      <p>お探しのページは見つかりませんでした。</p>
+    </main>
+  </div>
+</Layout>
