@@ -1,42 +1,14 @@
 ---
-import type { PictureComponentLocalImageProps } from '@astrojs/image/components'
 import Section from '@/components/Section.astro'
 import ActivityCard from '@/features/activity/components/ActivityCard.astro'
-import discordImage from '@/features/activity/assets/discord.webp'
-
-interface Item {
-  title: string
-  image: PictureComponentLocalImageProps['src']
-  description: string
-}
-
-const items: Item[] = [
-  {
-    title: '4月 講習会',
-    image: discordImage,
-    description:
-      'プログラミングの基礎、機械学習、3Dモデリングなど様々なテーマで、数カ月間にわたり講習会が開催されます。新歓イベントの一環として開催しており、どなたでも参加できます。',
-  },
-  {
-    title: '6月 ハッカソン',
-    image: discordImage,
-    description:
-      'チームに分かれて数週間で共同制作を行うイベント「ハッカソン」が開催されます。',
-  },
-  {
-    title: '11月 まちかね祭',
-    image: discordImage,
-    description:
-      '大阪大学の大学祭の一つであるまちかね祭に出展し、制作物を展示します。食品を販売する模擬店も開きます。',
-  },
-]
+import { events } from '@/features/activity/events'
 ---
 
 <Section background="secondary">
   <Fragment slot="title">イベント</Fragment>
   <ul class="flex flex-col items-center gap-8">
     {
-      items.map(({ title, image, description }) => (
+      events.map(({ title, image, description }) => (
         <li class="max-w-[32rem]">
           <ActivityCard title={title} image={image}>
             {description}

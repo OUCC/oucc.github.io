@@ -20,12 +20,7 @@ const { title, image } = Astro.props
   </h3>
   {
     image && (
-      <Image
-        class="w-full aspect-[2/1]"
-        src={image}
-        alt={`${title}の様子`}
-        sizes="100%"
-      />
+      <Image class="w-full" src={image} alt={`${title}の様子`} sizes="100%" />
     )
   }
   <div class="text-justify-ja">
