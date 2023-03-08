@@ -3,7 +3,9 @@ import type { PictureComponentLocalImageProps } from '@astrojs/image/components'
 import Section from '@/components/Section.astro'
 import LinkButton from '@/components/button/LinkButton.astro'
 import ActivityCard from '@/features/activity/components/ActivityCard.astro'
-import discordImage from '@/features/activity/assets/discord.webp'
+import welcomeImage from '@/features/activity/assets/welcome.webp'
+import exhibition1Image from '@/features/activity/assets/exhibition1.webp'
+import springDevImage from '@/features/activity/assets/spring_dev.webp'
 
 interface Item {
   title: string
@@ -14,21 +16,21 @@ interface Item {
 const items: Item[] = [
   {
     title: '4月 講習会',
-    image: discordImage,
+    image: welcomeImage,
     description:
-      'プログラミングの基礎、機械学習、3Dモデリングなど様々なテーマで、数カ月間にわたり講習会が開催されます。新歓イベントの一環として開催しており、どなたでも参加できます。',
+      'プログラミングの基礎、機械学習、3Dモデリングなど様々なテーマで、数カ月間にわたり講習会が開催されます。新歓イベントの一環として開催しており、どなたでも参加できます。※画像は2022年度のものです',
   },
   {
-    title: '6月 ハッカソン',
-    image: discordImage,
+    title: '5月 いちょう祭',
+    image: exhibition1Image,
     description:
-      'チームに分かれて数週間で共同制作を行うイベント「ハッカソン」が開催されます。',
+      '大阪大学の文化祭であるいちょう祭に出展し、OUCCで制作したゲーム、対話AI、VR体験などの展示を行います。',
   },
   {
-    title: '11月 まちかね祭',
-    image: discordImage,
+    title: '3月 春休み共同開発',
+    image: springDevImage,
     description:
-      '大阪大学の大学祭の一つであるまちかね祭に出展し、制作物を展示します。食品を販売する模擬店も開きます。',
+      '複数のチームに分かれて共同開発を行います。各自でテーマを投稿し、興味を持った人で集まってチームを構成します。最終日には全チームで成果発表を行います。',
   },
 ]
 ---
