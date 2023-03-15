@@ -4,7 +4,11 @@ import Hero from '@/components/Hero.astro'
 import FaqSection from '@/features/faq/components/FaqSection.astro'
 ---
 
-<Layout title="FAQ" showJoinLink>
+<Layout
+  title="FAQ"
+  description="OUCCの活動について、よくある質問とその回答をご紹介します。"
+  showJoinLink
+>
   <Hero title="FAQ" copy="よくある質問とその回答" compact />
   <main>
     <FaqSection />

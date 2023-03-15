@@ -4,7 +4,11 @@ import Hero from '@/components/Hero.astro'
 import ContactSection from '@/features/contact/components/ContactSection.astro'
 ---
 
-<Layout title="お問い合わせ" showJoinLink>
+<Layout
+  title="お問い合わせ"
+  description="OUCCのご連絡先をご案内します。メール、質問箱、Discordでお問い合わせいただけます。"
+  showJoinLink
+>
   <Hero title="お問い合わせ" copy="ご連絡はこちらから" compact />
   <main>
     <ContactSection />

@@ -5,7 +5,11 @@ import EventsSection from '@/features/activity/components/EventsSection.astro'
 import DailyActivitySection from '@/features/activity/components/DailyActivitySection.astro'
 ---
 
-<Layout title="活動紹介" showJoinLink>
+<Layout
+  title="活動紹介"
+  description="OUCCの普段の活動は主にオンラインで行われています。対面で開催するイベントを写真とともにご紹介します。"
+  showJoinLink
+>
   <Hero title="活動紹介" copy="1年間の活動を紹介します" compact />
   <main>
     <DailyActivitySection />
