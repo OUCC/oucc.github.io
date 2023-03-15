@@ -15,15 +15,18 @@ export interface Props {
   showJoinLink?: boolean
 }
 
-if (Astro.site === undefined) {
-  throw new Error('Astro.siteが未定義です。astro.config.tsで設定してください。')
-}
-
 const { title, description, showJoinLink = false } = Astro.props
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
-const logoUrl = new URL('/favicon.webp', Astro.site)
-const ogImageUrl = new URL('/ogp.png', Astro.site)
+if (Astro.site === undefined) {
+  throw new Error(
+    'ウェブサイトのURLが設定されていません。astro.config.tsで指定してください。',
+  )
+}
+
+const siteUrl = Astro.site.toString()
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString()
+const faviconUrl = new URL('/favicon.webp', Astro.site).toString()
+const ogImageUrl = new URL('/ogp.png', Astro.site).toString()
 
 const siteName = 'OUCC - 大阪大学コンピュータークラブ'
 const siteNameShort = 'OUCC'
@@ -38,14 +41,14 @@ const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
     <meta name="description" content={description} />
     <meta property="og:title" content={composedTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImageUrl.toString()} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content="ja_JP" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@OUCC" />
     <meta name="twitter:creator" content="@OUCC" />
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.webp" />
     <title>{composedTitle}</title>
   </head>
@@ -61,15 +64,15 @@ const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
         '@type': 'WebSite',
         name: siteName,
         alternateName: siteNameShort,
-        url: Astro.site.toString(),
+        url: siteUrl,
       } satisfies WithContext<WebSite>}
     />
     <StructuredData
       data={{
         '@context': 'https://schema.org',
         '@type': 'Organization',
-        logo: logoUrl.toString(),
-        url: Astro.site.toString(),
+        logo: faviconUrl,
+        url: siteUrl,
       } satisfies WithContext<Organization>}
     />
     {
@@ -84,7 +87,7 @@ const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
                   '@type': 'ListItem',
                   position: 1,
                   name: title,
-                  item: canonicalURL.toString(),
+                  item: canonicalUrl,
                 },
               ],
             } satisfies WithContext<BreadcrumbList>
