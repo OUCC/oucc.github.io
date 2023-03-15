@@ -23,19 +23,28 @@ const { title, description, showJoinLink = false } = Astro.props
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 const logoUrl = new URL('/favicon.webp', Astro.site)
+const ogImageUrl = new URL('/ogp.png', Astro.site)
 
-const composedTitle =
-  title === undefined
-    ? 'OUCC - 大阪大学コンピュータークラブ'
-    : title + ' | OUCC - 大阪大学コンピュータークラブ'
+const siteName = 'OUCC - 大阪大学コンピュータークラブ'
+const siteNameShort = 'OUCC'
+const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
 ---
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" prefix="og: https://ogp.me/ns/website#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <meta property="og:title" content={composedTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl.toString()} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@OUCC" />
+    <meta name="twitter:creator" content="@OUCC" />
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" href="/favicon.webp" />
     <title>{composedTitle}</title>
@@ -50,8 +59,8 @@ const composedTitle =
       data={{
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        name: 'OUCC - 大阪大学コンピュータークラブ',
-        alternateName: 'OUCC',
+        name: siteName,
+        alternateName: siteNameShort,
         url: Astro.site.toString(),
       } satisfies WithContext<WebSite>}
     />
