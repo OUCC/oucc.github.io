@@ -1,0 +1,20 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/Hero.astro'
+import PrivacySection from '@/features/privacy/components/PrivacySection.astro'
+---
+
+<Layout
+  title="プライバシーポリシー"
+  description="当ウェブサイトでのユーザーデータの取り扱いについてご案内します。"
+  showJoinLink
+>
+  <Hero
+    title="プライバシーポリシー"
+    copy="ユーザーデータの取り扱いについて"
+    compact
+  />
+  <main>
+    <PrivacySection />
+  </main>
+</Layout>
