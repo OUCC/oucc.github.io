@@ -5,6 +5,7 @@ import type {
   WebSite,
   WithContext,
 } from 'schema-dts'
+import GoogleAnalytics from '@/components/GoogleAnalytics.astro'
 import Header from '@/components/nav/Header.astro'
 import Footer from '@/components/Footer.astro'
 import StructuredData from '@/components/StructuredData.astro'
@@ -36,6 +37,7 @@ const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
 <!DOCTYPE html>
 <html lang="ja" prefix="og: https://ogp.me/ns/website#">
   <head>
+    <GoogleAnalytics />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
@@ -96,12 +98,12 @@ const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
         />
       )
     }
+    <style is:global>
+      html {
+        /* 参考: https://ics.media/entry/200317/ */
+        font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
+          'Hiragino Sans', Meiryo, sans-serif;
+      }
+    </style>
   </body>
 </html>
-<style is:global>
-  html {
-    /* 参考: https://ics.media/entry/200317/ */
-    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN',
-      'Hiragino Sans', Meiryo, sans-serif;
-  }
-</style>
