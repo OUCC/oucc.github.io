@@ -15,6 +15,7 @@ module.exports = {
         secondary: '#f1f2f7',
         twitter: '#1d9bf0',
         discord: '#5865f2',
+        peing: '#5eb9ba',
       },
       dropShadow: {
         contrast: '0 2px 2px rgba(0, 0, 0, 0.25)',
@@ -26,6 +27,8 @@ module.exports = {
         'twitter-heavy': '0 4px 8px #1d9bf0e0',
         'discord-light': '0 4px 8px #5865f2a0',
         'discord-heavy': '0 4px 8px #5865f2e0',
+        'peing-light': '0 4px 8px #5eb9baa0',
+        'peing-heavy': '0 4px 8px #5eb9bae0',
       },
     },
   },
