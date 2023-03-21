@@ -1,4 +1,16 @@
+const { rgba } = require('polished')
 const plugin = require('tailwindcss/plugin')
+
+const colors = {
+  primary: '#1a2872',
+  secondary: '#f1f2f7',
+  twitter: '#1d9bf0',
+  discord: '#5865f2',
+  peing: '#5eb9ba',
+}
+
+const dropShadowLight = (color) => `0 4px 8px ${rgba(color, 0.6)}`
+const dropShadowHeavy = (color) => `0 4px 8px ${rgba(color, 0.9)}`
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,25 +22,19 @@ module.exports = {
         // 最大コンテナ幅にモバイルでの左右のパディングを足したもの
         'padded-container': 'calc(768px + 4rem)',
       },
-      colors: {
-        primary: '#1a2872',
-        secondary: '#f1f2f7',
-        twitter: '#1d9bf0',
-        discord: '#5865f2',
-        peing: '#5eb9ba',
-      },
+      colors,
       dropShadow: {
         contrast: '0 2px 2px rgba(0, 0, 0, 0.25)',
-        'primary-light': '0 4px 8px #1a2872a0',
-        'primary-heavy': '0 4px 8px #1a2872e0',
-        'white-light': '0 4px 8px #ffffffa0',
-        'white-heavy': '0 4px 8px #ffffffe0',
-        'twitter-light': '0 4px 8px #1d9bf0a0',
-        'twitter-heavy': '0 4px 8px #1d9bf0e0',
-        'discord-light': '0 4px 8px #5865f2a0',
-        'discord-heavy': '0 4px 8px #5865f2e0',
-        'peing-light': '0 4px 8px #5eb9baa0',
-        'peing-heavy': '0 4px 8px #5eb9bae0',
+        'primary-light': dropShadowLight(colors.primary),
+        'primary-heavy': dropShadowHeavy(colors.primary),
+        'white-light': dropShadowLight('white'),
+        'white-heavy': dropShadowHeavy('white'),
+        'twitter-light': dropShadowLight(colors.twitter),
+        'twitter-heavy': dropShadowHeavy(colors.twitter),
+        'discord-light': dropShadowLight(colors.discord),
+        'discord-heavy': dropShadowHeavy(colors.discord),
+        'peing-light': dropShadowLight(colors.peing),
+        'peing-heavy': dropShadowHeavy(colors.peing),
       },
     },
   },
