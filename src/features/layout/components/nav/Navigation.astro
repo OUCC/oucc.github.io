@@ -22,13 +22,13 @@ import DrWani from './DrWani.astro'
       Twitter
     </NavigationListItem>
   </ul>
-  <div class="hidden grow relative [container-type:size]">
+  <div class="grow relative [container-type:size]">
     <div
       class:list={[
         'absolute w-full h-full overflow-hidden flex items-end justify-center',
-        // <DrWani>の高さが132pxなので、コンテナの高さが132px未満の場合は表示しない
-        'invisible [@container(min-height:132px)]:visible',
-        'opacity-0 [@container(min-height:132px)]:opacity-100 transition-[visibility,opacity]',
+        // <DrWani>の高さが145pxなので、コンテナの高さが145px未満の場合は表示しない
+        'invisible [@container(min-height:145px)]:visible',
+        'opacity-0 [@container(min-height:145px)]:opacity-100 transition-[visibility,opacity]',
       ]}
     >
       <DrWani />
