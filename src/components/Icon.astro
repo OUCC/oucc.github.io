@@ -1,0 +1,47 @@
+---
+import { fileURLToPath } from 'url'
+import fs from 'node:fs/promises'
+import { optimize } from 'svgo'
+
+interface Props {
+  // `src/assets/icons`にあるSVGのファイル名
+  name: string
+
+  // `aria-label`に指定するテキスト
+  alt: string
+}
+
+const { name, alt } = Astro.props
+
+const svgUrl = new URL(`../assets/icons/${name}.svg`, import.meta.url)
+const svgPath = fileURLToPath(svgUrl)
+const svgContent = await fs.readFile(svgPath, 'utf8')
+
+const { data: optimizedSvgContent } = optimize(svgContent, {
+  path: svgPath,
+  plugins: [
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          convertPathData: false,
+          removeViewBox: false,
+        },
+      },
+    },
+    'removeDimensions',
+    {
+      name: 'addAttributesToSVGElement',
+      params: {
+        attribute: {
+          role: 'img',
+          'aria-label': alt,
+          style: 'max-width:100%;max-height:100%',
+        },
+      },
+    },
+  ],
+})
+---
+
+<Fragment set:html={optimizedSvgContent} />

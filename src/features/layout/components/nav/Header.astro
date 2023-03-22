@@ -1,6 +1,5 @@
 ---
-import HamburgerIcon from '@/components/icon/HamburgerIcon.astro'
-import OuccLogoSquare from '@/components/icon/OuccLogoSquare.astro'
+import Icon from '@/components/Icon.astro'
 import LinkButton from '@/components/button/LinkButton.astro'
 import Navigation from './Navigation.astro'
 
@@ -19,11 +18,11 @@ const { showJoinLink = false } = Astro.props
       id="navigation-dialog-open"
       class="mx-5 w-5 flex items-center text-slate-500"
     >
-      <HamburgerIcon />
+      <Icon name="hamburger_menu" alt="ナビゲーションメニューを開く" />
     </button>
     <a href="/">
-      <div class="h-full aspect-square">
-        <OuccLogoSquare />
+      <div class="h-full aspect-square grid place-items-center">
+        <Icon name="oucc" alt="OUCC" />
       </div>
     </a>
   </div>

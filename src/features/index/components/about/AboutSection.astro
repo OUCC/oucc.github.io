@@ -1,32 +1,30 @@
 ---
 import Section from '@/components/Section.astro'
-import OuccLogoSquare from '@/components/icon/OuccLogoSquare.astro'
-import MemberIcon from '@/components/icon/MemberIcon.astro'
-import TeamIcon from '@/components/icon/TeamIcon.astro'
+import Icon from '@/components/Icon.astro'
 import AboutCard from './AboutCard.astro'
 
 interface Item {
-  icon: typeof OuccLogoSquare
+  icon: string
   description: string[]
 }
 
 const items: Item[] = [
   {
-    icon: OuccLogoSquare,
+    icon: 'oucc',
     description: [
       'OUCC（大阪大学コンピュータクラブ）は、コンピュータを使ったものづくりに関心を持つ学生が交流するサークルです。',
       'プログラミングやお絵描き、3Dモデリングなどの活動を行っています。',
     ],
   },
   {
-    icon: TeamIcon,
+    icon: 'team',
     description: [
       'プログラミングを始めたばかりの人からすでに高度なスキルを持っている人まで、OUCCには多様なメンバーが集まっています。',
       '年齢や文系理系を問わずどなたでも大歓迎です。',
     ],
   },
   {
-    icon: MemberIcon,
+    icon: 'member',
     description: [
       '40年以上の歴史を有しており、大阪大学の公認も受けています。',
       '大学院生や社会人となっているOBOGとの交流も盛んで、幅広い世代が集う活気あふれる環境です。',
@@ -42,11 +40,11 @@ const items: Item[] = [
   </Fragment>
   <ul class="flex flex-col items-center md:flex-row md:items-start gap-5">
     {
-      items.map(({ icon: Icon, description }) => (
+      items.map(({ icon, description }) => (
         <li class="flex-1 max-w-[32rem]">
           <AboutCard>
-            <div slot="icon" class="w-20">
-              <Icon />
+            <div slot="icon" class="w-20 h-20 grid place-items-center">
+              <Icon name={icon} alt="" />
             </div>
             {description.map((x) => (
               <p>{x}</p>

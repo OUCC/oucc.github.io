@@ -1,6 +1,6 @@
 ---
 import type { PictureComponentLocalImageProps } from '@astrojs/image/components'
-import TimelineIcon from '@/components/icon/TimelineIcon.astro'
+import Icon from '@/components/Icon.astro'
 import Image from '@/components/Image.astro'
 
 interface Props {
@@ -14,7 +14,7 @@ const { title, image } = Astro.props
 <div class="flex flex-col gap-2.5">
   <h3 class="flex gap-2.5 text-2xl font-bold">
     <span class="w-8">
-      <TimelineIcon />
+      <Icon name="timeline" alt="" />
     </span>
     <span>{title}</span>
   </h3>

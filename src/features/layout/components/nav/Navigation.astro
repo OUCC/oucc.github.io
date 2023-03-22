@@ -1,12 +1,14 @@
 ---
-import OuccLogoSquare from '@/components/icon/OuccLogoSquare.astro'
+import Icon from '@/components/Icon.astro'
 import NavigationListItem from './NavigationListItem.astro'
 import DrWani from './DrWani.astro'
 ---
 
 <nav class="w-full h-full bg-white flex flex-col">
   <div class="h-24 py-2 flex justify-center">
-    <OuccLogoSquare />
+    <div class="aspect-square grid place-items-center">
+      <Icon name="oucc" alt="OUCC" />
+    </div>
   </div>
   <ul class="flex flex-col text-center">
     <NavigationListItem to="/">トップページ</NavigationListItem>
