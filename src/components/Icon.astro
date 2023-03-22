@@ -1,6 +1,4 @@
 ---
-import { fileURLToPath } from 'url'
-import fs from 'node:fs/promises'
 import { optimize } from 'svgo'
 
 interface Props {
@@ -13,12 +11,9 @@ interface Props {
 
 const { name, alt } = Astro.props
 
-const svgUrl = new URL(`../assets/icons/${name}.svg`, import.meta.url)
-const svgPath = fileURLToPath(svgUrl)
-const svgContent = await fs.readFile(svgPath, 'utf8')
+const svgContent = (await import(`../assets/icons/${name}.svg?raw`)).default
 
 const { data: optimizedSvgContent } = optimize(svgContent, {
-  path: svgPath,
   plugins: [
     {
       name: 'preset-default',
