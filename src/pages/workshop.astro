@@ -1,0 +1,18 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Hero from '@/components/Hero.astro'
+import WorkshopSection from '@/features/workshop/components/WorkshopSection.astro'
+import Workshop2023Section from '@/features/workshop/components/Workshop2023Section.astro'
+---
+
+<Layout
+  title="講習会"
+  description="新歓イベントの一環として開催される講習会についてご紹介します。"
+  showJoinLink
+>
+  <Hero title="講習会" copy="一緒に新しい技術を学びませんか？" compact />
+  <main>
+    <WorkshopSection />
+    <Workshop2023Section />
+  </main>
+</Layout>
