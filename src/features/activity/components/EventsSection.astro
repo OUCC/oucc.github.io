@@ -17,6 +17,7 @@ export interface Item {
   title: string
   image: PictureComponentLocalImageProps['src']
   description: string
+  link?: { href: string; targetBlank?: boolean; text: string }
 }
 
 export const items: Item[] = [
@@ -24,13 +25,19 @@ export const items: Item[] = [
     title: '4月 講習会',
     image: welcomeImage,
     description:
-      'プログラミングの基礎、機械学習、3Dモデリングなど様々なテーマで、数カ月間にわたり講習会が開催されます。新歓イベントの一環として開催しており、どなたでも参加できます。※画像は2022年度のものです',
+      'プログラミングの基礎、機械学習、3Dモデリングなど様々なテーマで、数カ月間にわたり講習会が開催されます。新歓イベントの一環として開催しており、どなたでも参加できます。※画像は2022年度のものです。',
+    link: { href: '/workshop', text: '講習会について詳しく' },
   },
   {
     title: '5月 いちょう祭',
     image: exhibition1Image,
     description:
       '大阪大学の文化祭であるいちょう祭に出展し、OUCCで制作したゲーム、対話AI、VR体験などの展示を行います。',
+    link: {
+      href: 'https://ichosai.com/',
+      targetBlank: true,
+      text: 'いちょう祭公式サイト',
+    },
   },
   {
     title: '6月 ハッカソン',
@@ -49,24 +56,44 @@ export const items: Item[] = [
     image: kc3Image,
     description:
       'KC3（関西情報系学生団体交流会）の交流会・勉強会に参加します。他大学の学生と親交を深める貴重な機会です。',
+    link: {
+      href: 'https://kc3.me/',
+      targetBlank: true,
+      text: 'KC3公式サイト',
+    },
   },
   {
     title: '11月 まちかね祭',
     image: machikanesaiImage,
     description:
       '大阪大学の大学祭であるまちかね祭に出展し、食品を販売する模擬店を開きます。',
+    link: {
+      href: 'https://machikanesai.com/',
+      targetBlank: true,
+      text: 'まちかね祭公式サイト',
+    },
   },
   {
     title: '12月 Advent Calendar',
     image: adventCalendarImage,
     description:
       '12月1日から25日までブログ記事を投稿する企画を行います。部員が各々好きなテーマで記事を執筆し、毎日投稿を目指します。',
+    link: {
+      href: 'https://adventar.org/calendars/7859',
+      targetBlank: true,
+      text: 'OUCC Advent Calendar 2022',
+    },
   },
   {
     title: '2月 KC3Hack',
     image: codeImage,
     description:
       'KC3（関西情報系学生団体交流会）のハッカソンに参加します。参加者を混成したチームが編成され、1週間という短期間でひとつのプロダクトを完成させます。協賛企業からフィードバックや交流の機会をいただくこともできます。',
+    link: {
+      href: 'https://kc3.me/',
+      targetBlank: true,
+      text: 'KC3公式サイト',
+    },
   },
   {
     title: '2月 追いコン',
@@ -87,9 +114,9 @@ export const items: Item[] = [
   <Fragment slot="title">イベント</Fragment>
   <ul class="flex flex-col items-center gap-8">
     {
-      items.map(({ title, image, description }) => (
+      items.map(({ title, image, description, link }) => (
         <li class="max-w-[32rem]">
-          <ActivityCard title={title} image={image}>
+          <ActivityCard title={title} image={image} link={link}>
             {description}
           </ActivityCard>
         </li>

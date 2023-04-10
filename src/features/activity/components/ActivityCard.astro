@@ -2,13 +2,15 @@
 import type { PictureComponentLocalImageProps } from '@astrojs/image/components'
 import Icon from '@/components/Icon.astro'
 import Image from '@/components/Image.astro'
+import LinkButton from '@/components/button/LinkButton.astro'
 
 interface Props {
   title: string
   image?: PictureComponentLocalImageProps['src']
+  link?: { href: string; targetBlank?: boolean; text: string }
 }
 
-const { title, image } = Astro.props
+const { title, image, link } = Astro.props
 ---
 
 <div class="flex flex-col gap-2.5">
@@ -26,4 +28,17 @@ const { title, image } = Astro.props
   <div class="text-justify-ja">
     <slot />
   </div>
+  {
+    link && (
+      <div class="flex justify-center">
+        <LinkButton
+          href={link.href}
+          target={link.targetBlank ? '_blank' : undefined}
+          variant="white"
+        >
+          {link.text}
+        </LinkButton>
+      </div>
+    )
+  }
 </div>
