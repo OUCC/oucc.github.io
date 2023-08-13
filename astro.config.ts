@@ -8,6 +8,23 @@ import prefetch from '@astrojs/prefetch'
 export default defineConfig({
   site: 'https://oucc.org',
   compressHTML: true,
+  // 旧ウェブサイトでよくアクセスされていたURLにリダイレクトを設定する
+  redirects: {
+    '/about.html': '/',
+    '/access.html': '/',
+    '/activity.html': '/activity/',
+    '/contact.html': '/contact/',
+    '/join.html': '/join/',
+    '/link.html': '/',
+    '/member.html': '/',
+    '/part.html': '/',
+    '/welcomeevent.html': '/',
+    '/group/programming': '/',
+    '/group/programming/about.html': '/',
+    '/group/programming/activity.html': '/',
+    '/group/programming/works.html': '/',
+    '/group/handaitaisen/handai_taisen.html': '/',
+  },
   integrations: [
     image({ serviceEntryPoint: '@astrojs/image/sharp' }),
     tailwind(),
