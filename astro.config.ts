@@ -7,6 +7,7 @@ import prefetch from '@astrojs/prefetch'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://oucc.org',
+  compressHTML: true,
   integrations: [
     image({ serviceEntryPoint: '@astrojs/image/sharp' }),
     tailwind(),
