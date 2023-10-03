@@ -43,9 +43,7 @@ const items: Item[] = [
       items.map(({ icon, description }) => (
         <li class="flex-1 max-w-[32rem]">
           <AboutCard>
-            <div slot="icon" class="w-20 h-20 grid place-items-center">
-              <Icon name={icon} alt="" />
-            </div>
+            <Icon slot="icon" name={icon} alt="" class="w-20 h-20" />
             {description.map((x) => (
               <p>{x}</p>
             ))}

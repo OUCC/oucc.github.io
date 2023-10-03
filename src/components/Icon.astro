@@ -7,9 +7,11 @@ interface Props {
 
   // `aria-label`に指定するテキスト
   alt: string
+
+  class?: string
 }
 
-const { name, alt } = Astro.props
+const { name, alt, ...attrs } = Astro.props
 
 const svgContent = (await import(`../assets/icons/${name}.svg?raw`)).default
 
@@ -31,7 +33,7 @@ const { data: optimizedSvgContent } = optimize(svgContent, {
         attribute: {
           role: 'img',
           'aria-label': alt,
-          style: 'width:100%;height:100%',
+          ...attrs,
         },
       },
     },
