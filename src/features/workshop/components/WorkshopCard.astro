@@ -14,9 +14,7 @@ const { title, date, description } = Astro.props
 >
   <h2 class="text-xl font-bold">{title}</h2>
   <p class="flex items-center gap-2 text-slate-600">
-    <span class="w-4">
-      <Icon name="clock" alt="開催日時" />
-    </span>
+    <Icon name="clock" alt="開催日時" class="w-4" />
     <span>{date}</span>
   </p>
   <p class="text-justify-ja">

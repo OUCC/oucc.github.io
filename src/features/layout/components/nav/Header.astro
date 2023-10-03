@@ -16,14 +16,16 @@ const { showJoinLink = false } = Astro.props
   <div class="flex">
     <button
       id="navigation-dialog-open"
-      class="mx-5 w-5 flex items-center text-slate-500"
+      class="mx-5 flex items-center text-slate-500"
     >
-      <Icon name="hamburger_menu" alt="ナビゲーションメニューを開く" />
+      <Icon
+        name="hamburger_menu"
+        alt="ナビゲーションメニューを開く"
+        class="w-5"
+      />
     </button>
     <a href="/">
-      <div class="h-full aspect-square grid place-items-center">
-        <Icon name="oucc" alt="OUCC" />
-      </div>
+      <Icon name="oucc" alt="OUCC" class="h-full aspect-square" />
     </a>
   </div>
   <div class="flex flex-col justify-center">
