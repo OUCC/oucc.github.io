@@ -13,7 +13,7 @@ interface Props {
 
 const { name, alt, ...attrs } = Astro.props
 
-const svgContent = (await import(`../assets/icons/${name}.svg?raw`)).default
+const svgContent = (await import(`../../assets/icons/${name}.svg?raw`)).default
 
 const { data: optimizedSvgContent } = optimize(svgContent, {
   plugins: [
