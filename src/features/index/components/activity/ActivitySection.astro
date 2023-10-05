@@ -1,5 +1,5 @@
 ---
-import type { PictureComponentLocalImageProps } from '@astrojs/image/components'
+import type { ImageMetadata } from 'astro'
 import Section from '@/components/Section.astro'
 import LinkButton from '@/components/button/LinkButton.astro'
 import ActivityCard from '@/features/activity/components/ActivityCard.astro'
@@ -9,7 +9,7 @@ import springDevImage from '@/assets/spring_dev.webp'
 
 interface Item {
   title: string
-  image: PictureComponentLocalImageProps['src']
+  image: ImageMetadata
   description: string
   link?: { href: string; targetBlank?: boolean; text: string }
 }
