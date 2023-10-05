@@ -1,0 +1,35 @@
+---
+import Section from '@/components/common/Section.astro'
+import DiscordJoinLink from '@/components/common/button/DiscordJoinLink.astro'
+import PlaceDescription from './place/PlaceDescription.astro'
+---
+
+<Section background="white">
+  <div class="flex flex-col gap-5">
+    <div>
+      <p>
+        OUCCはチャットアプリ「Discord」を中心にいくつかの場所で活動しています。
+      </p>
+    </div>
+    <PlaceDescription />
+    <div>
+      <p>
+        OUCCに興味がある方は、まずDiscordの公開サーバーにご参加ください。新入生や入部に興味を持った学部生はもちろん、受験生や社会人、他大生などどなたでも歓迎します。
+      </p>
+      <p>
+        個人情報の登録は不要で、ハンドルネームで交流できます。以下のリンクから参加をお待ちしています。
+      </p>
+    </div>
+    <div class="flex justify-center">
+      <DiscordJoinLink />
+    </div>
+    <div>
+      <p>
+        大阪大学の学生の方は、部費2000円/年を納めることで部員になることができます。学年や入部時期に制限はありません。
+      </p>
+      <p>
+        部員になるとDiscordの部員サーバーに参加できるほか、サーバーやウェブサイト、部室、大学祭での出し物の運営に携われます。詳しくは公開サーバーにある案内をご確認ください。
+      </p>
+    </div>
+  </div>
+</Section>

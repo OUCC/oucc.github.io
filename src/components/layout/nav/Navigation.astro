@@ -1,0 +1,37 @@
+---
+import Icon from '@/components/common/Icon.astro'
+import NavigationListItem from './NavigationListItem.astro'
+import DrWani from './DrWani.astro'
+---
+
+<nav class="w-full h-full bg-white flex flex-col">
+  <div class="py-2 flex justify-center">
+    <Icon name="oucc" alt="OUCC" class="w-20 aspect-square" />
+  </div>
+  <ul class="flex flex-col text-center">
+    <NavigationListItem to="/">トップページ</NavigationListItem>
+    <NavigationListItem to="/join">Join OUCC!</NavigationListItem>
+    <NavigationListItem to="/activity">活動紹介</NavigationListItem>
+    <NavigationListItem to="/workshop">講習会</NavigationListItem>
+    <NavigationListItem to="/faq">FAQ</NavigationListItem>
+    <NavigationListItem to="/contact">お問い合わせ</NavigationListItem>
+    <NavigationListItem to="https://blog.oucc.org/" targetBlank>
+      ブログ
+    </NavigationListItem>
+    <NavigationListItem to="https://twitter.com/OUCC" targetBlank>
+      Twitter
+    </NavigationListItem>
+  </ul>
+  <div class="grow relative [container-type:size]">
+    <div
+      class:list={[
+        'absolute w-full h-full overflow-hidden flex items-end justify-center',
+        // <DrWani>の高さが145pxなので、コンテナの高さが145px未満の場合は表示しない
+        'invisible [@container(min-height:145px)]:visible',
+        'opacity-0 [@container(min-height:145px)]:opacity-100 transition-[visibility,opacity]',
+      ]}
+    >
+      <DrWani />
+    </div>
+  </div>
+</nav>

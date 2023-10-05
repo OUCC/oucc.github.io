@@ -1,0 +1,96 @@
+---
+import Icon from '@/components/common/Icon.astro'
+import LinkButton from '@/components/common/button/LinkButton.astro'
+import Navigation from './Navigation.astro'
+
+interface Props {
+  showJoinLink?: boolean
+}
+
+const { showJoinLink = false } = Astro.props
+---
+
+<header
+  class="sticky top-0 z-10 h-16 pr-5 flex justify-between bg-white border-b"
+>
+  <div class="flex">
+    <button
+      id="navigation-dialog-open"
+      class="mx-5 flex items-center text-slate-500"
+    >
+      <Icon
+        name="hamburger_menu"
+        alt="ナビゲーションメニューを開く"
+        class="w-5"
+      />
+    </button>
+    <a href="/">
+      <Icon name="oucc" alt="OUCC" class="h-full aspect-square" />
+    </a>
+  </div>
+  <div class="flex flex-col justify-center">
+    {showJoinLink && <LinkButton href="/join">Join OUCC!</LinkButton>}
+  </div>
+  <dialog
+    id="navigation-dialog"
+    data-active="false"
+    class:list={[
+      'group m-0 p-0 w-full h-full max-w-none max-h-none bg-transparent backdrop:bg-transparent',
+      'data-[active=true]:backdrop-blur-sm transition-[backdrop-filter] ease-[cubic-bezier(0.2,0.95,0.5,1)] duration-[400ms]',
+    ]}
+  >
+    <div
+      class:list={[
+        'w-64 h-full drop-shadow-[2px_0_4px_rgba(0,0,0,0.5)]',
+        '-translate-x-full group-data-[active=true]:translate-x-0 transition-transform ease-[cubic-bezier(0.2,0.95,0.5,1)] duration-[400ms]',
+      ]}
+    >
+      <Navigation />
+    </div>
+  </dialog>
+</header>
+
+<script>
+  import { disableScroll, enableScroll } from '@/utils/controlScroll'
+
+  const dialogOpenButton = document.getElementById('navigation-dialog-open')
+  const dialog = document.getElementById('navigation-dialog')
+
+  if (dialogOpenButton === null) {
+    throw new Error('#navigation-dialog-open element not found')
+  }
+  if (dialog === null) {
+    throw new Error('#navigation-dialog element not found')
+  }
+  if (!(dialog instanceof HTMLDialogElement)) {
+    throw new Error('#navigation-dialog is not a <dialog> element')
+  }
+
+  const requestOpenDialog = () => {
+    dialog.showModal()
+    dialog.dataset.active = 'true'
+    disableScroll()
+  }
+  const requestCloseDialog = () => {
+    dialog.dataset.active = 'false'
+    enableScroll()
+  }
+
+  dialogOpenButton.addEventListener('click', requestOpenDialog)
+
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      requestCloseDialog()
+    }
+  })
+  dialog.addEventListener('cancel', (e) => {
+    requestCloseDialog()
+    e.preventDefault()
+  })
+
+  dialog.addEventListener('transitionend', () => {
+    if (dialog.dataset.active === 'false') {
+      dialog.close()
+    }
+  })
+</script>

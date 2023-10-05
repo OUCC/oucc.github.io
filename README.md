@@ -6,16 +6,21 @@ OUCC のウェブサイトです。静的サイトジェネレータ Astro を�
 
 ## ディレクトリ構成
 
+Astroで慣習的に使われるディレクトリ構成を採用しています。
+
+cf. [ディレクトリ構成 🚀 Astroドキュメント](https://docs.astro.build/ja/core-concepts/project-structure/)
+
 ```
 /
-├── public/             # ルートに置くファイル
+├── public/             # https://oucc.org/ の直下に置くファイル
 │   └── favicon.webp
 ├── src/
-│   ├── assets/         # 全体で共通して使う画像など
-│   ├── components/     # 全体で共通して使うコンポーネント
-│   ├── layouts/        # レイアウト
+│   ├── assets/         # 画像やアイコンなどの静的ファイル
 │   ├── pages/          # ページ
-│   └── features/       # ページごとに個別で使うもの
+│   ├── layouts/        # 各ページのレイアウト
+│   └── components/     # 各ページで使うコンポーネント
+│        ├── common/    # 全体で共通して使うもの
+│        ├── layout/    # レイアウトで使うもの
 │        ├── activity/  # 活動紹介ページで使うもの
 │        ├── index/     # トップページで使うもの
 │        ├── ...
