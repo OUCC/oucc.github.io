@@ -5,10 +5,10 @@ import type {
   WebSite,
   WithContext,
 } from 'schema-dts'
-import GoogleAnalytics from '@/features/layout/components/GoogleAnalytics.astro'
-import Header from '@/features/layout/components/nav/Header.astro'
-import Footer from '@/features/layout/components/Footer.astro'
-import StructuredData from '@/features/layout/components/StructuredData.astro'
+import GoogleAnalytics from '@/components/layout/GoogleAnalytics.astro'
+import Header from '@/components/layout/nav/Header.astro'
+import Footer from '@/components/layout/Footer.astro'
+import StructuredData from '@/components/layout/StructuredData.astro'
 
 export interface Props {
   title?: string
@@ -34,7 +34,7 @@ const siteNameShort = 'OUCC'
 const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja" prefix="og: https://ogp.me/ns/website#">
   <head>
     <GoogleAnalytics />
