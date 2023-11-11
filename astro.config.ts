@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
-import prefetch from '@astrojs/prefetch'
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,5 +22,8 @@ export default defineConfig({
     '/group/programming/works.html': '/',
     '/group/handaitaisen/handai_taisen.html': '/',
   },
-  integrations: [tailwind(), sitemap(), prefetch({ selector: 'a' })],
+  prefetch: {
+    prefetchAll: true,
+  },
+  integrations: [tailwind(), sitemap()],
 })
