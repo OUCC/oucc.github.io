@@ -4,7 +4,6 @@ const plugin = require('tailwindcss/plugin')
 const colors = {
   primary: '#1a2872',
   secondary: '#f1f2f7',
-  twitter: '#1d9bf0',
   discord: '#5865f2',
   peing: '#5eb9ba',
 }
@@ -29,8 +28,8 @@ module.exports = {
         'primary-heavy': dropShadowHeavy(colors.primary),
         'white-light': dropShadowLight('white'),
         'white-heavy': dropShadowHeavy('white'),
-        'twitter-light': dropShadowLight(colors.twitter),
-        'twitter-heavy': dropShadowHeavy(colors.twitter),
+        'black-light': dropShadowLight('black'),
+        'black-heavy': dropShadowHeavy('black'),
         'discord-light': dropShadowLight(colors.discord),
         'discord-heavy': dropShadowHeavy(colors.discord),
         'peing-light': dropShadowLight(colors.peing),
