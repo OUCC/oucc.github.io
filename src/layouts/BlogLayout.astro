@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer.astro'
 export interface Props {
   title: string
   description: string
+  keywords?: string
   summarySize?: 'summary' | 'summary_large_image'
   image?: string
 }
@@ -13,6 +14,7 @@ export interface Props {
 const {
   title,
   description,
+  keywords,
   summarySize = 'summary_large_image',
   image = '/ogp.png',
 } = Astro.props
@@ -21,6 +23,7 @@ const ogImageUrl = new URL(image, Astro.site).toString()
 
 <BaseLayout title={`${title} - Blog`} description={description}>
   <Fragment slot="header">
+    {keywords && <meta property="keywords" content={keywords} />}
     <meta
       property="og:title"
       content={`${title} | OUCC - 大阪大学コンピュータクラブ`}
