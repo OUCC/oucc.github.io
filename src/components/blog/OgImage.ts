@@ -1,6 +1,6 @@
 import satori from 'satori'
 import oucc from '../../assets/icons/oucc.svg?raw'
-import * as fs from 'fs'
+import fs from 'node:fs/promises'
 import sharp from 'sharp'
 
 let fontCache:
@@ -54,7 +54,7 @@ export async function createOgImage(title: string, author: string) {
       ] as const
     ).map(async ({ weight, path }) => ({
       weight,
-      data: await readFileAsync(path),
+      data: await fs.readFile(path),
     })),
   )
 
@@ -121,16 +121,4 @@ export async function createOgImage(title: string, author: string) {
   )
 
   return await sharp(Buffer.from(svg)).png().toBuffer()
-}
-
-function readFileAsync(path: fs.PathOrFileDescriptor) {
-  return new Promise<Buffer>((resolve, reject) => {
-    fs.readFile(path, (err, data) => {
-      if (err === null) {
-        resolve(data)
-      } else {
-        reject(err)
-      }
-    })
-  })
 }

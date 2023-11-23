@@ -8,14 +8,26 @@ interface Props {
   // `aria-label`に指定するテキスト
   alt: string
 
+  isBlog?: boolean
   class?: string
+
+  width?: number
+  height?: number
 }
 
-const { name, alt, ...attrs } = Astro.props
+const { name, alt, isBlog, ...attrs } = Astro.props
 
-// 一度 string として確定させる
-const path = `../../assets/icons/${name}.svg?raw`
-const svgContent = (await import(path)).default
+const normalizedAttrs: Partial<
+  Record<Exclude<keyof Props, 'name' | 'alt'>, string>
+> = {
+  ...attrs,
+  width: attrs.width?.toString(),
+  height: attrs.height?.toString(),
+}
+
+const svgContent = isBlog
+  ? (await import(`../../assets/icons/blog/${name}.svg?raw`)).default
+  : (await import(`../../assets/icons/${name}.svg?raw`)).default
 
 const { data: optimizedSvgContent } = optimize(svgContent, {
   plugins: [
@@ -35,7 +47,7 @@ const { data: optimizedSvgContent } = optimize(svgContent, {
         attribute: {
           role: 'img',
           'aria-label': alt,
-          ...attrs,
+          ...normalizedAttrs,
         },
       },
     },

@@ -23,7 +23,7 @@ const ogImageUrl = new URL(image, Astro.site).toString()
 
 <BaseLayout title={`${title} - Blog`} description={description}>
   <Fragment slot="header">
-    {keywords && <meta property="keywords" content={keywords} />}
+    {keywords && <meta name="keywords" content={keywords} />}
     <meta
       property="og:title"
       content={`${title} | OUCC - 大阪大学コンピュータクラブ`}

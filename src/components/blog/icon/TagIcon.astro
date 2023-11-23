@@ -13,17 +13,15 @@ const { tagImage, size } = Astro.props
 {
   tagImage.type === 'svg' ? (
     <Icon
-      name={`blog/${tagImage.name}`}
+      name={tagImage.name}
       alt={`${tagImage.name} のアイコン`}
-      class={`h-[${size}px] w-[${size}px] aspect-square`}
+      class="aspect-square"
+      width={size}
+      height={size}
+      isBlog
     />
   ) : tagImage.type === 'external-url' ? (
-    <img
-      src={tagImage.url}
-      height={size}
-      width={size}
-      class={`h-[${size}px] w-[${size}px] aspect-square`}
-    />
+    <img src={tagImage.url} height={size} width={size} class="aspect-square" />
   ) : (
     unreachable(tagImage)
   )

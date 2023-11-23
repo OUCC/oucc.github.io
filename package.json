@@ -9,8 +9,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "typecheck": "astro check && tsc --noEmit",
-    "lint": "prettier --check .",
-    "format": "prettier --write .",
+    "lint": "prettier --check \"./**/*.{ts,tsx,astro,json}\"",
+    "format": "prettier --write \"./**/*.{ts,tsx,astro,json}\"",
     "validate-blog": "git diff --name-only | xargs npx ts-node --esm tools/validate-blog.ts"
   },
   "dependencies": {
