@@ -1,0 +1,26 @@
+---
+import BlogContent from '@/components/blog/BlogContent.astro'
+import BlogLayout from '@/layouts/BlogLayout.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blogs')
+  return blogEntries.map((blog) => ({
+    params: { slug: blog.slug },
+    props: { blog },
+  }))
+}
+
+const { blog } = Astro.props
+const ogImageUrl = `http://localhost:4321/blog/${blog.slug}/ogp.png`
+---
+
+<BlogLayout
+  title={blog.data.title}
+  description={blog.data.description}
+  image={ogImageUrl}
+>
+  <main class="bg-dot bg-dot-secondary">
+    <BlogContent blog={blog} />
+  </main>
+</BlogLayout>

@@ -1,0 +1,37 @@
+---
+import Icon from '@/components/common/Icon.astro'
+import { unreachable } from '@/utils/unreachable'
+import type { CollectionEntry } from 'astro:content'
+type Props = CollectionEntry<'authors'>['data'] & { size: number }
+
+const { size, ...author } = Astro.props
+
+const image = author.image
+  ? author.image
+  : author.github
+  ? ({
+      type: 'external-url',
+      url: `https://github.com/${author.github}.png`,
+    } as const)
+  : undefined
+---
+
+{
+  image &&
+    (image.type === 'svg' ? (
+      <Icon
+        name={`blog/${image.name}`}
+        alt={`${image.name} のアイコン`}
+        class={`h-[${size}px] w-[${size}px] aspect-square rounded-full`}
+      />
+    ) : image.type === 'external-url' ? (
+      <img
+        src={image.url}
+        height={size}
+        width={size}
+        class={`h-[${size}px] w-[${size}px] aspect-square rounded-full`}
+      />
+    ) : (
+      unreachable(image)
+    ))
+}

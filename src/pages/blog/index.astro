@@ -1,0 +1,14 @@
+---
+import BlogLayout from '@/layouts/BlogLayout.astro'
+import { getCollection } from 'astro:content'
+import BlogListSection from '@/components/blog/BlogListSection.astro'
+
+const blogEntries = await getCollection('blogs')
+---
+
+<BlogLayout title="最新の記事一覧" description="メンバーのブログです。">
+  <img src="/blog/1/ogp.png" />
+  <main class="flex flex-col h-full">
+    <BlogListSection title="最新の記事一覧" blogs={blogEntries} />
+  </main>
+</BlogLayout>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string
+  background: 'white' | 'primary' | 'secondary'
+}
+
+const { title, background } = Astro.props
+---
+
+<h1
+  class:list={[
+    'py-6 text-6xl flex justify-center items-center gap-x-5 bg-dot',
+    {
+      'bg-dot-white': background === 'white',
+      'bg-dot-primary': background === 'primary',
+      'bg-dot-secondary': background === 'secondary',
+    },
+  ]}
+>
+  {
+    Astro.slots.has('icon') && (
+      <div class="bg-white rounded-full aspect-square h-[95px] flex justify-center items-center bg-none border">
+        <slot name="icon" />
+      </div>
+    )
+  }
+  {title}
+</h1>

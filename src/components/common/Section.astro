@@ -1,5 +1,4 @@
 ---
-import { unreachable } from '@/utils/unreachable'
 import Heading1 from './Heading1.astro'
 
 interface Props {
@@ -11,30 +10,13 @@ const { background } = Astro.props
 
 <section
   class:list={[
-    'py-8 flex justify-center',
+    'py-8 flex justify-center bg-dot',
     {
-      'bg-white': background === 'white',
-      'bg-primary': background === 'primary',
-      'bg-secondary': background === 'secondary',
+      'bg-dot-white': background === 'white',
+      'bg-dot-primary': background === 'primary',
+      'bg-dot-secondary': background === 'secondary',
     },
   ]}
-  style={{
-    '--bg-dot-color':
-      background === 'white'
-        ? '#00000010'
-        : background === 'primary'
-        ? '#ffffff10'
-        : background === 'secondary'
-        ? '#00000010'
-        : unreachable(background),
-    '--bg-dot-pattern': '10px',
-    '--bg-dot-size': '15%',
-    'background-image':
-      'radial-gradient(var(--bg-dot-color) var(--bg-dot-size), transparent var(--bg-dot-size)), radial-gradient(var(--bg-dot-color) var(--bg-dot-size), transparent var(--bg-dot-size))',
-    'background-size': 'var(--bg-dot-pattern) var(--bg-dot-pattern)',
-    'background-position':
-      '0 0, calc(var(--bg-dot-pattern) / 2) calc(var(--bg-dot-pattern) / 2)',
-  }}
 >
   <div class="w-full max-w-padded-container flex flex-col gap-5">
     {

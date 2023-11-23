@@ -1,0 +1,47 @@
+---
+import { getEntries, getEntry, type CollectionEntry } from 'astro:content'
+import TagList from './tag/TagList.astro'
+import AuthorIcon from './icon/AuthorIcon.astro'
+type Props = CollectionEntry<'blogs'>['data'] &
+  CollectionEntry<'blog-metas'>['data'] & { slug: string }
+
+function formatDate(date: Date): string {
+  const diff = Date.now() - date.getTime()
+  if (diff < 24 * 3600 * 1000) {
+    // 1日より短いとき
+    return `${Math.floor(diff / 3600_000)}時間前`
+  } else if (diff < 5 * 24 * 3600 * 1000) {
+    // 5日より短いとき
+    return `${Math.floor(diff / 24 / 3600_000)}日前`
+  }
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+}
+
+const { slug, ...blog } = Astro.props
+
+const author = await getEntry(blog.author)
+const tags = await getEntries(blog.tags)
+---
+
+<li
+  class="block bg-white rounded-xl p-5 border max-sm:rounded-none max-sm:border-0 space-y-1"
+>
+  <a href={`/blog/${slug}`}>
+    <h2 class="px-2 text-xl font-bold line-clamp-2 hover:underline">
+      {blog.title}
+    </h2>
+  </a>
+  {(<TagList tags={tags} />)}
+  <div class="px-2 flex gap-3 text-gray-600">
+    <div class="hover:underline">
+      <a href={`/blog/authors/${author.id}`} class="flex gap-2 items-center"
+        ><AuthorIcon {...author.data} size={22} />{author.data.name}</a
+      >
+    </div>
+    <time datetime={(blog.updateDate ?? blog.postDate).toISOString()}>
+      {blog.updateDate && <span class="pr-[2px]">↻</span>}{
+        formatDate(blog.updateDate ?? blog.postDate)
+      }
+    </time>
+  </div>
+</li>

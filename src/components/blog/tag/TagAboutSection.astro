@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import Section from '../../common/Section.astro'
+import InlineLink from '@/components/common/InlineLink.astro'
+
+interface Props {
+  tag: CollectionEntry<'tags'>['data']
+}
+
+const { tag } = Astro.props
+
+const items: (
+  | (CollectionEntry<'tags'>['data']['site'] & { title: string })
+  | undefined
+)[] = [
+  tag.site && {
+    ...tag.site,
+    title: '公式サイト',
+    text: tag.site.text || `${tag.name} - 公式サイト`,
+  },
+  tag.document && {
+    ...tag.document,
+    title: '公式ドキュメント',
+    text: tag.document.text || `${tag.name} - 公式ドキュメント`,
+  },
+  tag.github && {
+    ...tag.github,
+    title: 'GitHub',
+    text: tag.github.text || `${tag.name} - GitHub`,
+  },
+]
+---
+
+<Section background="white">
+  <Fragment slot="title">{tag.name} について</Fragment>
+
+  <div class="block">
+    {tag.description && <div class="mb-3">{tag.description}</div>}
+    {
+      items.map(
+        (item) =>
+          item && (
+            <p>
+              {item.title}：<InlineLink href={item.url}>{item.text}</InlineLink>
+            </p>
+          ),
+      )
+    }
+  </div>
+</Section>

@@ -1,0 +1,45 @@
+---
+import BlogListSection from '@/components/blog/BlogListSection.astro'
+import BlogTitle from '@/components/blog/BlogTitle.astro'
+import TagIcon from '@/components/blog/icon/TagIcon.astro'
+import TagAboutSection from '@/components/blog/tag/TagAboutSection.astro'
+import BlogLayout from '@/layouts/BlogLayout.astro'
+import { unreachable } from '@/utils/unreachable'
+import { getCollection } from 'astro:content'
+export async function getStaticPaths() {
+  const tagEntries = await getCollection('tags')
+  return tagEntries.map((tag) => ({
+    params: { slug: tag.id },
+    props: { tag },
+  }))
+}
+
+const {
+  tag: { id, data: tag },
+} = Astro.props
+const blogEntries = await getCollection('blogs')
+
+const isShowAbout = tag.description || tag.site || tag.document || tag.github
+---
+
+<BlogLayout
+  title={`${tag.name}の記事一覧`}
+  description={tag.description ?? `${tag.name}に関する記事が集まっています`}
+  image={tag.image.type === 'svg'
+    ? `/blog/tag/${id}/ogp.png`
+    : tag.image.type === 'external-url'
+    ? tag.image.url
+    : unreachable(tag.image)}
+  summarySize="summary"
+>
+  <BlogTitle title={tag.name} background="white">
+    <Fragment slot="icon"><TagIcon tagImage={tag.image} size={80} /></Fragment>
+  </BlogTitle>
+  <main class="flex flex-col h-full">
+    {isShowAbout && <TagAboutSection tag={tag} />}
+    <BlogListSection
+      title={`${tag.name} に関する記事`}
+      blogs={blogEntries.filter((b) => b.data.tags.some((t) => t.id === id))}
+    />
+  </main>
+</BlogLayout>

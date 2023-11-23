@@ -5,13 +5,26 @@ import Navigation from './Navigation.astro'
 
 interface Props {
   showJoinLink?: boolean
+  isSticky?: boolean
+  rootPath?: string
+  headerTitle?: string
 }
 
-const { showJoinLink = false } = Astro.props
+const {
+  showJoinLink = false,
+  isSticky = true,
+  rootPath = '/',
+  headerTitle,
+} = Astro.props
 ---
 
 <header
-  class="sticky top-0 z-10 h-16 pr-5 flex justify-between bg-white border-b"
+  class:list={[
+    'z-10 h-16 pr-5 flex justify-between bg-white border-b',
+    {
+      'sticky top-0': isSticky,
+    },
+  ]}
 >
   <div class="flex">
     <button
@@ -24,8 +37,9 @@ const { showJoinLink = false } = Astro.props
         class="w-5"
       />
     </button>
-    <a href="/">
-      <Icon name="oucc" alt="OUCC" class="h-full aspect-square" />
+    <a href={rootPath} class="flex items-center">
+      <Icon name="oucc" alt="OUCC" class="block h-full aspect-square" />
+      {headerTitle && <h1 class="text-4xl font-bold mx-4">{headerTitle}</h1>}
     </a>
   </div>
   <div class="flex flex-col justify-center">

@@ -1,0 +1,29 @@
+---
+import { getEntries, type CollectionEntry } from 'astro:content'
+import BlogListItem from './BlogListItem.astro'
+
+interface Props {
+  blogs: CollectionEntry<'blogs'>[]
+}
+
+const { blogs } = Astro.props
+
+const blogMetas = await getEntries(
+  blogs.map((b) => ({ collection: 'blog-metas', id: b.slug })),
+)
+
+const sortedBlogs = blogs.map((b, i) => ({
+  ...b.data,
+  ...blogMetas[i]!.data,
+  slug: b.slug,
+}))
+sortedBlogs.sort(
+  (b1, b2) =>
+    (b2.updateDate ?? b2.postDate).getTime() -
+    (b1.updateDate ?? b1.postDate).getTime(),
+)
+---
+
+<ul class="flex flex-col gap-y-3">
+  {sortedBlogs.map((blog) => <BlogListItem {...blog} />)}
+</ul>

@@ -1,0 +1,71 @@
+---
+import { getEntries, type CollectionEntry, getEntry } from 'astro:content'
+import TagList from './tag/TagList.astro'
+import AuthorIcon from './icon/AuthorIcon.astro'
+interface Props {
+  blog: CollectionEntry<'blogs'>
+}
+
+function formatDate(date: Date): string {
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+}
+
+const { blog } = Astro.props
+const { data: blogMeta } = await getEntry({
+  collection: 'blog-metas',
+  id: blog.slug,
+})
+const tags = await getEntries(blog.data.tags)
+const author = await getEntry(blog.data.author)
+const { Content } = await blog.render()
+---
+
+<div class="py-4 flex flex-col items-center">
+  <h1 class="text-5xl font-bold p-5 text-center">{blog.data.title}</h1>
+  <article class="w-full max-w-padded-container bg-white rounded-2xl p-4 my-10">
+    <div class="p-1 text-lg mb-1">
+      <a
+        class="hover:underline flex gap-2 items-center"
+        href={`/blog/authors/${author.id}`}
+        ><AuthorIcon {...author.data} size={28} />{author.data.name}</a
+      >
+    </div>
+    <TagList tags={tags} />
+    <div class="text-sm text-gray-700 flex gap-3 p-2">
+      {
+        blogMeta.updateDate && (
+          <div>最終更新日：{formatDate(blogMeta.updateDate)}</div>
+        )
+      }
+      <div>
+        投稿日：{formatDate(blogMeta.postDate)}
+      </div>
+    </div>
+    <div class="w-full max-w-none pt-6 prose">
+      <Content />
+    </div>
+  </article>
+</div>
+
+<style is:global>
+  @tailwind components;
+  @tailwind utilities;
+
+  @layer components {
+    .prose code:not(pre > *) {
+      @apply bg-gray-200 rounded px-1 font-normal;
+    }
+    .prose code:not(pre > *)::after {
+      @apply content-none;
+    }
+    .prose code:not(pre > *)::before {
+      @apply content-none;
+    }
+    .prose > *:where(:not(h1, h2, h3, h4, h5, h6, pre)) {
+      @apply mx-4;
+    }
+    .prose > *:where(h1, h2, h3, h4, h5, h6) {
+      @apply border-b-2;
+    }
+  }
+</style>
