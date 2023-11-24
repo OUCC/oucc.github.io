@@ -1,9 +1,24 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
+const ok = validateExistingFiles()
+if (!ok) process.exit(1)
+updateBlogMeta()
+
 type BlogMeta = {
   postDate: string
   updateDate?: string
+}
+
+function validateExistingFiles() {
+  let ok = true
+  for (const file of process.argv.slice(2)) {
+    if (!fs.existsSync(file) || !fs.statSync(file).isFile()) {
+      console.log(`\u001b[31m[ERROR]\tThe file was not found: ${file}\u001b[m`)
+      ok = false
+    }
+  }
+  return ok
 }
 
 /**
@@ -37,5 +52,3 @@ function updateBlogMeta() {
     console.log(`[INFO]\tUpdate blog meta: ${blogMetaPath}`)
   }
 }
-
-updateBlogMeta()
