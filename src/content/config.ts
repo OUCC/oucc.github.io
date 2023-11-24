@@ -42,7 +42,7 @@ const authorsCollection = defineCollection({
           url: z.string().url(),
         }),
       ])
-      .optional(),
+      .default({ type: 'svg', name: 'default_user' }),
   }),
 })
 

@@ -11,7 +11,8 @@
     "typecheck": "astro check && tsc --noEmit",
     "lint": "prettier --check \"./**/*.{ts,tsx,astro,json}\"",
     "format": "prettier --write \"./**/*.{ts,tsx,astro,json}\"",
-    "validate-blog": "git diff --name-only | xargs npx ts-node --esm tools/validate-blog.ts"
+    "validate-blog": "ts-node --esm tools/validate-blog.ts",
+    "update-blogmeta": "ts-node --esm tools/update-blogmeta.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",

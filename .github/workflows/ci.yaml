@@ -49,6 +49,7 @@ jobs:
 
   validate-blog:
     if: startsWith(github.head_ref, 'blog/')
+    needs: [build, lint, typecheck]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
@@ -57,11 +58,9 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
-      - run: npm run validate-blog
-          - workin
+      - run: git diff --name-only | xargs npm run validate-blog --
 
   update-blogmeta:
-    if: startsWith(github.head_ref, 'blog/')
     needs: [validate-blog]
     permissions:
       pages: write
@@ -73,12 +72,12 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
-      - run: git diff --name-only | xargs npx ts-node --esm ./tools/update-blogmeta.ts
+      - run: git diff --name-only | xargs npm run update-blogmeta --
       - run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
-          git commit -m "[Bot] Update Blog Meta"
+          git commit -m "[Bot] Update blog meta"
           git push origin ${{github.head_ref}}
 
   deploy:

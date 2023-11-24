@@ -6,7 +6,12 @@ export async function getStaticPaths() {
   const authors = await getCollection('authors')
 
   return authors
-    .filter((author) => author.data.image?.type === 'svg')
+    .filter(
+      (author) =>
+        author.data.image.type !== 'svg' ||
+        author.data.image.name !== 'default_user' ||
+        !author.data.github,
+    )
     .map((author) => ({
       params: { slug: author.id },
       props: { author },
