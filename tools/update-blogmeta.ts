@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 const ok = validateExistingFiles()
-if (!ok) process.exit(1)
+if (!ok) process.exit(2)
 updateBlogMeta()
 
 type BlogMeta = {
@@ -25,13 +25,21 @@ function validateExistingFiles() {
  * blog meta のファイルの日付を更新します
  */
 function updateBlogMeta() {
-  for (const { dir, name } of process.argv
+  const targetFiles = process.argv
     .slice(2)
     .map(path.parse)
     .filter(
       (parsedPath) =>
         parsedPath.dir === 'src/content/blogs' && parsedPath.ext === '.md',
-    )) {
+    )
+  if (targetFiles.length === 0) {
+    console.log(
+      '\u001b[31m[ERROR]\tSet more than one target files to args.\u001b[m',
+    )
+    process.exit(1)
+  }
+
+  for (const { dir, name } of targetFiles) {
     const blogMetaPath = path.resolve(dir, `./blog-meta/${name}.json`)
 
     let meta: BlogMeta | null = null
