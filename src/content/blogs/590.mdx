@@ -1,0 +1,77 @@
+---
+title: OUCC Advent Calendar DAY21 Unityでゲーム作るRTA+おまけの謎解き
+description: |
+    執筆者:Pres.U(近々ハンドルネーム変更予定)
+    この記事はOUCC Advent Calendar 2021の21日目の記事です(実質9日目)。前回(12/21)はtakuemonさんのMixamoのススメです。
+
+    今回はUnityで2Dゲームをゼロから作りかつ記事を書くという無謀なRTAを行います。多分これが一番早いとは思いません。
+author: member
+tags: [advent-calendar, unity]
+---
+import Image from "@/components/common/Image.astro"
+import osechi2 from "./590/osechi2.jpg"
+import game1 from "./590/game1.png"
+import result from "./590/2021-12-22-1-1024x683.png"
+
+<p>執筆者:Pres.U(近々ハンドルネーム変更予定)<br/>この記事は<a href="http://OUCC Advent calender 2021" title="a">OUCC Advent Ca</a><a href="https://adventar.org/calendars/6722" title="https://adventar.org/calendars/6722">lendar 2021</a>の21日目の記事です(実質9日目)。前回(12/21)はtakuemonさんの<a href="/blog/567">Mixamoのススメ</a>です。</p>
+
+<p>今回はUnityで2Dゲームをゼロから作りかつ記事を書く<s>という無謀な</s>RTAを行います。<strong>多分これが一番早いとは思いません</strong>。</p>
+
+<h2><strong>目次(と思しき何か)</strong></h2>
+
+<ol><li>初めに</li><li>作るゲーム</li><li>今回のRTAのレギュレーション</li><li>準備</li><li>ゲームの方針</li><li>実装方法</li><li>できた</li><li>完走した感想(俄並感)</li><li>謎解き</li></ol>
+
+<h2>初めに</h2>
+
+<p>ほかの皆さんの記事は実用性があり内容も素晴らしいのですが、わたくしの書く記事は実用性も糞もなく、<s>TDN</s>ただの読んでくださる人<s>および執筆者</s>の時間潰しにすぎません。それでも楽しんで頂けると幸いです。</p>
+
+<div class="wp-block-image"><figure class="aligncenter size-full"><Image src={osechi2} alt="おせちだよ～" class="wp-image-605" /><figcaption>図1:上はほかの皆様の記事、下は僕の記事</figcaption></figure></div>
+
+<h2>作るゲーム</h2>
+
+<p>今回は、脱出ゲームを作ってみようと思います。</p>
+
+<div class="wp-block-image"><figure class="aligncenter size-full"><Image src={game1} alt="" class="wp-image-606" /><figcaption>図2:ゲーム画面の予定</figcaption></figure></div>
+
+<h2>今回のRTAのレギュレーション</h2>
+
+<ul><li>Any%RTA、すなわち出来の良さを考慮しない</li><li>計測開始はブログの執筆を開始した午後4時とす</li><li>計測開始時点でのUnityプロジェクトは初期状態とする</li><li>計測終了はブログを投稿した時間</li></ul>
+
+<h2>準備</h2>
+
+<p>まずはプロジェクトを作りましょう。Unity Hubから新規作成→2D→任意で名前変更→作成で作れます。<br/>次に、画像を自作します。ペイントがおすすめです。</p>
+
+<h2>ゲームの方針 </h2>
+
+<p>軽い謎を解いて鍵をゲットし部屋から脱出する感じです。</p>
+
+<h2>実装方法</h2>
+
+<p><br/>タイトル・本編・クリア画面の3つのシーンをSceneManagerを使って遷移させてやる感じです。また、アイテムの表示・非表示はオブジェクトの座標を画面外に移すことで疑似的に実行しています。</p>
+
+<h2>できた</h2>
+
+<p>後でドライブにzipファイルを置いておきます。</p>
+
+<figure class="wp-block-image size-large"><Image src={result} alt="" class="wp-image-608" /><figcaption>図3:ゲーム画面</figcaption></figure>
+
+<h2>完走した感想(俄並感)</h2>
+
+<p>じつは実装しているうちに、GameObjectを非表示にするとアタッチしているスクリプトが無効になるといった仕様に悩まされ方針を変更せざるを得なくなりました。<br/>また、最近Unityに触れる機会がなかったので、いい練習の機会になったと思いました。<br/>最後に、ゲーム作るのは大変でした。</p>
+
+<h2>謎解き</h2>
+
+<p>本編です。<br/></p>
+
+<p><em>1213①②16③④<br/>④⑤⑥22⑦②⑧</em></p>
+
+<p>⑥④⑦⑤er④→？</p>
+
+<p>ヒント1:<span class="has-inline-color has-white-color">僕は22です(年齢じゃないよ)</span></p>
+
+<p>ヒント2:<span class="has-inline-color has-white-color">①～⑧に入るのは数字ではなくアルファベット</span></p>
+
+<p>ヒント3:<span class="has-inline-color has-white-color">このイベントはずばり…？</span></p>
+
+<p>答え:<span class="has-inline-color has-white-color">mystery</span></p>
+
