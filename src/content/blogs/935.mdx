@@ -1,0 +1,137 @@
+---
+title: Discordの読み上げBotを作っている話
+description: |
+  この記事は OUCC Advent Calendar 2022 の 19 日目の記事です。昨日の記事は yuyu さんの「StackEditで非プログラマーと協同開発した話」でした。
+
+  はじめまして、ciffelia です。今日は私が開発している Discord 読み上げ Bot「Koe」と Koe で採用している技術をご紹介させていただきます。
+author: member
+tags: [advent-calendar]
+---
+import Image from '@/components/common/Image.astro'
+import VoicevoxLogo from "./935/logo-300x150.png"
+import KoeScreenshot from "./935/koe-screenshot-1024x594.png"
+
+この記事は <a href="https://adventar.org/calendars/7859" target="_blank" rel="noopener">OUCC Advent Calendar 2022</a> の 19 日目の記事です。昨日の記事は yuyu さんの<a href="/blog/918" target="_blank" rel="noopener">「StackEditで非プログラマーと協同開発した話」</a>でした。
+
+はじめまして、<a href="https://github.com/ciffelia" target="_blank" rel="noopener">ciffelia</a> です。今日は私が開発している Discord 読み上げ Bot「Koe」と Koe で採用している技術をご紹介させていただきます。
+
+<p style="text-align: center">
+  <Image
+    src={VoicevoxLogo}
+    alt="Koeのロゴ"
+    width="300"
+    height="150"
+    class="alignnone size-medium wp-image-942"
+  />
+  <a href="https://github.com/ciffelia/koe" target="_blank" rel="noopener">
+    https://github.com/ciffelia/koe
+  </a>
+</p>
+
+# 読み上げ Bot って何？
+
+Discord のテキストチャンネルに送信されたメッセージをボイスチャンネルで読み上げてくれる Bot です。
+聞き専の人たちが送信したメッセージを合成音声で代読し、会話に参加しやすくしてくれます。
+
+<Image
+  src={KoeScreenshot}
+  alt="Koeが動作する様子を写したスクリーンショット"
+  width="840"
+  height="487"
+  class="aligncenter size-large wp-image-946"
+/>
+
+# 特徴
+
+- <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">VOICEVOX</a> を使用した高品質な音声合成 - ずんだもん、四国めたんを含む 10 人以上の音源から好みに合ったものを選択可能
+- 特定の語句の読み方を設定する辞書機能
+  - 読み方が難しいユーザー名の人がいても安心
+- ネタバレ（`||`で囲むやつ）は読み上げをスキップ
+
+# 読み上げの仕組み
+
+ボイスチャットに参加した Koe は概ね以下の手順でテキストを読み上げています。
+
+1. Discord API からメッセージを受信
+2. Redis から辞書データを取得
+3. 読み上げるテキストを生成
+4. Redis から声の設定（プリセット ID）を取得
+5. VOICEVOX Engine にテキストとプリセット ID を送信
+6. VOICEVOX Engine から合成音声の wav データを受信
+7. ffmpeg で音声データを変換
+8. 音声データを Opus にエンコードし、Discord に送信
+
+# 使っている技術
+
+## プログラミング言語: Rust
+
+Koe は Rust で書かれています。Rust は高速かつメモリ安全なプログラミング言語で、以下のような特徴があります。
+
+- 機械語にコンパイルされる
+  - C や C++ と同じコンパイラ言語です。
+  - Python や JavaScript のようなインタプリタ言語と比較して非常に高速に動作します。
+  - ただしコンパイルは比較的遅いです。
+- GC が存在しない
+  - 後述するように、変数の生存期間がコンパイル時に確定するためガベージコレクタが存在しません。
+  - GC がメモリ管理を行っている Go と比較して高速に動作します。
+  - Discord が Go から Rust に移行してパフォーマンスを改善した話が面白いです: <a href="https://discord.com/blog/why-discord-is-switching-from-go-to-rust" target="_blank" rel="noopener">Why Discord is switching from Go to Rust</a>
+- 型システムがメモリ安全性を保証してくれる
+  - 変数がコードのどの部分で使われているのかコンパイラがチェックします。
+  - メモリ安全であることが保証されないとコンパイルが通りません。
+  - Rust の学習が難しいと言われる所以はこのメモリ安全性チェックにあります。
+  - use-after-free をはじめとする C/C++ で起こりがちなバグを未然に防ぐことができます。
+  - 他の言語に類を見ない特徴的な機能です。
+- 標準のパッケージマネージャがある
+  - Cargo と呼ばれるパッケージマネージャが同梱されています。
+  - Cargo ではパッケージのことを crate と呼び、<a href="https://crates.io/" target="_blank" rel="noopener">crates.io</a> で検索できます。
+  - Node.js の npm と同じような使い心地です。
+    - npm ほど酷くはありませんが、Depenency Hell に陥ることもあります。
+- 高機能で書きやすい
+  - 開発が活発なため、便利な機能が他の言語から多数取り入れられています。
+  - 例えば、関数型言語のように、配列に`map`や`filter`を適用できます。
+  - JavaScript や C#のように、`async` / `await`で非同期処理を行うこともできます。
+  - シンプルさを重視し限られた機能のみを実装する Go とは対照的です。どちらが良いか好みが分かれる部分かもしれません。
+
+## Discord API: serenity / songbird
+
+Rust で Discord API を扱うための crate として最も有名なのが <a href="https://github.com/serenity-rs/serenity" target="_blank" rel="noopener">serenity</a> です。基本的な API 呼び出し機能に加えてキャッシュ機構を備えており、Discord API の扱いにくい部分を隠蔽してくれます。
+また、Discord のボイスチャットに関する API を扱うための crate が <a href="https://github.com/serenity-rs/songbird" target="_blank" rel="noopener">songbird</a> です。ボイスチャンネルに Bot として接続し音声を流す機能を備えています。
+
+## 音声合成: VOICEVOX Engine
+
+読み上げソフトウェアとして有名な <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener">VOICEVOX</a> から音声合成エンジンを切り出したものが <a href="https://github.com/VOICEVOX/voicevox_engine" target="_blank" rel="noopener">VOICEVOX Engine</a> です。
+VOICEVOX Engine に対して HTTP リクエストでパラメータを送ると、合成された音声データを返してくれます。
+
+## データベース: Redis
+
+Redis は key-value store として使えるデータベースです。いわゆる NoSQL データベースの一つです。
+Koe では辞書やユーザーの声などの設定を保存するために使用しています。
+
+## コンテナ管理: Docker
+
+Docker は言わずと知れたコンテナ管理ソフトウェアです。コンテナとは、超軽量な Linux の仮想マシンのようなものなのですが、簡潔かつ正確に語るのは難しいので詳細は割愛します。
+Koe では<a href="https://github.com/ciffelia/koe/blob/1.0.1/deployment/docker-compose.yml" target="_blank" rel="noopener"><code>docker-compose.yml</code></a>を配布しており、コマンド一つで簡単に Koe、Redis、VOICEVOX Engine のコンテナを起動・停止できるようにしています。
+
+## リリース自動化: GitHub Actions
+
+GitHub Actions は、GitHub の管理する仮想マシン上で様々なイベントをトリガーとして任意の処理を実行できるサービスです。
+Koe では以下のような処理を自動化しています。
+
+- リポジトリにコードがプッシュされたとき
+  - コンパイルが通るかチェック
+  - コンテナをビルドして GitHub Container Registry にプッシュ
+- 私がリリースボタンを押したとき
+  - 新しいバージョンをリリースするコミットを作成
+  - バージョンに対応する Git のタグを作成
+  - バージョンに対応する Docker コンテナのタグを作成
+  - リリースノートを作成
+
+## 依存しているソフトウェアのアップデート自動化: Renovate
+
+Koe は様々なソフトウェアに依存しています。先述した serenity, songbird, Redis に加えて、設定ファイルのデシリアライザとして <a href="https://github.com/serde-rs/serde" target="_blank" rel="noopener">Serde</a>、HTTP クライアントとして <a href="https://github.com/seanmonstar/reqwest" target="_blank" rel="noopener">reqwest</a> などを利用しています。
+それらの新しいバージョンがリリースされるたびに手動で更新を行うのは面倒なので、アップデートを自動化する <a href="https://github.com/renovatebot/renovate" target="_blank" rel="noopener">Renovate</a> を導入しました。Renovate は指定した時間に自動で Pull Request を作成し、ビルドが通るとマージしてくれます。
+
+# おわりに
+
+Koe を使ってみたくなった方は<a href="https://github.com/ciffelia/koe#readme" target="_blank" rel="noopener">ドキュメント</a>を読めば簡単に導入できます。ソースコードが公開されているため改造も容易です。ぜひお試しください。
+また、今回ご紹介した技術の多くは Discord Bot の開発以外にも活用できるものです。これらの技術を活用し、効率的なソフトウェア開発に役立てていただければ幸いです。

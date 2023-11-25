@@ -1,0 +1,150 @@
+---
+title: fishshellを触ってみた
+description: |
+    本記事のタイトルにも書いてある通りfishshellについて話していこうと思います。本記事は調べたらそのまま出てくるような内容をまとめたような形になってしまうかもしれないですが、そのような場合は温かい目で見守ってください。
+
+    shell
+
+    まず、shellとはざっくりいうと自身がPCに対して行ってもらいたい命令をOS対して出すプログラムのことです。そしてshellにはいくつか種類があり、たとえばbash,tcsh,zshなどがあります。それらには当然のように機能の面において違いがあります。今回話そうとしているfishとはそのようなshellのうちの一つです。
+author: member
+tags: [advent-calendar]
+---
+import Image from "@/components/common/Image.astro"
+import publicdomainq from "./659/publicdomainq-0016115svg.jpg"
+import sample1 from "./659/sample1-1024x562.png"
+import sample2 from "./659/sample2-1024x482.png"
+import fish2 from "./659/fish2-860x491-1.jpg"
+import fish3 from "./659/fish3-860x491-1.jpg"
+import Screenshot from "./659/スクリーンショット-2021-12-25-15.32.41-1024x716.png"
+
+{/* wp:paragraph */}
+<p class="text-end">執筆者：NamiFuji</p>
+{/* /wp:paragraph */}
+
+{/* wp:image {"id":668,"sizeSlug":"full","linkDestination":"none"} */}
+<figure class="wp-block-image size-full"><Image src={publicdomainq} alt="" class="wp-image-668" /><figcaption>(フリー素材です)</figcaption></figure>
+{/* /wp:image */}
+
+{/* wp:paragraph */}
+<p>この記事は<a href="https://adventar.org/calendars/6722">OUCC Advent Calendar 2021</a>の25日目の記事です。前回は上月さんの｢Live2Dを触ってみた」でした。さて本日はクリスマスです。皆さんは本日はどのようにお過ごしの予定でしょうか？私はこの前買ったパズルを完成させる予定です。人によってはクリぼっちで最悪だなんて言っている人がいますが、私の考えではクリスマスにひとりで過ごすということは全く恥じることではないと思います。なぜかというとクリスマスというのは本来イエス＝キリストの誕生を祝うことが目的であるので、そもそもクリスマスに大勢で集まらなければならないと考えること自体が本来の目的とずれているからです。なので一人であるということ自体に対してなんら問題もなく、逆に誰かといなければと考えること自体が周りの考えに振り回されているということになり、それ自体が問題となるからです。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>さて、余談は置いておいて、本記事のタイトルにも書いてある通りfishshellについて話していこうと思います。本記事は調べたらそのまま出てくるような内容をまとめたような形になってしまうかもしれないですが、そのような場合は温かい目で見守ってください。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph {"fontSize":"large"} */}
+<p class="has-large-font-size"><strong>shell</strong></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>まず、shellとはざっくりいうと自身がPCに対して行ってもらいたい命令をOS対して出すプログラムのことです。そしてshellにはいくつか種類があり、たとえばbash,tcsh,zshなどがあります。それらには当然のように機能の面において違いがあります。今回話そうとしているfishとはそのようなshellのうちの一つです。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph {"fontSize":"large"} */}
+<p class="has-large-font-size"><strong>fishのどこがいいのか</strong></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>さてこれからfishについて話していこうとおもいますが、なぜbashやzshではなくfishなのかと疑問に思う人がいるかもしれません。その理由を端的にいうと、fishは他のshellと比べてとても扱う（カスタマイズをする）のが容易であるからです。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>fishのデフォルトの機能としてシンタックスハイライトの機能がついており、それによってコマンドやオプションが間違っているのか一目で確かめることができます。さらにコマンドを入力する際に過去のコマンド履歴からインタラクティブに補完を見ることもできます。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>補完機能の例</p>
+{/* /wp:paragraph */}
+
+{/* wp:image {"id":666,"sizeSlug":"large","linkDestination":"none"} */}
+<figure class="wp-block-image size-large"><Image src={sample1} alt="" class="wp-image-666" /></figure>
+{/* /wp:image */}
+
+{/* wp:paragraph */}
+<p>入力時</p>
+{/* /wp:paragraph */}
+
+{/* wp:image {"id":667,"sizeSlug":"large","linkDestination":"none"} */}
+<figure class="wp-block-image size-large"><Image src={sample2} alt="" class="wp-image-667" /></figure>
+{/* /wp:image */}
+
+{/* wp:paragraph */}
+<p>間違った入力をした時</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph {"fontSize":"large"} */}
+<p class="has-large-font-size"><strong>fishの簡単なカスタマイズの方法</strong></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>実行環境：M1mac   Monterey</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>１，iterm2かターミナルでfish_configとコマンドを入力する。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>２，ブラウザが開かれるので、そこから設定を行う</p>
+{/* /wp:paragraph */}
+
+{/* wp:image {"id":662,"sizeSlug":"full","linkDestination":"none"} */}
+<figure class="wp-block-image size-full"><Image src={fish2} alt="" class="wp-image-662" /></figure>
+{/* /wp:image */}
+
+{/* wp:image {"id":663,"sizeSlug":"full","linkDestination":"none"} */}
+<figure class="wp-block-image size-full"><Image src={fish3} alt="" class="wp-image-663" /></figure>
+{/* /wp:image */}
+
+{/* wp:paragraph */}
+<p></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>以上のような簡単な操作だけでもまぁまぁ見た目を変えることができる。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph {"fontSize":"large"} */}
+<p class="has-large-font-size"><strong>fishのカスタマイズ方法</strong></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>さきほどはfishの簡単なカスタマイズ方法を説明しましたが、この方法ではカスタマイズの自由度がとても狭いです。そのためつぎはさらに自由度の高いカスタマイズ方法について話そうと思います。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>それは~/.config/fish/config.fishファイルに直接設定を書いていく方法です。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>たったこれだけだと、文章として寂しいので私個人が実際にいじった部分をのせようと思います。</p>
+{/* /wp:paragraph */}
+
+{/* wp:image {"id":665,"sizeSlug":"large","linkDestination":"none"} */}
+<figure class="wp-block-image size-large"><Image src={Screenshot} alt="" class="wp-image-665" /></figure>
+{/* /wp:image */}
+
+{/* wp:paragraph */}
+<p></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>現時点の私の設定ファイルは見ての通り、あまり書かれていません。そのためこれからさらに使いやすいように設定ファイルをいじるのが私の目標です。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>今までに述べた方法以外にも、プラグインを入れるというカスタマイズ方法もあります。みなさんもこれを機にfishをつかって、みなさんの使いやすいようにカスタマイズしてみてください。</p>
+{/* /wp:paragraph */}

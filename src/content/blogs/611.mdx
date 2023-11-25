@@ -1,0 +1,117 @@
+---
+title: Live2Dを触ってみた
+description: |
+  この記事はOUCC Advent Calendar 2021の24日目の記事です。イブですね。イベント開催することで24日の予定を阻むFGOの運営の気持ちがよくわかる日になりました。いかがお過ごしでしょうか？前回は、かき氏の「Reactで時間割アプリを作ってみた」でした。
+
+  私が書いた記事は、前回はGANについて、前々回はOpenCVについて、前々々回はUnityについて書くといったように毎回分野を変えて記述しているので、今回はLive2Dについて記述していこうと思います。
+author: member
+tags: [advent-calendar]
+---
+import Image from "@/components/common/Image.astro"
+import E_chan_gif from "./611/123530619-7b7e9b00-d737-11eb-83cc-0bfd10d8c3be.gif"
+import live2dten from "./611/live2dten.png"
+
+{/* wp:paragraph */}
+<p>この記事は<a href="https://adventar.org/calendars/6722">OUCC Advent Calendar 2021</a>の24日目の記事です。イブですね。イベント開催することで24日の予定を阻むFGOの運営の気持ちがよくわかる日になりました。いかがお過ごしでしょうか？前回は、かき氏の「<a href="https://qiita.com/kaki765/items/79d1235f5344877c56a5" title="https://qiita.com/kaki765/items/79d1235f5344877c56a5">Reactで時間割アプリを作ってみた</a>」でした。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>私が書いた記事は、前回はGANについて、前々回はOpenCVについて、前々々回はUnityについて書くといったように毎回分野を変えて記述しているので、今回はLive2Dについて記述していこうと思います。</p>
+{/* /wp:paragraph */}
+
+{/* wp:heading */}
+<h2>～あらすじ～</h2>
+{/* /wp:heading */}
+
+{/* wp:paragraph */}
+<p>自分の描いた絵が動くと嬉しいですよね。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>というわけで、Live2Dやったことないけどやってみました。</p>
+{/* /wp:paragraph */}
+
+{/* wp:heading */}
+<h2>～キャラについて～</h2>
+{/* /wp:heading */}
+
+{/* wp:paragraph */}
+<p>今回動かすキャラは、「Angel-Rein」ちゃんです。<br/>春のハッカソンで「嫌われているE-Learningを擬人化して対話することで好きになろう企画」の自然言語で会話する対話Botを作成することになりました。<br/>その時に、新しいキャラを制作することが好きな私がデザインしたのがReinちゃんです。<br/>マフラー付けて冬っぽい服装ですが、考案したのは春で、描いたのは夏ごろです。</p>
+{/* /wp:paragraph */}
+
+{/* wp:image {"id":627,"sizeSlug":"full","linkDestination":"none"} */}
+<figure class="wp-block-image size-full"><Image src={E_chan_gif} alt="" class="wp-image-627" /><figcaption>名前の由来は、E-Learningのアナグラム</figcaption></figure>
+{/* /wp:image */}
+
+{/* wp:paragraph */}
+<p>デザインやキャラの詳細については、<a href="https://sachsen.booth.pm/items/3420680?utm_source=pixiv&amp;utm_medium=promotion&amp;utm_campaign=pixiv-promotion&amp;utm_content=work-all_items">ここ</a>を参照してください。(別ページへ飛びます。)</p>
+{/* /wp:paragraph */}
+
+{/* wp:heading */}
+<h2>～出来たもの～</h2>
+{/* /wp:heading */}
+
+{/* wp:paragraph */}
+<p>※読み込みに時間がかかるかも。お許しを</p>
+{/* /wp:paragraph */}
+
+<figure><img src="https://sachsen.github.io/4upload/image/advent/randomPose8fps1200.gif" alt="ここに画像が表示されるはず" />
+<figcaption>ランダムAというデフォルトで用意されているアニメーションを再生したもの</figcaption>
+</figure>
+
+{/* wp:paragraph */}
+<p>▼表示されない方はこちらから(高画質版)</p>
+{/* /wp:paragraph */}
+
+<iframe class="w-5/6 aspect-[1080/1436] mx-auto" src="https://www.youtube.com/embed/Vx9VwLfvkWY" title="れいんちゃんLive2Dランダムポーズ" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+{/* wp:html */}
+
+{/* /wp:html */}
+
+{/* wp:paragraph */}
+<p>又は<a href="https://youtu.be/Vx9VwLfvkWY?vq=hd1080">ようつべリンク</a>から</p>
+{/* /wp:paragraph */}
+
+{/* wp:heading */}
+<h2>～感想～</h2>
+{/* /wp:heading */}
+
+{/* wp:paragraph */}
+<p>むずい！　正直Blenderの方が簡単とさえ思えました。というか実際Blenderの方が簡単だと思います。<br/>3Dを絵を変形させて表現するというのが難しい。<br/>ここがこう回転すればこうなるといったようなことを頭の中で考えながら作成しなければならず、立体図形把握能力が求められる作業だと感じました。</p>
+{/* /wp:paragraph */}
+
+{/* wp:image {"id":618,"sizeSlug":"full","linkDestination":"none"} */}
+<figure class="wp-block-image size-full"><Image src={live2dten} alt="" class="wp-image-618 w-auto" /></figure>
+{/* /wp:image */}
+
+{/* wp:paragraph */}
+<p>見てください、この点の数！たった腕を動かすだけでこれだけのキーを打ち込まなければなりませんでした。(もっと賢い方法はあるのかもしれませんが)<br/>袖が動いて前と後ろが切り替わる所とか、それによって袖がどう動くかとか、腕がより俯瞰した位置ならどう見えるかなどなど考えて動かすとこうなりました。<br/>Blenderなら立体図形を作成してしまえば、動き方に応じて図形を編集する必要は無いですが、live2dは立体図形は手元にないけど図形を動かすとこう見えるだろうという予測を立てなければならないです。<br/>もっとも可動範囲を狭くする、例えば腕の振れ幅を10度だけにする、顔もほんのちょっとしか動かないとかいったことをすれば簡単になると思いますが、回転や拡大縮小以外の複雑に変形しながら動く場合には、それだけで数時間飛ぶ作業量を要求されたりします。<br/>あと、原画はキャラ設定画像としてなるべく正面で描いた絵なのですが、少し見栄えよく見せようと顔が傾いていたりします。これのせいで、対称編集が出来ないといった書く段階で知りたかった事柄も相まって難易度を底上げしてしまったようです。<br/>物理演算を入れる作業については、あまり細かいところを気にしなかった(気にしている余裕がなかった)からか、結構楽々に設定することができました。<br/></p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>しかし、この図形を想像しなければいけない部分とかどうにかならないのでしょうか。真に絵を描ける人はこの辺の能力が高いのかもしれませんね。<br/>昔Live2D　Euclidとかあって、自分の絵を3D化できるという話を聞いて心躍ったのですが、あれはどうやら既に公開停止になっているようです。何が原因で頓挫したのかは分からないですが、上手くいけばメタバース時代の覇権を握れたかもしれないと思えるだけに残念です。<br/>それにしても、世の中のVtuberはLive2dであそこまで動かせてすごいんだなぁ～って今回作成してみて感じました。</p>
+{/* /wp:paragraph */}
+
+{/* wp:heading */}
+<h2>～総括～</h2>
+{/* /wp:heading */}
+
+{/* wp:html */}
+<p>Blenderではなく、Live2Dを使用する場面というのは恐らく以下の場面でしょう。</p>
+<ol>
+  <li><p>あまり動かさない、又は動く部位が回転や拡大縮小といった単純な変形で構成されることが多い場合</p></li>
+  <li><p>絵を動かしたい、又は3Dの見た目は好きじゃない、3Dでは表現できないデザインを動かしたい場合</p></li>
+</ol>
+{/* /wp:html */}
+
+{/* wp:paragraph */}
+<p>少しでもご参考になれば幸いです。</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p>筆者：上月さん</p>
+{/* /wp:paragraph */}
+
+{/* wp:paragraph */}
+<p></p>
+{/* /wp:paragraph */}

@@ -1,0 +1,295 @@
+---
+title: pythonとArduinoと画像認識でタワーディフェンスゲームの自動化をしてみた
+description: |
+    前書き
+    この記事はOUCC Advent Calendar 2022の8日の記事です。担当はMrMocchyです。
+    作成したプログラムはGithubに上げていますので全体をご覧になりたい方はこちらへどうぞ。
+    この記事ではゲームの自動化という内容を扱っています。これはゲーム開発者が想定していないだろう遊び方ですが、やっていることはプレイヤーの操作をプログラムに代替させているだけです。リソースを違法に爆増させるような類のチートではないのでお目こぼしください。
+    また、このゲームをやったことがないと何言ってるのか分からない部分も多いとは思いますが、そういうものだと思ってください。
+author: member
+tags:
+  - python
+  - automation
+  - advent-calendar
+---
+import Image from '@/components/common/Image.astro'
+import Screenshot from "./901/スクリーンショット-4-1024x555.png"
+
+### 前書き
+この記事は[**OUCC Advent Calendar 2022**](https://adventar.org/calendars/7859)の8日の記事です。担当はMrMocchyです。
+作成したプログラムはGithubに上げていますので全体をご覧になりたい方は[こちら](https://github.com/MrMocchy/AutoInfinitode2)へどうぞ。
+この記事ではゲームの自動化という内容を扱っています。これはゲーム開発者が想定していないだろう遊び方ですが、やっていることはプレイヤーの操作をプログラムに代替させているだけです。リソースを違法に爆増させるような類のチートではないのでお目こぼしください。
+また、このゲームをやったことがないと何言ってるのか分からない部分も多いとは思いますが、そういうものだと思ってください。
+
+### 自動化したゲームについて
+自分は[**Infinitode 2**](https://infinitode.prineside.com/ "Infinitode 2 公式サイト")というタワーディフェンスゲームを長いこと遊んでいるのですが、これはゲーム性として「プレイして得たリソースでタワーを強化し、次のプレイへ」という周回を繰り返す、盆栽ゲーと呼ばれることもあるタイプです。ステージごとにマップも敵の種類も大きく変わる、タワーと敵の相性により与えるダメージが0%～200%になる、無限の強化と無限の敵、etc...、とまあここはレビューサイトではないので切り上げますが、自分にとっては非常に奥の深いゲームだと思っているわけです。
+しかしやりこんでいくとステージごとにある程度の最適解のようなものが見えてくるわけで、それを自動化に定評のあるらしいpythonを用いて放置ファームしようというわけです。
+
+### プログラム全体の流れ
+上で書いた最適解、すなわちどこに何をするのか、というのをcsvに羅列してそれを順に行わせます。
+csvファイルには[行動、座標、オプション]（後ろ2つはあったりなかったり）を列挙しています。別の[行動、カテゴリ、ホットキー]を並べたhotkeys.csvから読み込んだ辞書型を参照して、[座標、カテゴリ、ホットキー]などを持つクラスのリストとして読み込みます。そして現在の所持金などからその行動をできるか判断して実行するというループでプレイさせます。
+現在の所持金や設置・アップグレードのコストなどはPyOCRを使って画面から文字認識で読み取っています。
+
+### 操作の自動化
+Infinitode 2にはホットキー機能があり、キーボード入力一つでタワー設置やアップグレードからゲーム進行速度変更までできます。これを**pyautogui**で操作しました。しかし、移動の矢印キーはホットキーで変更できず、pyautoguiが利きませんでした。調べた結果、自作キーボードなどに用いられる**Atmega32U4**というマイコンを積んだ**Arduino**なら操作できるのではと考え、amazonで[Arduino Pro Microの互換機らしきもの](https://www.amazon.co.jp/gp/product/B07J55YWKZ/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1 "KEYESTUDIO 5V Pro Micro Atmega32U4 マイコン 開発ボード + USBケーブル キット for Arduinoと互換性 アルディーノ アルドゥイーノ アルデュイーノ アルディーノ")を購入しました。あとは
+
+- [Arduinoを USB/HIDデバイス(仮想キーボード)として活用する](https://qiita.com/pronechia/items/b7a3722391af8e04e292)
+- [PC⇔Arduinoのシリアル通信をPython3でやってみた](https://qiita.com/k_zoo/items/cbeda6736d727113b7cd)
+- [WindowsのコマンドラインからUSBデバイスについて調べる方法](https://ascii.jp/elem/000/004/085/4085974/)
+
+を参考に、pythonからArduinoにシリアル通信で文字を送り、それに応じたキーボード入力操作をさせました。
+
+```python
+# control.py抜粋
+import os
+import serial
+import time
+
+#シリアル通信のセットアップ
+ser = serial.Serial()
+#デバイスマネージャでArduinoのポート確認
+readlines = os.popen("powershell \"Get-CimInstance Win32_PnPEntity | Where-Object {$_ -like \'*Arduino*\'} | Select-Object Caption\"").readlines()
+if readlines == []:
+	print("error @ control")
+	print("Arduino was not found")
+	exit()
+PORT = readlines[3][15:-2]#"COM5"の形のポートを取得
+ser.port = PORT
+ser.baudrate = 9600       #Arduinoと合わせる
+ser.setDTR(False)         #DTRを常にLOWにしReset阻止
+ser.open()
+#終了時に ser.close() をする
+
+def moveBy(dx,dy):
+	string=b""
+	if dx<0:
+		string+=b"l"*(-dx)
+	else:
+		string+=b"r"*dx
+	if dy<0:
+		string+=b"d"*(-dy)
+	else:
+		string+=b"u"*dy
+	ser.write(string)
+    #ゲーム側のカーソル移動を待つ
+	time.sleep(0.2*(abs(dx)+abs(dy)))
+```
+```C
+//move/move.ino
+//Arduino側プログラム
+#include "Keyboard.h"
+void setup() {
+  Serial.begin(9600);
+  Keyboard.begin();
+}
+void loop() {
+  if (Serial.available() > 0) {
+    switch (Serial.read()) {
+      case 'r':
+        Keyboard.write(KEY_RIGHT_ARROW);
+        break;
+      //以下略
+    }
+  }
+}
+
+```
+
+### 画像認識部分
+- [Tesseract+PyOCRで簡易OCRを試してみる](https://qiita.com/nabechi6011/items/3a367ca94dbd208efcc7)
+- [PyocrとTesseractで精度の高いOCRを作ってみよう](https://myafu-python.com/work/text-extraction/)
+- [PythonでOCRを実行する方法](https://gammasoft.jp/blog/ocr-by-python/)
+
+などを参考に、ゲーム画面から現在の所持金やコストなどの文字の部分を切り取って文字認識で読み込みました。
+ゲーム内で`3:4`のように表示された座標を読み取る際に特にうまく読み取れないことが多かったので、認識精度を上げるためにいろいろ試しました。その中で効果があったと思われるものを挙げます。
+
+- 切り取る画像の範囲を読み取りたい文字列いっぱいにまで狭める。
+- 黒字に白文字は誤認識しやすいようなので、で反転して二値化。（`from PIL import Image`を使用）
+- 上の二値化ついでに画像を横に拡大して、細い半角の文字を細めの全角くらいにする。（数字の認識力は向上したが、コロンを誤認識することも増えたので結局使わなかった）
+- 切り取る部分によって二値化の閾値を調整
+- `tesseract_layout`という読み取る方法(?)を変更する引数は、いろいろ試したけど結局`6`でよさげだった。
+
+また、指定の画像を画面から見つけるのを用いて、設置コストの画面切り替えやポーズ画面の判定をしたりしています。
+
+```python
+# ocr.py抜粋
+def getImage(_left,_top,_right,_bottom):
+    #ウィンドウが前面にあるか入力前にチェックし、なければカウントダウンして終了
+    foregroundCheck()
+    # ウィンドウサイズを取得し、ずれを調整
+    f = ctypes.windll.dwmapi.DwmGetWindowAttribute
+    rect = ctypes.wintypes.RECT()
+    DWMWA_EXTENDED_FRAME_BOUNDS = 9
+    f(ctypes.wintypes.HWND(hwnd),ctypes.wintypes.DWORD(DWMWA_EXTENDED_FRAME_BOUNDS),ctypes.byref(rect),ctypes.sizeof(rect))
+    # 取得したサイズでスクリーンショットを撮る
+    image = ImageGrab.grab((rect.left+2+_left, rect.top+31+_top, rect.left+2+_right, rect.top+31+_bottom))
+    return image
+
+def getTextFromImage(rect,border,show=False) -> str:
+    img=getImage(rect[0],rect[1],rect[2],rect[3])
+    if img == None: return
+    img=img.convert("RGB")
+    size=img.size
+    img=img.resize((size[0]*2,size[1]*2))
+    size=img.size
+    img2=Image.new("RGB",(size[0],size[1]))
+    #2値化して精度を上げる
+    for x in range(size[0]):
+        for y in range(size[1]):
+            r,g,b=img.getpixel((x,y))
+            if r+g+b > border*3:
+                r,g,b=(0,0,0)
+            else:
+                r,g,b = (255,255,255)
+            #img2.putpixel((x*2+1,y),(r,g,b))
+            img2.putpixel((x,y),(r,g,b))
+    txt = tool.image_to_string(img2,lang,builder=pyocr.builders.TextBuilder(tesseract_layout=6))
+    #指定範囲の調整用に切り取った画像と二値化後の画像を並べて表示
+    if __name__ == '__main__' or show:
+        imgs=Image.new("RGB",(img.size[0]+img2.size[0],img.size[1]))
+        imgs.paste(img,(0,0))
+        imgs.paste(img2,(img.size[0],0))
+        imgs.show()
+    return txt
+```
+
+### その他
+
+csvファイルから読み込んだプレイ動作のアルゴリズムは`Algo`という名のclassのリストで保存。
+設置と同時のアビリティ取得や複数回アップグレードなどの特殊な命令は、複数のAlgoを続けてリストに追加している形です。
+```python
+#csvdata.py抜粋
+with open(f"csv/{stage}.csv","r") as file:
+	reader = csv.reader(file)
+	
+	line = [row for row in reader]
+
+	for lineNo in range(line.__len__()):
+		l=line[lineNo]
+		if l == []:
+			continue
+		if not hotkeys.dic.__contains__(l[0]):
+			error(f"line {lineNo+1} : \"{l[0]}\" is not defined  (csv/{stage}.csv)")
+		if l.__len__() > 2:
+			#posありのとき
+			pos=(int(l[1]),int(l[2]))
+		elif l.__len__()==2:
+			#posなしでoptionありのとき
+			l.__add__(["",l[1]])
+		if l.__len__() > 3:
+			#オプションがある時
+			if hotkeys.dic[l[0]][0]=="u":
+				for i in range(int(l[3]) if hotkeys.dic[l[0]][0]=="u" else int(l[3])):
+					algos.append(Algo(line=lineNo,name=l[0],pos=pos,cate=hotkeys.dic[l[0]][0],hotkey=hotkeys.dic[l[0]][1:],curLoop=i,maxLoop=int(l[3])))
+			elif hotkeys.dic[l[0]][0]=="t":
+				algos.append(Algo(line=lineNo,name=l[0],pos=pos,cate=hotkeys.dic[l[0]][0],hotkey=hotkeys.dic[l[0]][1:]))
+				algos.append(Algo(line=lineNo,name=f"ability{l[3]}",pos=pos,cate="a",hotkey=hotkeys.dic[f"ability{l[3]}"][1:]))
+			elif hotkeys.dic[l[0]][0]=="a":
+				algos.append(Algo(line=lineNo,name=f"ability{l[3]}",pos=pos,cate="a",hotkey=hotkeys.dic[f"ability{l[3]}"][1:]))
+			continue
+		algos.append(Algo(line=lineNo,name=l[0],pos=pos,cate=hotkeys.dic[l[0]][0],hotkey=hotkeys.dic[l[0]][1:]))
+```
+行動を実行する前にそれを可能か現在地、コスト、ゲームの状態（ポーズ画面やウィンドウがバックグラウンドにあるなど）を画面から読み取ってから判断します。
+実行に成功したかを読み取って成功するまで繰り返すという方法も取れますが、あんまりスマートではないと思ってやめました。一応学習目的でもあるので。
+```python
+#main.py抜粋
+def canDo(a:csvdata.Algo):
+	tile = ocr.getTileName()
+	if a.cate == "g":
+		return True
+	elif ocr.isPause:
+		return False
+	elif tile == "":
+		return False
+	#現在のタイルに不適切な行動の判別と、コスト取得
+	elif tile == "PLATFORM":
+		if not(a.cate=="t" or a.cate=="m"):
+			a.print()
+			control.error("unable to do \""+a.name+"\" on "+tile)
+		price = ocr.getPuttingPrice(a)
+	elif tile == "SOURCE":
+		if a.cate != "d":
+			a.print()
+			control.error("unable to do \""+a.name+"\" on "+tile)
+		price = ocr.getPuttingPrice(a)
+	elif tile=="ROAD" or tile =="BASE" or tile=="PORTAL" or tile=="MUSIC":
+		a.print()
+		control.error("unable to do \""+a.name+"\" on "+tile)
+	elif hotkeys.dic[tile.lower()][0] == "t":
+		if a.cate == "a":
+			#アビリティはノーコスト
+			return True
+		elif a.cate != "u":
+			a.print()
+			control.error("unable to do \""+a.name+"\" on "+tile)
+		price = ocr.getUpgradePrice()
+	elif hotkeys.dic[tile.lower()][0] == "d":
+		if a.cate != "u":
+			a.print()
+			control.error("unable to do \""+a.name+"\" on "+tile)
+		price = ocr.getUpgradePrice()
+	#コスト的な実行不可能の判断
+	coin = ocr.getCoinNum()
+	if price == None:
+		return False
+	if coin == None:
+		return False
+	if a.name == "bounty":
+		return coin > price*(bountyNum +1)
+	if coin-saving-price>0:
+		return True
+	return False
+```
+また、ウィンドウがアクティブでなくなったときはカウントダウンして終了、ポーズ画面になるとコンソールにcontinueと入力すると続ける、などのユーティリティ的機能をつけました。
+```python
+# ocr.py抜粋
+def foregroundCheck():
+    def waitAndRecheck():
+        time.sleep(1)
+        if hwnd == win32gui.GetForegroundWindow():
+            return True
+        return False
+    if hwnd != win32gui.GetForegroundWindow():
+        if waitAndRecheck(): return
+        print("exit in")
+        if waitAndRecheck(): return
+        print("3...")
+        if waitAndRecheck(): return
+        print("2..")
+        if waitAndRecheck(): return
+        print("1.")
+        if waitAndRecheck(): return
+        error("Infinitode2 window is not foreground")
+
+isPause = False
+def pauseCheck():
+    global isPause
+    if pyautogui.locateOnWindow(imagePass("endgame"),"Infinitode 2",grayscale=False,confidence=0.95):
+        isPause = True
+```
+
+そして肝心のプレイのアルゴリズムのcsvですが、未完成です。最初の数分はプレイできているのでそのまま追加すれば大丈夫だろうとは思います。ファーム効率のいいステージはマップも広いのでもっと大変ですが。
+
+### プレイ画面
+
+<figure>
+ <Image src={Screenshot} width="840" height="455" />
+ <figcaption> AutoInfinitode2プレイ画面</figcaption>
+</figure>
+{/* [caption id="attachment_903" align="alignnone" width="840"]<img src="https://blog.oucc.org/wp-content/uploads/2022/12/スクリーンショット-4-1024x555.png" alt="" width="840" height="455" class="size-large wp-image-903" /> AutoInfinitode2プレイ画面[/caption] */}
+右下の操作ログ以外は単なるプレイ画面なんですが。地味ですね。
+所持金（上部のコインのアイコン）の認識のため、全てのエフェクトを非表示にしているので映像でも地味です。
+
+### TODO
+- ステージのプレイアルゴリズムの完成
+- ゲームオーバー後に自動的にリスタートするループ
+- 変数とかクラスの名前、ファイルの整理
+- ファーム用ステージのプレイアルゴリズム作成
+
+### 後書き
+
+夏にBlenderのアドオン開発で初めて本格的に触ったpythonですが、やはり自動化にも手を出してみたいを思って始めました。特に普段の作業で自動化の需要がなかったのでゲームの自動化にしました。
+切り抜く画像の座標合わせを始め、何かとゲーム画面を参照しながらやらなきゃならなかったので起動しっぱなしだったんですが、プレイしていないのにSteamでのプレイ時間が20時間くらい伸びてました。起動したまま飯食ってた時間も含めているので実際は不明ですが。
+
+以上、pythonとArduinoと画像認識でタワーディフェンスゲームの自動化をしてみた、でした。
+ご読了ありがとうございました。
