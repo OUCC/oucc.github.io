@@ -4,7 +4,12 @@ const blogsCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string().min(1),
-    description: z.string().min(10).max(99),
+    description: z
+      .string()
+      .min(10)
+      .transform((desc) =>
+        desc.length > 100 ? desc.slice(0, 100) + '…' : desc,
+      ),
     author: reference('authors'),
     tags: z.array(reference('tags')),
   }),

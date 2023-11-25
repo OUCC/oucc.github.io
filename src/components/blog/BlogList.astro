@@ -1,5 +1,5 @@
 ---
-import { getEntries, type CollectionEntry } from 'astro:content'
+import { type CollectionEntry, getEntry } from 'astro:content'
 import BlogListItem from './BlogListItem.astro'
 
 interface Props {
@@ -8,13 +8,13 @@ interface Props {
 
 const { blogs } = Astro.props
 
-const blogMetas = await getEntries(
-  blogs.map((b) => ({ collection: 'blog-metas', id: b.slug })),
+const blogMetas = await Promise.all(
+  blogs.map((b) => getEntry({ collection: 'blog-metas', id: b.slug })),
 )
 
 const sortedBlogs = blogs.map((b, i) => ({
   ...b.data,
-  ...blogMetas[i]!.data,
+  ...(blogMetas[i]?.data ?? { postDate: new Date() }),
   slug: b.slug,
 }))
 sortedBlogs.sort(

@@ -11,10 +11,10 @@ function formatDate(date: Date): string {
 }
 
 const { blog } = Astro.props
-const { data: blogMeta } = await getEntry({
+const { data: blogMeta } = (await getEntry({
   collection: 'blog-metas',
   id: blog.slug,
-})
+})) ?? { data: { postDate: new Date(), updateDate: undefined } }
 const tags = await getEntries(blog.data.tags)
 const author = await getEntry(blog.data.author)
 const { Content } = await blog.render()
@@ -61,10 +61,10 @@ const { Content } = await blog.render()
     .prose code:not(pre > *)::before {
       @apply content-none;
     }
-    .prose > *:where(:not(h1, h2, h3, h4, h5, h6, pre)) {
+    .prose > *:where(:not(h1, h2, h3, h4, h5, h6, pre, iframe)) {
       @apply mx-4;
     }
-    .prose > *:where(h1, h2, h3, h4, h5, h6) {
+    .prose > *:where(h1, h2) {
       @apply border-b-2;
     }
   }
