@@ -6,14 +6,6 @@ type Props = CollectionEntry<'blogs'>['data'] &
   CollectionEntry<'blog-metas'>['data'] & { slug: string }
 
 function formatDate(date: Date): string {
-  const diff = Date.now() - date.getTime()
-  if (diff < 24 * 3600 * 1000) {
-    // 1日より短いとき
-    return `${Math.floor(diff / 3600_000)}時間前`
-  } else if (diff < 5 * 24 * 3600 * 1000) {
-    // 5日より短いとき
-    return `${Math.floor(diff / 24 / 3600_000)}日前`
-  }
   return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
