@@ -1,0 +1,16 @@
+{
+  "name": "Go",
+  "image": {
+    "type": "svg",
+    "name": "Go-Logo_Aqua"
+  },
+  "site": {
+    "url": "https://go.dev/"
+  },
+  "document": {
+    "url": "https://go.dev/doc/"
+  },
+  "github": {
+    "url": "https://github.com/golang/go"
+  }
+}
