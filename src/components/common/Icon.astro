@@ -15,15 +15,14 @@ interface Props {
   height?: number
 }
 
-const { name, alt, isBlog, ...attrs } = Astro.props
+const { name, alt, isBlog, width, height, ...attrs } = Astro.props
 
 const normalizedAttrs: Partial<
   Record<Exclude<keyof Props, 'name' | 'alt'>, string>
-> = {
-  ...attrs,
-  width: attrs.width?.toString(),
-  height: attrs.height?.toString(),
-}
+> = attrs
+
+if (width) normalizedAttrs.width = width.toString()
+if (height) normalizedAttrs.height = height.toString()
 
 const svgContent = isBlog
   ? (await import(`../../assets/icons/blog/${name}.svg?raw`)).default
