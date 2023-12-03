@@ -22,7 +22,7 @@ const ogpPath =
   author.data.github
     ? `https://github.com/${author.data.github}.png`
     : author.data.image.type === 'svg'
-    ? `/author/${author.id}/ogp.png`
+    ? `/authors/${author.id}/ogp.png`
     : author.data.image.type === 'external-url'
     ? author.data.image.url
     : unreachable(author.data.image)

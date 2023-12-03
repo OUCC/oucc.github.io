@@ -2,7 +2,9 @@
 
 OUCC BLOG の仕様について記載しています。何もわからない場合はサーバー係に投稿したい Markdown ファイルを渡してください。
 
-ブログの投稿を行う際は `blog/` から始まるブランチで作業してください。ブログの投稿に関する作業以外は禁止されていますが、CIによる支援が得られます。
+ブログの投稿を行う際はブランチ名が `blog/` で始まるブランチを作成し作業してください。このブランチではブログの投稿に関する作業以外は禁止されていますが、後述するようにCIによる支援が得られます。
+
+ブログに関して作業することを明示しつつこの制約を受けたくない場合は、ブランチ名が `blog/admin/` で始まるブランチで作業してください。
 
 ## 記事の投稿
 
@@ -14,15 +16,15 @@ title: タイトル
 description: 説明
 author: 著者
 tags:
-    - タグ1
-    - タグ2
-    - タグ3
+  - タグ1
+  - タグ2
+  - タグ3
 ---
 ```
 
-画像ファイル`src/content/blogs` に新しいディレクトリを作成してそこに配置する、または外部においてURLで指定してください。
+画像ファイルは `src/content/blogs` に新しいディレクトリを作成してそこに配置するか、または外部においてURLで指定してください。
 
-※ ファイル名には`#`含めることができません。
+※ ファイル名には `#` を含めることができません。
 
 ## 記事のメタ情報
 
@@ -31,7 +33,7 @@ tags:
 以下のようにコマンドを使うことで手動で更新することもできます。
 
 ```bash
-$ npm run update-blogmeta -- src/content/blogs/NEW-POST1.md src/content/blogs/NEW-POST2.md 
+$ npm run update-blogmeta -- src/content/blogs/NEW-POST1.md src/content/blogs/NEW-POST2.md
 ```
 
 ## 著者
@@ -48,17 +50,18 @@ $ npm run update-blogmeta -- src/content/blogs/NEW-POST1.md src/content/blogs/NE
 
 ```ts
 interface Author {
-    name: string,
-    description?: string,
-    github?: string,
-    image?:
-        ({
-            type: "svg",
-            name: string,
-        } | {
-            type: "external-url"
-            url: string,
-        })
+  name: string
+  description?: string
+  github?: string
+  image?:
+    | {
+        type: 'svg'
+        name: string
+      }
+    | {
+        type: 'external-url'
+        url: string
+      }
 }
 ```
 
@@ -84,30 +87,28 @@ interface Author {
 
 ```ts
 interface Tag {
-    name: string,
-    description?: string,
-    image?:
-        ({
-            type: "svg",
-            name: string,
-        } | {
-            type: "external-url"
-            url: string,
-        })
-    site?:
-        {
-            url: string,
-            text?: string
-        },
-    document?:
-        {
-            url: string,
-            text?: string
-        },
-    github?:
-        {
-            url: string,
-            text?: string
-        },
+  name: string
+  description?: string
+  image?:
+    | {
+        type: 'svg'
+        name: string
+      }
+    | {
+        type: 'external-url'
+        url: string
+      }
+  site?: {
+    url: string
+    text?: string
+  }
+  document?: {
+    url: string
+    text?: string
+  }
+  github?: {
+    url: string
+    text?: string
+  }
 }
 ```

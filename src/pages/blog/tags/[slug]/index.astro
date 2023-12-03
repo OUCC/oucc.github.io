@@ -26,7 +26,7 @@ const isShowAbout = tag.description || tag.site || tag.document || tag.github
   title={`${tag.name}の記事一覧`}
   description={tag.description ?? `${tag.name}に関する記事が集まっています`}
   image={tag.image.type === 'svg'
-    ? `/blog/tag/${id}/ogp.png`
+    ? `/blog/tags/${id}/ogp.png`
     : tag.image.type === 'external-url'
     ? tag.image.url
     : unreachable(tag.image)}

@@ -48,7 +48,7 @@ jobs:
       - run: npm run typecheck
 
   validate-blog:
-    if: startsWith(github.head_ref, 'blog/')
+    if: startsWith(github.head_ref, 'blog/') && !startsWith(github.head_ref, 'blog/admin/')
     needs: [build, lint, typecheck]
     runs-on: ubuntu-22.04
     steps:
@@ -82,7 +82,7 @@ jobs:
         if: steps.update_blogmeta.outputs.UPDATE_RESULT != '1' && steps.update_blogmeta.outputs.UPDATE_RESULT != '0'
       - name: Git Commit
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "[Bot] Update blog meta"

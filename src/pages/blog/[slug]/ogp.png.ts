@@ -1,4 +1,4 @@
-import { createOgImage } from '@/components/blog/OgImage'
+import { createOgImage } from '@/pages/blog/[slug]/_OgImageGenerator'
 import type { APIContext } from 'astro'
 import { getCollection, getEntry } from 'astro:content'
 
