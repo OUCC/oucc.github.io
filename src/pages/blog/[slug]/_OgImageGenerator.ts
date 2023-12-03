@@ -1,5 +1,5 @@
 import satori from 'satori'
-import oucc from '../../assets/icons/oucc.svg?raw'
+import oucc from '@/assets/icons/oucc.svg?raw'
 import fs from 'node:fs/promises'
 import sharp from 'sharp'
 
@@ -16,24 +16,8 @@ export async function createOgImage(title: string, author: string) {
     (
       [
         {
-          weight: 100,
-          path: './fonts/Noto_Sans_JP/static/NotoSansJP-Thin.ttf',
-        },
-        {
-          weight: 200,
-          path: './fonts/Noto_Sans_JP/static/NotoSansJP-ExtraLight.ttf',
-        },
-        {
-          weight: 300,
-          path: './fonts/Noto_Sans_JP/static/NotoSansJP-Light.ttf',
-        },
-        {
           weight: 400,
           path: './fonts/Noto_Sans_JP/static/NotoSansJP-Regular.ttf',
-        },
-        {
-          weight: 500,
-          path: './fonts/Noto_Sans_JP/static/NotoSansJP-Medium.ttf',
         },
         {
           weight: 600,
@@ -42,14 +26,6 @@ export async function createOgImage(title: string, author: string) {
         {
           weight: 700,
           path: './fonts/Noto_Sans_JP/static/NotoSansJP-Bold.ttf',
-        },
-        {
-          weight: 800,
-          path: './fonts/Noto_Sans_JP/static/NotoSansJP-ExtraBold.ttf',
-        },
-        {
-          weight: 900,
-          path: './fonts/Noto_Sans_JP/static/NotoSansJP-Black.ttf',
         },
       ] as const
     ).map(async ({ weight, path }) => ({
@@ -76,7 +52,10 @@ export async function createOgImage(title: string, author: string) {
                 type: 'div',
                 props: {
                   children: title,
-                  tw: 'text-6xl font-bold line-clamp-2 px-8',
+                  tw: 'text-6xl font-bold px-8',
+                  // satori の tailwind のバージョンは v3.1.8 で line-clamp のサポートは v3.3 からのため
+                  style:
+                    'overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;',
                 },
               },
             },
