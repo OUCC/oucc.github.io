@@ -63,7 +63,7 @@ jobs:
   update-blogmeta:
     needs: [validate-blog]
     permissions:
-      pages: write
+      contents: write
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
