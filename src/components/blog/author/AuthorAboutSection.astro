@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import Section from '../../common/Section.astro'
+import InlineLink from '@/components/common/InlineLink.astro'
+
+interface Props {
+  author: CollectionEntry<'authors'>['data']
+}
+
+const { author } = Astro.props
+
+const items: (Record<'url' | 'text' | 'title', string> | '' | undefined)[] = [
+  author.github && {
+    title: 'GitHub',
+    url: `https://github.com/${author.github}`,
+    text: `${author.github} - GitHub`,
+  },
+]
+---
+
+<Section background="white">
+  <div class="block">{author.description}</div>
+  <div class="block">
+    {author.description && <div class="mb-3">{author.description}</div>}
+    {
+      items.map(
+        (item) =>
+          item && (
+            <p>
+              {item.title}：<InlineLink href={item.url}>{item.text}</InlineLink>
+            </p>
+          ),
+      )
+    }
+  </div>
+</Section>

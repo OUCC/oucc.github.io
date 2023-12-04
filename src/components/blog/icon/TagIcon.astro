@@ -1,0 +1,28 @@
+---
+import Icon from '@/components/common/Icon.astro'
+import { unreachable } from '@/utils/unreachable'
+import type { CollectionEntry } from 'astro:content'
+interface Props {
+  tagImage: CollectionEntry<'tags'>['data']['image']
+  size: number
+}
+
+const { tagImage, size } = Astro.props
+---
+
+{
+  tagImage.type === 'svg' ? (
+    <Icon
+      name={tagImage.name}
+      alt={`${tagImage.name} のアイコン`}
+      class="aspect-square"
+      width={size}
+      height={size}
+      isBlog
+    />
+  ) : tagImage.type === 'external-url' ? (
+    <img src={tagImage.url} height={size} width={size} class="aspect-square" />
+  ) : (
+    unreachable(tagImage)
+  )
+}

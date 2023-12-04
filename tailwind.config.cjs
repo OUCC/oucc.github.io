@@ -35,16 +35,61 @@ module.exports = {
         'peing-light': dropShadowLight(colors.peing),
         'peing-heavy': dropShadowHeavy(colors.peing),
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            a: {
+              color: theme('colors.blue.600'),
+              '&:hover': {
+                color: theme('colors.blue.800'),
+              },
+              '&:visited': {
+                color: theme('colors.purple.700'),
+                '&:hover': {
+                  color: theme('colors.purple.900'),
+                },
+              },
+            },
+          },
+        },
+      }),
     },
   },
   plugins: [
-    plugin(function ({ addComponents }) {
+    plugin(function ({ addComponents, theme }) {
       addComponents({
         '.text-justify-ja': {
           textAlign: 'justify',
           wordBreak: 'break-all',
         },
+        '.bg-dot': {
+          '--bg-dot-color': '#00000010',
+          '--bg-dot-pattern': '10px',
+          '--bg-dot-size': '15%',
+          'background-color': theme('colors.white'),
+          'background-image':
+            'radial-gradient(var(--bg-dot-color) var(--bg-dot-size), transparent var(--bg-dot-size)), radial-gradient(var(--bg-dot-color) var(--bg-dot-size), transparent var(--bg-dot-size))',
+          'background-size': 'var(--bg-dot-pattern) var(--bg-dot-pattern)',
+          'background-position':
+            '0 0, calc(var(--bg-dot-pattern) / 2) calc(var(--bg-dot-pattern) / 2)',
+        },
+        '.bg-dot-white': {
+          '--bg-dot-color': '#00000010',
+          '--tw-bg-opacity': '1',
+          'background-color': theme('colors.white'),
+        },
+        '.bg-dot-secondary': {
+          '--bg-dot-color': '#00000010',
+          '--tw-bg-opacity': '1',
+          'background-color': theme('colors.secondary'),
+        },
+        '.bg-dot-primary': {
+          '--bg-dot-color': '#ffffff10',
+          '--tw-bg-opacity': '1',
+          'background-color': theme('colors.primary'),
+        },
       })
     }),
+    require('@tailwindcss/typography'),
   ],
 }
