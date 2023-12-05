@@ -43,7 +43,7 @@ $ npm run update-blogmeta -- src/content/blogs/NEW-POST1.md src/content/blogs/NE
 
 - name : 著者の表示名
 - description : 著者の説明
-- github : GitHub アカウントの ID
+- github : GitHub アカウントの ID (image を指定しなかった場合、こちらで指定したアカウントのアイコンが使用されます。)
 - image : 著者のアイコン
   - `svg` は `src/assets/icons/blog` に入っているsvgファイルを指定できます。`name` には拡張子を除いたファイル名を指定してください。
   - `external-url` は外部の画像を指定できます。

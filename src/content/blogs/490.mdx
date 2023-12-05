@@ -22,13 +22,13 @@ import Pic from "./490/P_20210501_231913.jpg"
 
 <h2>経緯</h2>
 
-<p>さて、電子辞書とは言っても明確な機種を指定していませんでしたね。機種は <a href="https://jp.sharp/edictionary/index.html" title="https://jp.sharp/edictionary/index.html">SHARP のカラー電子辞書 Brain シリーズ</a>です。ただし、2021年発売のモデル以降は見た目こそほぼ変わりませんが中身が全く違うので対象としません。<a href="/blog/303" title="/blog/303">昨年の私の記事</a>で、実際に作り方を説明していますので興味があれば見ていってください。</p>
+<p>さて、電子辞書とは言っても明確な機種を指定していませんでしたね。機種は <a href="https://jp.sharp/edictionary/index.html" title="https://jp.sharp/edictionary/index.html">SHARP のカラー電子辞書 Brain シリーズ</a>です。ただし、2021年発売のモデル以降は見た目こそほぼ変わりませんが中身が全く違うので対象としません。<a href="/blog/articles/303" title="/blog/articles/303">昨年の私の記事</a>で、実際に作り方を説明していますので興味があれば見ていってください。</p>
 
 <p>まず、なぜ移植しようと思ったのか。それは突如として OB さんの1人が</p>
 
 <blockquote class="wp-block-quote"><p>「最近win32apiでテトリスを実装しました。」</p></blockquote>
 
-<p>という投稿と共に OUCC の Discord (内部サーバーで、当時はこちらがメインの活動場所だった)でテトリスを添付されたことが始まりです。何という奇遇でしょうか。WinCE が動く SHARP Brain は、ライブラリこそ碌に流通していませんが Win32 API の subset を利用することができます(詳細は<a href="/blog/303" title="/blog/303">昨年の記事</a>)。そして、その完成度の高さにも驚きました。結構昔から電子辞書で動くテトリスは<a href="https://brain.fandom.com/ja/wiki/Brain%E3%81%A7%E3%83%86%E3%83%88%E3%83%AA%E3%82%B9" title="https://brain.fandom.com/ja/wiki/Brain%E3%81%A7%E3%83%86%E3%83%88%E3%83%AA%E3%82%B9">実はあった</a>のですが、それはモノクロで乱数も seed 値が全く同じでパターンが変化しない、とても単純なものでした。</p>
+<p>という投稿と共に OUCC の Discord (内部サーバーで、当時はこちらがメインの活動場所だった)でテトリスを添付されたことが始まりです。何という奇遇でしょうか。WinCE が動く SHARP Brain は、ライブラリこそ碌に流通していませんが Win32 API の subset を利用することができます(詳細は<a href="/blog/articles/303" title="/blog/articles/303">昨年の記事</a>)。そして、その完成度の高さにも驚きました。結構昔から電子辞書で動くテトリスは<a href="https://brain.fandom.com/ja/wiki/Brain%E3%81%A7%E3%83%86%E3%83%88%E3%83%AA%E3%82%B9" title="https://brain.fandom.com/ja/wiki/Brain%E3%81%A7%E3%83%86%E3%83%88%E3%83%AA%E3%82%B9">実はあった</a>のですが、それはモノクロで乱数も seed 値が全く同じでパターンが変化しない、とても単純なものでした。</p>
 
 <pre class="wp-block-verse">「これは移植すると面白いかもしれない」</pre>
 

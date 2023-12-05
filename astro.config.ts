@@ -22,6 +22,7 @@ export default defineConfig({
     '/group/programming/activity.html': '/',
     '/group/programming/works.html': '/',
     '/group/handaitaisen/handai_taisen.html': '/',
+    '/blog/articles': '/blog',
   },
   prefetch: {
     prefetchAll: true,

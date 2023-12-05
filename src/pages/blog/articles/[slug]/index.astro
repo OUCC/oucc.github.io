@@ -18,7 +18,7 @@ const tags = await getEntries(blog.data.tags)
 <BlogLayout
   title={blog.data.title}
   description={blog.data.description}
-  image={`/blog/${blog.slug}/ogp.png`}
+  image={`/blog/articles/${blog.slug}/ogp.png`}
   keywords={tags.map((t) => t.data.name).join(',')}
 >
   <main class="bg-dot bg-dot-secondary">
