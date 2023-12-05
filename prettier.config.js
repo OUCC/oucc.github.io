@@ -1,7 +1,8 @@
-module.exports = {
+/** @type {import("prettier").Config} */
+export default {
   semi: false,
   singleQuote: true,
-  plugins: [require.resolve('prettier-plugin-astro')],
+  plugins: ['prettier-plugin-astro'],
   overrides: [
     {
       files: '*.astro',
