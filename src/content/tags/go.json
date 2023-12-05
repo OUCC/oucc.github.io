@@ -1,9 +1,5 @@
 {
   "name": "Go",
-  "image": {
-    "type": "svg",
-    "name": "Go-Logo_Aqua"
-  },
   "site": {
     "url": "https://go.dev/"
   },

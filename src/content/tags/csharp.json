@@ -1,9 +1,5 @@
 {
   "name": "C#",
-  "image": {
-    "type": "svg",
-    "name": "csharp"
-  },
   "description": "C#は、最新のタイプ セーフなオブジェクト指向のプログラミング言語です。 開発者は C# を使用することにより、.NET で稼働する、安全かつ堅牢な多くの種類のアプリケーションを構築できます。",
   "site": {
     "url": "https://dotnet.microsoft.com/ja-jp/learn/dotnet/what-is-dotnet"

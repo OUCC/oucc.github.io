@@ -1,40 +1,39 @@
 ---
-import Icon from '@/components/common/Icon.astro'
-import { unreachable } from '@/utils/unreachable'
+import type { ImageMetadata } from 'astro'
 import type { CollectionEntry } from 'astro:content'
-type Props = CollectionEntry<'authors'>['data'] & { size: number }
+import defaultImage from '@/assets/avatar.svg'
+import Image from '@/components/common/Image.astro'
+import { unreachable } from '@/utils/unreachable'
+import { getAuthorIcon } from './getAuthorIcon'
 
-const { size, ...author } = Astro.props
+interface Props {
+  author: CollectionEntry<'authors'>
+  size: number
+}
 
-const image =
-  author.image.type === 'svg' &&
-  author.image.name === 'default_user' &&
-  author.github
-    ? ({
-        type: 'external-url',
-        url: `https://github.com/${author.github}.png`,
-      } as const)
-    : author.image
+const { author, size } = Astro.props
+
+const getSrc = async (): Promise<string | ImageMetadata> => {
+  const icon = await getAuthorIcon(author)
+  switch (icon.type) {
+    case 'local-svg':
+      return icon.imageMetadata
+    case 'local-png':
+      return icon.imageMetadata
+    case 'external-url':
+      return icon.url
+    case 'default':
+      return defaultImage
+    default:
+      return unreachable(icon)
+  }
+}
 ---
 
-{
-  image.type === 'svg' ? (
-    <Icon
-      name={image.name}
-      alt={`${image.name} のアイコン`}
-      class="aspect-square rounded-full"
-      height={size}
-      width={size}
-      isBlog
-    />
-  ) : image.type === 'external-url' ? (
-    <img
-      src={image.url}
-      height={size}
-      width={size}
-      class="aspect-square rounded-full"
-    />
-  ) : (
-    unreachable(image)
-  )
-}
+<Image
+  src={await getSrc()}
+  alt={`${author.data.name} のアイコン`}
+  class="aspect-square rounded-full"
+  width={size}
+  height={size}
+/>

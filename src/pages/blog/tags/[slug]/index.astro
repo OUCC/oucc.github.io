@@ -2,6 +2,7 @@
 import BlogListSection from '@/components/blog/BlogListSection.astro'
 import BlogTitle from '@/components/blog/BlogTitle.astro'
 import TagIcon from '@/components/blog/icon/TagIcon.astro'
+import { getTagIcon } from '@/components/blog/icon/getTagIcon'
 import TagAboutSection from '@/components/blog/tag/TagAboutSection.astro'
 import BlogLayout from '@/layouts/BlogLayout.astro'
 import { unreachable } from '@/utils/unreachable'
@@ -14,32 +15,46 @@ export async function getStaticPaths() {
   }))
 }
 
-const {
-  tag: { id, data: tag },
-} = Astro.props
+const { tag } = Astro.props
 const blogEntries = await getCollection('blogs')
 
-const isShowAbout = tag.description || tag.site || tag.document || tag.github
+const getOgImagePath = async (): Promise<string> => {
+  const icon = await getTagIcon(tag)
+  switch (icon.type) {
+    case 'local-svg':
+      return `/blog/tags/${tag.id}/ogp.png`
+    case 'local-png':
+      return icon.url
+    case 'external-url':
+      return icon.url
+    case 'default':
+      return `/blog/tags/${tag.id}/ogp.png`
+    default:
+      return unreachable(icon)
+  }
+}
+
+const shouldDisplayAbout =
+  tag.data.description || tag.data.site || tag.data.document || tag.data.github
 ---
 
 <BlogLayout
-  title={`${tag.name}の記事一覧`}
-  description={tag.description ?? `${tag.name}に関する記事が集まっています`}
-  image={tag.image.type === 'svg'
-    ? `/blog/tags/${id}/ogp.png`
-    : tag.image.type === 'external-url'
-      ? tag.image.url
-      : unreachable(tag.image)}
+  title={`${tag.data.name}の記事一覧`}
+  description={tag.data.description ??
+    `${tag.data.name}に関する記事が集まっています`}
+  image={await getOgImagePath()}
   summarySize="summary"
 >
-  <BlogTitle title={tag.name} background="white">
-    <Fragment slot="icon"><TagIcon tagImage={tag.image} size={80} /></Fragment>
+  <BlogTitle title={tag.data.name} background="white">
+    <TagIcon slot="icon" tag={tag} size={80} />
   </BlogTitle>
   <main class="flex flex-col h-full">
-    {isShowAbout && <TagAboutSection tag={tag} />}
+    {shouldDisplayAbout && <TagAboutSection tag={tag.data} />}
     <BlogListSection
-      title={`${tag.name} に関する記事`}
-      blogs={blogEntries.filter((b) => b.data.tags.some((t) => t.id === id))}
+      title={`${tag.data.name} に関する記事`}
+      blogs={blogEntries.filter((b) =>
+        b.data.tags.some((t) => t.id === tag.id),
+      )}
     />
   </main>
 </BlogLayout>

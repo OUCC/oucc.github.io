@@ -1,7 +1,3 @@
 {
-  "name": "Arduino",
-  "image": {
-    "type": "svg",
-    "name": "arduino"
-  }
+  "name": "Arduino"
 }

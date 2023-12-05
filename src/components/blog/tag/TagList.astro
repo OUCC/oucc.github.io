@@ -12,11 +12,7 @@ const { tags } = Astro.props
 <ul class="flex sm:flex-row flex-col flex-wrap gap-3">
   {
     tags.map((tag) => (
-      <TagListItemCard
-        {...tag.data}
-        id={tag.id}
-        articleCount={tag.articleCount}
-      />
+      <TagListItemCard tag={tag} articleCount={tag.articleCount} />
     ))
   }
 </ul>

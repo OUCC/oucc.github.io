@@ -1,22 +1,23 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import TagIcon from '../icon/TagIcon.astro'
-type Props = CollectionEntry<'tags'>['data'] & {
-  id: CollectionEntry<'tags'>['id']
+
+interface Props {
+  tag: CollectionEntry<'tags'>
   articleCount: number
 }
 
-const { id, articleCount, ...tag } = Astro.props
+const { tag, articleCount } = Astro.props
 ---
 
 <li
   class="block sm:basis-[calc((100%-0.75rem)/2)] bg-white rounded-xl border space-y-1 group"
 >
-  <a class="w-full h-full p-4 flex items-center" href={`/blog/tags/${id}`}>
-    <TagIcon tagImage={tag.image} size={40} />
+  <a class="w-full h-full p-4 flex items-center" href={`/blog/tags/${tag.id}`}>
+    <TagIcon tag={tag} size={40} />
     <div class="px-2">
       <h2 class="text-xl font-bold line-clamp-1 group-hover:underline">
-        {tag.name}
+        {tag.data.name}
       </h2>
       <p class="text-sm text-gray-600">記事数 : {articleCount}</p>
     </div>

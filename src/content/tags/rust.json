@@ -1,7 +1,3 @@
 {
-  "name": "Rust",
-  "image": {
-    "type": "svg",
-    "name": "rust-logo-blk"
-  }
+  "name": "Rust"
 }

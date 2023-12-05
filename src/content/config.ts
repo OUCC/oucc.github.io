@@ -36,18 +36,6 @@ const authorsCollection = defineCollection({
     name: z.string().min(1),
     description: z.string().optional(),
     github: z.string().min(1).optional(),
-    image: z
-      .discriminatedUnion('type', [
-        z.object({
-          type: z.literal('svg'),
-          name: z.string().min(1),
-        }),
-        z.object({
-          type: z.literal('external-url'),
-          url: z.string().url(),
-        }),
-      ])
-      .default({ type: 'svg', name: 'default_user' }),
   }),
 })
 
@@ -60,18 +48,6 @@ const tagsCollection = defineCollection({
   type: 'data',
   schema: z.object({
     name: z.string().min(1),
-    image: z
-      .discriminatedUnion('type', [
-        z.object({
-          type: z.literal('svg'),
-          name: z.string().min(1),
-        }),
-        z.object({
-          type: z.literal('external-url'),
-          url: z.string().url(),
-        }),
-      ])
-      .default({ type: 'svg', name: 'hashtag' }),
     description: z.string().optional(),
     site: tagsAboutSchema.optional(),
     document: tagsAboutSchema.optional(),

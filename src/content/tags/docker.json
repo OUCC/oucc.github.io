@@ -1,7 +1,3 @@
 {
-  "name": "Docker",
-  "image": {
-    "type": "svg",
-    "name": "docker"
-  }
+  "name": "Docker"
 }

@@ -4,7 +4,7 @@ import type { HTMLAttributes } from 'astro/types'
 import { getImage } from 'astro:assets'
 
 type Props = Omit<HTMLAttributes<'img'>, 'src' | 'srcset'> & {
-  src: ImageMetadata | Promise<{ default: ImageMetadata }>
+  src: string | ImageMetadata | Promise<{ default: ImageMetadata }>
   widths?: number[]
 }
 

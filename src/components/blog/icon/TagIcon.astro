@@ -1,28 +1,39 @@
 ---
-import Icon from '@/components/common/Icon.astro'
-import { unreachable } from '@/utils/unreachable'
+import type { ImageMetadata } from 'astro'
 import type { CollectionEntry } from 'astro:content'
+import defaultImage from '@/assets/hashtag.svg'
+import Image from '@/components/common/Image.astro'
+import { unreachable } from '@/utils/unreachable'
+import { getTagIcon } from './getTagIcon'
+
 interface Props {
-  tagImage: CollectionEntry<'tags'>['data']['image']
+  tag: CollectionEntry<'tags'>
   size: number
 }
 
-const { tagImage, size } = Astro.props
+const { tag, size } = Astro.props
+
+const getSrc = async (): Promise<string | ImageMetadata> => {
+  const icon = await getTagIcon(tag)
+  switch (icon.type) {
+    case 'local-svg':
+      return icon.imageMetadata
+    case 'local-png':
+      return icon.imageMetadata
+    case 'external-url':
+      return icon.url
+    case 'default':
+      return defaultImage
+    default:
+      return unreachable(icon)
+  }
+}
 ---
 
-{
-  tagImage.type === 'svg' ? (
-    <Icon
-      name={tagImage.name}
-      alt={`${tagImage.name} のアイコン`}
-      class="aspect-square"
-      width={size}
-      height={size}
-      isBlog
-    />
-  ) : tagImage.type === 'external-url' ? (
-    <img src={tagImage.url} height={size} width={size} class="aspect-square" />
-  ) : (
-    unreachable(tagImage)
-  )
-}
+<Image
+  src={await getSrc()}
+  alt={`${tag.data.name} のアイコン`}
+  class="aspect-square"
+  width={size}
+  height={size}
+/>
