@@ -1,6 +1,8 @@
 ---
 import BlogContent from '@/components/blog/BlogContent.astro'
+import RelatedBlogSection from '@/components/blog/RelatedBlogSection.astro'
 import BlogLayout from '@/layouts/BlogLayout.astro'
+import { getBlogStatistics } from '@/content/_blog-statistics'
 import { getCollection, getEntries } from 'astro:content'
 
 export async function getStaticPaths() {
@@ -13,6 +15,7 @@ export async function getStaticPaths() {
 
 const { blog } = Astro.props
 const tags = await getEntries(blog.data.tags)
+const statistics = await getEntries([...(await getBlogStatistics(blog.slug))])
 ---
 
 <BlogLayout
@@ -23,5 +26,6 @@ const tags = await getEntries(blog.data.tags)
 >
   <main class="bg-dot bg-dot-secondary">
     <BlogContent blog={blog} />
+    <RelatedBlogSection blogs={statistics.slice(0, 5)} />
   </main>
 </BlogLayout>

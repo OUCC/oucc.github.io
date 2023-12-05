@@ -6,7 +6,7 @@ import BlogListSection from '@/components/blog/BlogListSection.astro'
 const blogEntries = await getCollection('blogs')
 ---
 
-<BlogLayout title="最新の記事一覧" description="メンバーのブログです。">
+<BlogLayout title="記事一覧" description="メンバーのブログです。">
   <main class="flex flex-col h-full">
     <BlogListSection title="最新の記事一覧" blogs={blogEntries} />
   </main>
