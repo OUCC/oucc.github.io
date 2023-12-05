@@ -1,5 +1,5 @@
 import satori from 'satori'
-import oucc from '@/assets/icons/oucc.svg?raw'
+import oucc from '@/assets/oucc.svg?raw'
 import fs from 'node:fs/promises'
 import sharp from 'sharp'
 

@@ -1,16 +1,19 @@
 ---
+import type { ImageMetadata } from 'astro'
 import Section from '@/components/common/Section.astro'
 import Icon from '@/components/common/Icon.astro'
+import Image from '@/components/common/Image.astro'
+import ouccImage from '@/assets/oucc.svg'
 import AboutCard from './AboutCard.astro'
 
 interface Item {
-  icon: string
+  icon: string | ImageMetadata
   description: string[]
 }
 
 const items: Item[] = [
   {
-    icon: 'oucc',
+    icon: ouccImage,
     description: [
       'OUCC（大阪大学コンピュータクラブ）は、コンピュータを使ったものづくりに関心を持つ学生が交流するサークルです。',
       'プログラミングやお絵描き、3Dモデリングなどの活動を行っています。',
@@ -43,7 +46,13 @@ const items: Item[] = [
       items.map(({ icon, description }) => (
         <li class="flex-1 max-w-[32rem] flex items-stretch">
           <AboutCard>
-            <Icon slot="icon" name={icon} alt="" class="w-20 h-20" />
+            <Fragment slot="icon">
+              {typeof icon === 'string' ? (
+                <Icon name={icon} alt="" class="w-20 h-20" />
+              ) : (
+                <Image src={icon} alt="" class="w-20 h-20 object-contain" />
+              )}
+            </Fragment>
             {description.map((x) => (
               <p>{x}</p>
             ))}
