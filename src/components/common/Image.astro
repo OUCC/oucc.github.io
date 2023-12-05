@@ -10,7 +10,7 @@ type Props = Omit<HTMLAttributes<'img'>, 'src' | 'srcset'> & {
 
 const { widths = [3840, 1920, 960, 480, 240], ...attrs } = Astro.props
 
-const { src, attributes } = await getImage(attrs)
+const { src, options, attributes } = await getImage(attrs)
 
 const originalWidth = parseInt(attributes.width, 10)
 const srcset = (
@@ -25,4 +25,14 @@ const srcset = (
 ).join(',')
 ---
 
-<img src={src} srcset=`${src} ${originalWidth}w,${srcset}` {...attributes} />
+{
+  options.format === 'svg' ? (
+    <img src={src} {...attributes} />
+  ) : (
+    <img
+      src={src}
+      srcset={`${src} ${originalWidth}w,${srcset}`}
+      {...attributes}
+    />
+  )
+}

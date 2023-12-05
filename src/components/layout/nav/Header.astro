@@ -1,5 +1,7 @@
 ---
 import Icon from '@/components/common/Icon.astro'
+import Image from '@/components/common/Image.astro'
+import ouccImage from '@/assets/oucc.svg'
 import LinkButton from '@/components/common/button/LinkButton.astro'
 import Navigation from './Navigation.astro'
 
@@ -38,11 +40,9 @@ const {
       />
     </button>
     <a href={rootPath} class="flex items-center">
-      <Icon
-        name="oucc"
-        alt="OUCC"
-        class="block max-h-full min-h-full h-16 aspect-square"
-      />
+      <span class="h-full aspect-square">
+        <Image src={ouccImage} alt="OUCC" class="h-full object-contain" />
+      </span>
       {headerTitle && <h1 class="text-4xl font-bold mx-4">{headerTitle}</h1>}
     </a>
   </div>
