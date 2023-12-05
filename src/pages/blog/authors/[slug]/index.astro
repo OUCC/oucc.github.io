@@ -22,10 +22,10 @@ const ogpPath =
   author.data.github
     ? `https://github.com/${author.data.github}.png`
     : author.data.image.type === 'svg'
-    ? `/authors/${author.id}/ogp.png`
-    : author.data.image.type === 'external-url'
-    ? author.data.image.url
-    : unreachable(author.data.image)
+      ? `/authors/${author.id}/ogp.png`
+      : author.data.image.type === 'external-url'
+        ? author.data.image.url
+        : unreachable(author.data.image)
 
 const isShowAboutSection = author.data.description || author.data.github
 ---

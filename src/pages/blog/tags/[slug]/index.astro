@@ -28,8 +28,8 @@ const isShowAbout = tag.description || tag.site || tag.document || tag.github
   image={tag.image.type === 'svg'
     ? `/blog/tags/${id}/ogp.png`
     : tag.image.type === 'external-url'
-    ? tag.image.url
-    : unreachable(tag.image)}
+      ? tag.image.url
+      : unreachable(tag.image)}
   summarySize="summary"
 >
   <BlogTitle title={tag.name} background="white">
