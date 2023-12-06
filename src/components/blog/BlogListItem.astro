@@ -1,13 +1,12 @@
 ---
 import { getEntries, getEntry, type CollectionEntry } from 'astro:content'
-import TagList from './tag/TagList.astro'
+import { formatDate } from '@/utils/format-date'
 import AuthorIcon from './icon/AuthorIcon.astro'
+import TagSmallList from './tag/TagSmallList.astro'
 type Props = CollectionEntry<'blogs'>['data'] &
-  CollectionEntry<'blog-metas'>['data'] & { slug: string }
-
-function formatDate(date: Date): string {
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-}
+  CollectionEntry<'blog-metas'>['data'] & {
+    slug: CollectionEntry<'blogs'>['slug']
+  }
 
 const { slug, ...blog } = Astro.props
 
@@ -15,15 +14,13 @@ const author = await getEntry(blog.author)
 const tags = await getEntries(blog.tags)
 ---
 
-<li
-  class="block bg-white rounded-xl p-5 border max-sm:rounded-none max-sm:border-0 space-y-1"
->
+<li class="block bg-white rounded-xl p-5 border space-y-1">
   <a href={`/blog/articles/${slug}`}>
     <h2 class="px-2 text-xl font-bold line-clamp-2 hover:underline">
       {blog.title}
     </h2>
   </a>
-  <TagList tags={tags} />
+  <TagSmallList tags={tags} />
   <div class="px-2 flex gap-3 text-gray-600">
     <div class="hover:underline">
       <a href={`/blog/authors/${author.id}`} class="flex gap-2 items-center"

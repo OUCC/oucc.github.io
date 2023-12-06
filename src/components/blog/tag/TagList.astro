@@ -1,25 +1,22 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import TagIcon from '../icon/TagIcon.astro'
+import TagListItemCard from './TagListItemCard.astro'
+
 interface Props {
-  tags: CollectionEntry<'tags'>[]
+  tags: (CollectionEntry<'tags'> & { articleCount: number })[]
 }
 
 const { tags } = Astro.props
 ---
 
-<ul class="flex flex-wrap gap-2">
+<ul class="flex sm:flex-row flex-col flex-wrap gap-3">
   {
     tags.map((tag) => (
-      <li>
-        <a
-          href={`/blog/tags/${tag.id}`}
-          class="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-sm text-justify p-1 rounded-full"
-        >
-          <TagIcon tagImage={tag.data.image} size={18} />
-          <p>{tag.data.name}</p>
-        </a>
-      </li>
+      <TagListItemCard
+        {...tag.data}
+        id={tag.id}
+        articleCount={tag.articleCount}
+      />
     ))
   }
 </ul>

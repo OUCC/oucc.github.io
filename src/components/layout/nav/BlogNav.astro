@@ -1,0 +1,34 @@
+---
+const current = Astro.url.pathname
+
+const navList: { target: string; title: string }[] = [
+  {
+    target: '/blog',
+    title: '記事一覧',
+  },
+  {
+    target: '/blog/tags',
+    title: 'タグ一覧',
+  },
+]
+---
+
+<div class="flex text-lg px-9 pt-1 gap-3 flex-nowrap">
+  {
+    navList.map(({ target, title }) => (
+      <a
+        href={target}
+        class:list={[
+          'text-gray-700 hover:text-black whitespace-nowrap',
+          {
+            'after:block after:bg-primary after:h-1 after:rounded-t-lg':
+              current === target,
+            'pb-1': current !== target,
+          },
+        ]}
+      >
+        {title}
+      </a>
+    ))
+  }
+</div>

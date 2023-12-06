@@ -1,0 +1,16 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import Section from '@/components/common/Section.astro'
+import BlogList from '@/components/blog/BlogList.astro'
+
+interface Props {
+  blogs: CollectionEntry<'blogs'>[]
+}
+
+const { blogs } = Astro.props
+---
+
+<Section background="secondary">
+  <Fragment slot="title">関連記事</Fragment>
+  <BlogList blogs={blogs} sorted />
+</Section>

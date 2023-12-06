@@ -1,13 +1,10 @@
 ---
 import { getEntries, type CollectionEntry, getEntry } from 'astro:content'
-import TagList from './tag/TagList.astro'
+import TagSmallList from './tag/TagSmallList.astro'
 import AuthorIcon from './icon/AuthorIcon.astro'
+import { formatDate } from '@/utils/format-date'
 interface Props {
   blog: CollectionEntry<'blogs'>
-}
-
-function formatDate(date: Date): string {
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
 }
 
 const { blog } = Astro.props
@@ -30,7 +27,7 @@ const { Content } = await blog.render()
         ><AuthorIcon {...author.data} size={28} />{author.data.name}</a
       >
     </div>
-    <TagList tags={tags} />
+    <TagSmallList tags={tags} />
     <div class="text-sm text-gray-700 flex gap-3 p-2">
       {
         blogMeta.updateDate && (

@@ -4,9 +4,10 @@ import BlogListItem from './BlogListItem.astro'
 
 interface Props {
   blogs: CollectionEntry<'blogs'>[]
+  sorted?: boolean
 }
 
-const { blogs } = Astro.props
+const { blogs, sorted } = Astro.props
 
 const blogMetas = await Promise.all(
   blogs.map((b) => getEntry({ collection: 'blog-metas', id: b.slug })),
@@ -17,11 +18,13 @@ const sortedBlogs = blogs.map((b, i) => ({
   ...(blogMetas[i]?.data ?? { postDate: new Date() }),
   slug: b.slug,
 }))
-sortedBlogs.sort(
-  (b1, b2) =>
-    (b2.updateDate ?? b2.postDate).getTime() -
-    (b1.updateDate ?? b1.postDate).getTime(),
-)
+if (!sorted) {
+  sortedBlogs.sort(
+    (b1, b2) =>
+      (b2.updateDate ?? b2.postDate).getTime() -
+      (b1.updateDate ?? b1.postDate).getTime(),
+  )
+}
 ---
 
 <ul class="flex flex-col gap-y-3">
