@@ -22,8 +22,8 @@ const navList: { target: string; title: string }[] = [
           'text-gray-700 hover:text-black whitespace-nowrap',
           {
             'after:block after:bg-primary after:h-1 after:rounded-t-lg':
-              current === target,
-            'pb-1': current !== target,
+              current === target || current === target + '/',
+            'pb-1': current !== target && current !== target + '/',
           },
         ]}
       >
