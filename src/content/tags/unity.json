@@ -1,9 +1,6 @@
 {
   "name": "Unity",
-  "image": {
-    "type": "svg",
-    "name": "U_ProfileIcon_Positive"
-  },
+  "image": "./unity.svg",
   "site": {
     "url": "https://unity.com"
   }

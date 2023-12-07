@@ -1,7 +1,4 @@
 {
   "name": "Astro",
-  "image": {
-    "type": "svg",
-    "name": "astro-icon-dark"
-  }
+  "image": "./astro.svg"
 }

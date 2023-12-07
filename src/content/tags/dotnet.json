@@ -1,7 +1,4 @@
 {
   "name": ".NET",
-  "image": {
-    "type": "svg",
-    "name": "dotnet-logo"
-  }
+  "image": "./dotnet.svg"
 }

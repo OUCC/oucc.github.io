@@ -1,7 +1,4 @@
 {
   "name": "Docker",
-  "image": {
-    "type": "svg",
-    "name": "docker"
-  }
+  "image": "./docker.svg"
 }
