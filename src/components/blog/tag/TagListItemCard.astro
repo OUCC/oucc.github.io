@@ -13,7 +13,7 @@ const { id, articleCount, ...tag } = Astro.props
   class="block sm:basis-[calc((100%-0.75rem)/2)] bg-white rounded-xl border space-y-1 group"
 >
   <a class="w-full h-full p-4 flex items-center" href={`/blog/tags/${id}`}>
-    <TagIcon tagImage={tag.image} size={40} />
+    <TagIcon tag={tag} size={40} />
     <div class="px-2">
       <h2 class="text-xl font-bold line-clamp-1 group-hover:underline">
         {tag.name}

@@ -21,7 +21,7 @@ const image =
   image.type === 'svg' ? (
     <Icon
       name={image.name}
-      alt={`${image.name} のアイコン`}
+      alt={`${author.name} のアイコン`}
       class="aspect-square rounded-full"
       height={size}
       width={size}
@@ -30,6 +30,7 @@ const image =
   ) : image.type === 'external-url' ? (
     <img
       src={image.url}
+      alt={`${author.name} のアイコン`}
       height={size}
       width={size}
       class="aspect-square rounded-full"

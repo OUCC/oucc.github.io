@@ -16,7 +16,7 @@ const { tags } = Astro.props
           href={`/blog/tags/${tag.id}`}
           class="flex items-center gap-1 bg-gray-100 hover:bg-gray-200 text-sm text-justify p-1 rounded-full"
         >
-          <TagIcon tagImage={tag.data.image} size={18} />
+          <TagIcon tag={tag.data} size={18} />
           <p>{tag.data.name}</p>
         </a>
       </li>
