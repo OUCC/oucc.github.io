@@ -37,7 +37,7 @@ const isShowAbout = tag.description || tag.site || tag.document || tag.github
   summarySize="summary"
 >
   <BlogTitle title={tag.name} background="white">
-    <Fragment slot="icon"><TagIcon tag={tag} size={80} /></Fragment>
+    <TagIcon slot="icon" tag={tag} size={80} />
   </BlogTitle>
   <main class="flex flex-col h-full">
     {isShowAbout && <TagAboutSection tag={tag} />}
