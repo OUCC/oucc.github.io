@@ -23,7 +23,7 @@ const blogEntries = await getCollection('blogs')
 const ogpPath = (
   await getImageWithSvgConvert({
     src: tag.image ?? defaultOgImage,
-    format: 'jpeg',
+    format: 'png',
   })
 ).src
 

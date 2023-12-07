@@ -26,7 +26,7 @@ const ogpPath = await (async () => {
     return `https://github.com/${author.data.github}.png`
   } else {
     return (
-      await getImageWithSvgConvert({ src: defaultOgImage, format: 'jpeg' })
+      await getImageWithSvgConvert({ src: defaultOgImage, format: 'png' })
     ).src
   }
 })()
