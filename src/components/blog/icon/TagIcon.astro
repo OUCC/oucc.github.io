@@ -2,27 +2,34 @@
 import Icon from '@/components/common/Icon.astro'
 import { unreachable } from '@/utils/unreachable'
 import type { CollectionEntry } from 'astro:content'
+
 interface Props {
-  tagImage: CollectionEntry<'tags'>['data']['image']
+  tag: CollectionEntry<'tags'>['data']
   size: number
 }
 
-const { tagImage, size } = Astro.props
+const { tag, size } = Astro.props
 ---
 
 {
-  tagImage.type === 'svg' ? (
+  tag.image.type === 'svg' ? (
     <Icon
-      name={tagImage.name}
-      alt={`${tagImage.name} のアイコン`}
+      name={tag.image.name}
+      alt={`${tag.name} のアイコン`}
       class="aspect-square"
       width={size}
       height={size}
       isBlog
     />
-  ) : tagImage.type === 'external-url' ? (
-    <img src={tagImage.url} height={size} width={size} class="aspect-square" />
+  ) : tag.image.type === 'external-url' ? (
+    <img
+      src={tag.image.url}
+      alt={`${tag.name} のアイコン`}
+      height={size}
+      width={size}
+      class="aspect-square"
+    />
   ) : (
-    unreachable(tagImage)
+    unreachable(tag.image)
   )
 }
