@@ -24,7 +24,7 @@ const { Content } = await blog.render()
       <a
         class="hover:underline flex gap-2 items-center"
         href={`/blog/authors/${author.id}`}
-        ><AuthorIcon {...author.data} size={28} />{author.data.name}</a
+        ><AuthorIcon author={author} size={28} />{author.data.name}</a
       >
     </div>
     <TagSmallList tags={tags} />

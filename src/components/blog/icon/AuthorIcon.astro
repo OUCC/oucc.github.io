@@ -2,26 +2,29 @@
 import Icon from '@/components/common/Icon.astro'
 import { unreachable } from '@/utils/unreachable'
 import type { CollectionEntry } from 'astro:content'
-type Props = CollectionEntry<'authors'>['data'] & { size: number }
 
-const { size, ...author } = Astro.props
+interface Props {
+  author: CollectionEntry<'authors'>
+  size: number
+}
+const { author, size } = Astro.props
 
 const image =
-  author.image.type === 'svg' &&
-  author.image.name === 'default_user' &&
-  author.github
+  author.data.image.type === 'svg' &&
+  author.data.image.name === 'default_user' &&
+  author.data.github
     ? ({
         type: 'external-url',
-        url: `https://github.com/${author.github}.png`,
+        url: `https://github.com/${author.data.github}.png`,
       } as const)
-    : author.image
+    : author.data.image
 ---
 
 {
   image.type === 'svg' ? (
     <Icon
       name={image.name}
-      alt={`${image.name} のアイコン`}
+      alt={`${author.data.name} のアイコン`}
       class="aspect-square rounded-full"
       height={size}
       width={size}

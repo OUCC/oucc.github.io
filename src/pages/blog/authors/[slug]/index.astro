@@ -39,7 +39,7 @@ const isShowAboutSection = author.data.description || author.data.github
 >
   <BlogTitle title={author.data.name} background="white">
     <Fragment slot="icon">
-      <AuthorIcon {...author.data} size={93} />
+      <AuthorIcon author={author} size={93} />
     </Fragment>
   </BlogTitle>
   {isShowAboutSection && <AuthorAboutSection author={author.data} />}
