@@ -41,7 +41,12 @@ const {
     </button>
     <a href={rootPath} class="flex items-center">
       <span class="h-full aspect-square">
-        <Image src={ouccImage} alt="OUCC" class="h-full object-contain" />
+        <Image
+          src={ouccImage}
+          alt="OUCC"
+          class="h-full object-contain"
+          loading="eager"
+        />
       </span>
       {headerTitle && <h1 class="text-4xl font-bold mx-4">{headerTitle}</h1>}
     </a>
