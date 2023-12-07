@@ -5,7 +5,7 @@ import mdx from '@astrojs/mdx'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://oucc.org',
+  site: import.meta.env.SITE_URL,
   // 旧ウェブサイトでよくアクセスされていたURLにリダイレクトを設定する
   redirects: {
     '/about.html': '/',
