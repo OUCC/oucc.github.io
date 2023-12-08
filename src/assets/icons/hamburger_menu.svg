@@ -1,7 +1,4 @@
 <!-- Source: https://icooon-mono.com/12590-%e3%83%a1%e3%83%8b%e3%83%a5%e3%83%bc%e3%81%ae%e7%84%a1%e6%96%99%e3%82%a2%e3%82%a4%e3%82%b3%e3%83%b310/ -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <path
-    fill="currentColor"
-    d="M0 16h512v80H0zM0 216.008h512v79.984H0zM0 416h512v80H0z"
-  />
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512">
+  <path d="M0 16h512v80H0zM0 216.008h512v79.984H0zM0 416h512v80H0z" />
 </svg>
