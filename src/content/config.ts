@@ -32,23 +32,13 @@ const blogsMetaCollection = defineCollection({
 
 const authorsCollection = defineCollection({
   type: 'data',
-  schema: z.object({
-    name: z.string().min(1),
-    description: z.string().optional(),
-    github: z.string().min(1).optional(),
-    image: z
-      .discriminatedUnion('type', [
-        z.object({
-          type: z.literal('svg'),
-          name: z.string().min(1),
-        }),
-        z.object({
-          type: z.literal('external-url'),
-          url: z.string().url(),
-        }),
-      ])
-      .default({ type: 'svg', name: 'default_user' }),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string().min(1),
+      description: z.string().optional(),
+      github: z.string().min(1).optional(),
+      image: image().optional(),
+    }),
 })
 
 const tagsAboutSchema = z.object({
@@ -58,25 +48,15 @@ const tagsAboutSchema = z.object({
 
 const tagsCollection = defineCollection({
   type: 'data',
-  schema: z.object({
-    name: z.string().min(1),
-    image: z
-      .discriminatedUnion('type', [
-        z.object({
-          type: z.literal('svg'),
-          name: z.string().min(1),
-        }),
-        z.object({
-          type: z.literal('external-url'),
-          url: z.string().url(),
-        }),
-      ])
-      .default({ type: 'svg', name: 'hashtag' }),
-    description: z.string().optional(),
-    site: tagsAboutSchema.optional(),
-    document: tagsAboutSchema.optional(),
-    github: tagsAboutSchema.optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string().min(1),
+      description: z.string().optional(),
+      site: tagsAboutSchema.optional(),
+      document: tagsAboutSchema.optional(),
+      github: tagsAboutSchema.optional(),
+      image: image().optional(),
+    }),
 })
 
 export const collections = {

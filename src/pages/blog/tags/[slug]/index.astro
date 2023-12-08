@@ -1,10 +1,11 @@
 ---
+import defaultOgImage from '@/assets/hashtag.svg'
 import BlogListSection from '@/components/blog/BlogListSection.astro'
 import BlogTitle from '@/components/blog/BlogTitle.astro'
 import TagIcon from '@/components/blog/icon/TagIcon.astro'
 import TagAboutSection from '@/components/blog/tag/TagAboutSection.astro'
 import BlogLayout from '@/layouts/BlogLayout.astro'
-import { unreachable } from '@/utils/unreachable'
+import { getImageWithSvgConvert } from '@/utils/getImageWithSvgConvert'
 import { getCollection } from 'astro:content'
 export async function getStaticPaths() {
   const tagEntries = await getCollection('tags')
@@ -19,17 +20,20 @@ const {
 } = Astro.props
 const blogEntries = await getCollection('blogs')
 
+const ogpPath = (
+  await getImageWithSvgConvert({
+    src: tag.image ?? defaultOgImage,
+    format: 'png',
+  })
+).src
+
 const isShowAbout = tag.description || tag.site || tag.document || tag.github
 ---
 
 <BlogLayout
   title={`${tag.name}の記事一覧`}
   description={tag.description ?? `${tag.name}に関する記事が集まっています`}
-  image={tag.image.type === 'svg'
-    ? `/blog/tags/${id}/ogp.png`
-    : tag.image.type === 'external-url'
-      ? tag.image.url
-      : unreachable(tag.image)}
+  image={ogpPath}
   summarySize="summary"
 >
   <BlogTitle title={tag.name} background="white">

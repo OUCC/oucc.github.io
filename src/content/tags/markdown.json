@@ -1,7 +1,4 @@
 {
   "name": "Markdown",
-  "image": {
-    "type": "svg",
-    "name": "Markdown-mark"
-  }
+  "image": "./markdown.svg"
 }

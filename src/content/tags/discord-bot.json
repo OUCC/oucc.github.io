@@ -1,7 +1,4 @@
 {
   "name": "Discord Bot",
-  "image": {
-    "type": "svg",
-    "name": "discord-mark-black"
-  }
+  "image": "./discord-bot.svg"
 }

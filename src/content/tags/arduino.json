@@ -1,7 +1,4 @@
 {
   "name": "Arduino",
-  "image": {
-    "type": "svg",
-    "name": "arduino"
-  }
+  "image": "./arduino.svg"
 }
