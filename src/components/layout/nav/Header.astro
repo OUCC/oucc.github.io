@@ -39,7 +39,7 @@ const {
         class="w-5"
       />
     </button>
-    <a href={rootPath} class="flex items-center">
+    <a href={rootPath} class="flex items-center basis-0">
       <span class="h-full aspect-square">
         <Image
           src={ouccImage}
@@ -51,7 +51,7 @@ const {
       {headerTitle && <h1 class="text-4xl font-bold mx-4">{headerTitle}</h1>}
     </a>
   </div>
-  <div class="flex flex-col justify-center">
+  <div class="flex flex-col justify-center shrink-0">
     {showJoinLink && <LinkButton href="/join">Join OUCC!</LinkButton>}
   </div>
   <dialog

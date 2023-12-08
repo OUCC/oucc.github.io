@@ -1,7 +1,4 @@
 {
   "name": "REST API",
-  "image": {
-    "type": "svg",
-    "name": "rest-api-icon"
-  }
+  "image": "./rest-api.svg"
 }

@@ -1,7 +1,4 @@
 {
   "name": "Git",
-  "image": {
-    "type": "svg",
-    "name": "git"
-  }
+  "image": "./git.svg"
 }

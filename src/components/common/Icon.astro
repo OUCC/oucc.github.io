@@ -1,57 +1,40 @@
 ---
-import { optimize } from 'svgo'
+/**
+ * /assets/icons にあるアイコンを単色で表示する。
+ *
+ * 色には現在の文字色（`currentColor`）が使われる。これはCSSの`color`で変更できる。
+ *
+ * CSSで幅または高さを指定しないと、大きさが0pxとなり表示されない。
+ * また、この要素は`<img>`と同様にデフォルトで`display: inline-block`となっている。要素の下に意図せず余白が生じる場合は`vertical-align: top`で調整できる。cf. https://stackoverflow.com/q/27536428
+ */
 
-interface Props {
-  // `src/assets/icons`にあるSVGのファイル名
+import type { HTMLAttributes } from 'astro/types'
+
+type Props = Omit<HTMLAttributes<'span'>, 'name' | 'alt' | 'style'> & {
+  // `src/assets/icons`にあるSVGのファイル名（拡張子は含まない）
   name: string
 
-  // `aria-label`に指定するテキスト
+  // 代替テキスト（`<img>`の`alt`属性と同じ）
   alt: string
 
-  isBlog?: boolean
-  class?: string
-
-  width?: number
-  height?: number
+  style?: Exclude<HTMLAttributes<'span'>['style'], string>
 }
 
-const { name, alt, isBlog, width, height, ...attrs } = Astro.props
+const { name, alt, ...attrs } = Astro.props
 
-const normalizedAttrs: Partial<
-  Record<Exclude<keyof Props, 'name' | 'alt'>, string>
-> = attrs
-
-if (width) normalizedAttrs.width = width.toString()
-if (height) normalizedAttrs.height = height.toString()
-
-const svgContent = isBlog
-  ? (await import(`../../assets/icons/blog/${name}.svg?raw`)).default
-  : (await import(`../../assets/icons/${name}.svg?raw`)).default
-
-const { data: optimizedSvgContent } = optimize(svgContent, {
-  plugins: [
-    {
-      name: 'preset-default',
-      params: {
-        overrides: {
-          convertPathData: false,
-          removeViewBox: false,
-        },
-      },
-    },
-    'removeDimensions',
-    {
-      name: 'addAttributesToSVGElement',
-      params: {
-        attribute: {
-          role: 'img',
-          'aria-label': alt,
-          ...normalizedAttrs,
-        },
-      },
-    },
-  ],
-})
+const image = (await import(`../../assets/icons/${name}.svg`)).default
 ---
 
-<Fragment set:html={optimizedSvgContent} />
+<span
+  role="img"
+  aria-label={alt}
+  class:list={[
+    'inline-block bg-current [mask-repeat:no-repeat] [mask-position:center] [mask-size:contain]',
+    attrs.class,
+  ]}
+  style={{
+    maskImage: `url(${JSON.stringify(image.src)})`,
+    aspectRatio: `${image.width}/${image.height}`,
+    ...attrs.style,
+  }}
+  {...attrs}></span>

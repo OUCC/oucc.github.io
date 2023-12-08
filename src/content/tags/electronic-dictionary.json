@@ -1,7 +1,4 @@
 {
   "name": "電子辞書",
-  "image": {
-    "type": "svg",
-    "name": "laptop"
-  }
+  "image": "./electronic-dictionary.svg"
 }

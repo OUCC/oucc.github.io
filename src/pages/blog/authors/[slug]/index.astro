@@ -1,10 +1,11 @@
 ---
+import defaultOgImage from '@/assets/avatar.svg'
 import BlogListSection from '@/components/blog/BlogListSection.astro'
 import BlogTitle from '@/components/blog/BlogTitle.astro'
 import AuthorAboutSection from '@/components/blog/author/AuthorAboutSection.astro'
 import AuthorIcon from '@/components/blog/icon/AuthorIcon.astro'
 import BlogLayout from '@/layouts/BlogLayout.astro'
-import { unreachable } from '@/utils/unreachable'
+import { getImageWithSvgConvert } from '@/utils/getImageWithSvgConvert'
 import { getCollection } from 'astro:content'
 export async function getStaticPaths() {
   const authorEntries = await getCollection('authors')
@@ -16,16 +17,19 @@ export async function getStaticPaths() {
 
 const { author } = Astro.props
 const blogEntries = await getCollection('blogs')
-const ogpPath =
-  author.data.image.type === 'svg' &&
-  author.data.image.name === 'default_user' &&
-  author.data.github
-    ? `https://github.com/${author.data.github}.png`
-    : author.data.image.type === 'svg'
-      ? `/authors/${author.id}/ogp.png`
-      : author.data.image.type === 'external-url'
-        ? author.data.image.url
-        : unreachable(author.data.image)
+const ogpPath = await (async () => {
+  if (author.data.image !== undefined) {
+    return (
+      await getImageWithSvgConvert({ src: author.data.image, format: 'jpeg' })
+    ).src
+  } else if (author.data.github !== undefined) {
+    return `https://github.com/${author.data.github}.png`
+  } else {
+    return (
+      await getImageWithSvgConvert({ src: defaultOgImage, format: 'png' })
+    ).src
+  }
+})()
 
 const isShowAboutSection = author.data.description || author.data.github
 ---
@@ -35,7 +39,7 @@ const isShowAboutSection = author.data.description || author.data.github
   description={author.data.description ??
     `${author.data.name}さんのプロフィール`}
   image={ogpPath}
-  summarySize={ogpPath === undefined ? undefined : 'summary'}
+  summarySize="summary"
 >
   <BlogTitle title={author.data.name} background="white">
     <Fragment slot="icon">
