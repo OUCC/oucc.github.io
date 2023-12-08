@@ -1,18 +1,11 @@
-import satori from 'satori'
+import satori, { type Font } from 'satori'
 import oucc from '@/assets/oucc.svg?raw'
 import fs from 'node:fs/promises'
 import sharp from 'sharp'
+import { lazy } from '@/utils/lazy'
 
-let fontCache:
-  | {
-      weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
-      data: Buffer
-    }[]
-  | null = null
-let ouccIconCache: string | null
-
-export async function createOgImage(title: string, author: string) {
-  fontCache ??= await Promise.all(
+const fonts = lazy<Font[]>(() =>
+  Promise.all(
     (
       [
         {
@@ -29,15 +22,18 @@ export async function createOgImage(title: string, author: string) {
         },
       ] as const
     ).map(async ({ weight, path }) => ({
+      name: 'NotoSansJP',
       weight,
       data: await fs.readFile(path),
     })),
-  )
+  ),
+)
 
-  ouccIconCache ??= (await sharp(Buffer.from(oucc)).png().toBuffer()).toString(
-    'base64',
-  )
+const ouccLogo = lazy(async () =>
+  (await sharp(Buffer.from(oucc)).png().toBuffer()).toString('base64'),
+)
 
+export async function createOgImage(title: string, author: string) {
   const svg = await satori(
     {
       type: 'body',
@@ -75,7 +71,7 @@ export async function createOgImage(title: string, author: string) {
                 {
                   type: 'img',
                   props: {
-                    src: `data:image/png;base64,${ouccIconCache}`,
+                    src: `data:image/png;base64,${await ouccLogo()}`,
                     height: 80,
                   },
                 },
@@ -95,7 +91,7 @@ export async function createOgImage(title: string, author: string) {
     {
       width: 1200,
       height: 630,
-      fonts: fontCache.map((font) => ({ ...font, name: 'NotoSansJP' })),
+      fonts: await fonts(),
     },
   )
 
