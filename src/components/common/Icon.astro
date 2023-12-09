@@ -33,6 +33,7 @@ const image = (await import(`../../assets/icons/${name}.svg`)).default
     attrs.class,
   ]}
   style={{
+    '-webkit-mask-image': `url(${JSON.stringify(image.src)})`,
     maskImage: `url(${JSON.stringify(image.src)})`,
     aspectRatio: `${image.width}/${image.height}`,
     ...attrs.style,
