@@ -1,11 +1,14 @@
 import { defineConfig } from 'astro/config'
+import { loadEnv } from 'vite'
 import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
 import mdx from '@astrojs/mdx'
 
+const { SITE_URL } = loadEnv(process.env.NODE_ENV!, process.cwd(), '')
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://oucc.org',
+  site: SITE_URL,
   // 旧ウェブサイトでよくアクセスされていたURLにリダイレクトを設定する
   redirects: {
     '/about.html': '/',
