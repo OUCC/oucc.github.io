@@ -31,11 +31,18 @@ const { Content } = await blog.render()
     <div class="text-sm text-gray-700 flex gap-3 p-2">
       {
         blogMeta.updateDate && (
-          <div>最終更新日：{formatDate(blogMeta.updateDate)}</div>
+          <div>
+            最終更新日：
+            <time datetime={blogMeta.updateDate.toISOString()}>
+              {formatDate(blogMeta.updateDate)}
+            </time>
+          </div>
         )
       }
       <div>
-        投稿日：{formatDate(blogMeta.postDate)}
+        投稿日：<time datetime={blogMeta.postDate.toISOString()}
+          >{formatDate(blogMeta.postDate)}</time
+        >
       </div>
     </div>
     <div class="w-full max-w-none pt-6 prose">
