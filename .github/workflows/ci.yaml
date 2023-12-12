@@ -11,6 +11,8 @@ permissions:
 
 jobs:
   build:
+    if: ${{ !cancelled() && !failure() }}
+    needs: [update-blogmeta]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +28,8 @@ jobs:
           retention-days: 90
 
   lint:
+    if: ${{ !cancelled() && !failure() }}
+    needs: [update-blogmeta]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -37,6 +41,8 @@ jobs:
       - run: npm run lint
 
   typecheck:
+    if: ${{ !cancelled() && !failure() }}
+    needs: [update-blogmeta]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -49,7 +55,6 @@ jobs:
 
   validate-blog:
     if: startsWith(github.head_ref, 'blog/') && !startsWith(github.head_ref, 'blog/admin/')
-    needs: [build, lint, typecheck]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -58,6 +63,7 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - run: npm run build
       - run: |
           git fetch origin main
           git diff origin/main..HEAD --name-only | xargs npm run validate-blog --
