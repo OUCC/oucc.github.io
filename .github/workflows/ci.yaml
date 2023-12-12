@@ -76,21 +76,19 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Update blog meta
-        id: update_blogmeta
         run: |
-          git diff origin/main..HEAD --name-only | xargs npm run update-blogmeta --
-          echo "{UPDATE_RESULT}_{$?}" >> "$GITHUB_OUTPUT"
-        continue-on-error: true
-      - run: exit ${{ steps.update_blogmeta.outputs.UPDATE_RESULT }}
-        if: steps.update_blogmeta.outputs.UPDATE_RESULT != '1' && steps.update_blogmeta.outputs.UPDATE_RESULT != '0'
+          git diff origin/main..HEAD --name-status | xargs npm run update-blogmeta --
       - name: Git Commit
         run: |
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add .
-          git commit -m "[Bot] Update blog meta"
-          git push origin ${{github.head_ref}}
-        if: steps.update_blogmeta.outputs.UPDATE_RESULT == '0'
+          git add -N .
+          if ! git diff --exit-code --quiet
+          then
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add .
+            git commit -m "[Bot] Update blog meta"
+            git push origin ${{github.head_ref}}
+          fi
 
   deploy:
     if: github.ref == 'refs/heads/main'
