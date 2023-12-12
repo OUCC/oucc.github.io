@@ -19,18 +19,15 @@ const items: (Record<'url' | 'text' | 'title', string> | '' | undefined)[] = [
 ---
 
 <Section background="white">
-  <div class="block">{author.description}</div>
-  <div class="block">
-    {author.description && <div class="mb-3">{author.description}</div>}
-    {
-      items.map(
-        (item) =>
-          item && (
-            <p>
-              {item.title}：<InlineLink href={item.url}>{item.text}</InlineLink>
-            </p>
-          ),
-      )
-    }
-  </div>
+  {author.description && <div class="mb-3">{author.description}</div>}
+  {
+    items.map(
+      (item) =>
+        item && (
+          <p>
+            {item.title}：<InlineLink href={item.url}>{item.text}</InlineLink>
+          </p>
+        ),
+    )
+  }
 </Section>
