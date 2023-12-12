@@ -4,14 +4,14 @@
   "image": "./electronic-dictionary.svg",
   "site": {
     "url": "https://jp.sharp/edictionary/",
-    "text": "Brain 公式サイト（SHARP）"
+    "text": "電子辞書：シャープ"
   },
   "document": {
     "url": "https://brain.fandom.com/ja/wiki/Brain_Wiki",
-    "text": "Brain Wiki"
+    "text": "Brain Wiki（非公式）"
   },
   "github": {
     "url": "https://github.com/brain-hackers",
-    "text": "Brain Hackers - GitHub"
+    "text": "Brain Hackers"
   }
 }
