@@ -1,4 +1,17 @@
 {
   "name": "電子辞書",
-  "image": "./electronic-dictionary.svg"
+  "description": "電子辞書を本来とは異なる目的で活用する、電子辞書ハック関係の記事群です。主に SHARP 社製カラー電子辞書シリーズの Brain を対象としています。SHARP 社とは無関係な非公式の内容であることに注意してください。",
+  "image": "./electronic-dictionary.svg",
+  "site": {
+    "url": "https://jp.sharp/edictionary/",
+    "text": "Brain 公式サイト（SHARP）"
+  },
+  "document": {
+    "url": "https://brain.fandom.com/ja/wiki/Brain_Wiki",
+    "text": "Brain Wiki"
+  },
+  "github": {
+    "url": "https://github.com/brain-hackers",
+    "text": "Brain Hackers - GitHub"
+  }
 }
