@@ -6,12 +6,13 @@ process.exit(validateBlog() ? 0 : 1)
  * 変更されたファイルが許可されているものに含まれているか判定します
  *
  * 許可されているファイルは以下のとおりです。
- * - src/content/blogs/*.md (blogs, tags, authors 以外)
+ * - src/content/blogs/*.{md, mdx}
  * - src/content/blogs/ より一階層下にある画像
  * - src/content/authors/*.json
- * - src/content/blog-metas/*.json (blogs, tags, authors 以外)
+ * - src/content/authors/ にある画像
+ * - src/content/blog-metas/*.json
  * - src/content/tags/*.json
- * - src/assets/icons/blog/*.svg
+ * - src/content/tags/ にある画像
  */
 function validateBlog() {
   let ok = true
@@ -21,48 +22,20 @@ function validateBlog() {
 
     if (parsedPath.dir === 'src/content/blogs') {
       // ブログ本体
-      if (
-        parsedPath.ext === '.md' &&
-        !['blogs', 'tags', 'authors'].includes(parsedPath.name)
-      )
-        continue
+      if (parsedPath.ext === '.md' || parsedPath.ext === '.mdx') continue
     } else if (parsedPath.dir === 'src/content/blog-metas') {
       // ブログのメタ情報
-      if (
-        parsedPath.ext === '.json' &&
-        !['blogs', 'tags', 'authors'].includes(parsedPath.name)
-      )
-        continue
-    } else if (parsedPath.dir.startsWith('src/content/blogs/')) {
+      if (parsedPath.ext === '.json') continue
+    } else if (
+      parsedPath.dir.match(/^src\/content\/blogs\/[^(#/)]*\/[^(#/)]*$/)
+    ) {
       // 画像
-      if (
-        [
-          '.jpg',
-          '.jpeg',
-          '.jfif',
-          '.pjpeg',
-          '.pjp',
-          '.png',
-          '.svg',
-          '.webp',
-          '.gif',
-          '.avif',
-          '.apng',
-        ].includes(parsedPath.ext)
-      )
-        continue
+      if (isImage(parsedPath.ext)) continue
     } else if (
+      ['src/content/authors', 'src/content/tags'].includes(parsedPath.dir)
+    ) {
       // ブログの著者・タグ
-      ['src/content/authors', 'src/content/tags'].includes(parsedPath.dir) &&
-      parsedPath.ext === '.json'
-    ) {
-      continue
-    } else if (
-      // ブログのアイコン
-      parsedPath.dir === 'src/assets/icons/blog' &&
-      parsedPath.ext === '.svg'
-    ) {
-      continue
+      if (parsedPath.ext === '.json' || isImage(parsedPath.ext)) continue
     }
 
     console.log(
@@ -72,4 +45,20 @@ function validateBlog() {
   }
 
   return ok
+}
+
+function isImage(ext: string) {
+  return [
+    '.jpg',
+    '.jpeg',
+    '.jfif',
+    '.pjpeg',
+    '.pjp',
+    '.png',
+    '.svg',
+    '.webp',
+    '.gif',
+    '.avif',
+    '.apng',
+  ].includes(ext)
 }
