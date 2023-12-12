@@ -9,7 +9,7 @@ type BlogMeta = {
   postDate: string
   updateDate?: string
 }
-const gitDiffs = validateArgs(chunkArray(process.argv.slice(2), 2))
+const gitDiffs = validateArgs(chunkArray(process.argv.slice(2)))
 if (gitDiffs === null) process.exit(1)
 updateBlogMeta(gitDiffs)
 
@@ -51,7 +51,7 @@ function validateArgs(gitDiffs: string[][]): FileStatus[] | null {
         status[0]!.startsWith('R') &&
         Number.isInteger(Number(status[0]!.slice(1)))
       ) {
-        if (validateFile(status[1]!) && validateFile(status[2]!)) {
+        if (validateFile(status[2]!)) {
           result.push(status as [`R${number}`, string, string])
         }
       } else
@@ -152,20 +152,20 @@ function predicateTargetFiles([status, file]: readonly [
   return false
 }
 
-function chunkArray<T>(array: T[], chunkSize: number) {
-  const result: T[][] = []
-  let tempArray: T[] = []
+function chunkArray(array: string[]) {
+  const result: string[][] = []
+  let tempArray: string[] = []
+
   for (const val of array) {
-    if (tempArray.length < chunkSize) {
+    if (val.startsWith('src/content')) {
+      // ファイルの変更は src/content しか許可されていない
       tempArray.push(val)
     } else {
-      result.push(tempArray)
+      if (tempArray.length > 0) result.push(tempArray)
       tempArray = [val]
     }
   }
+  if (tempArray.length > 0) result.push(tempArray)
 
-  if (tempArray.length !== 0) {
-    result.push(tempArray)
-  }
   return result
 }
