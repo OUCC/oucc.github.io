@@ -1,4 +1,17 @@
 {
   "name": ".NET",
-  "image": "./dotnet.svg"
+  "description": ".NET は C#, F#, VB.NET などが実行可能な仮想マシンです。(JVM に似ています) クラスプラットフォームであるためどんな環境でも同じコードで実行できます。",
+  "image": "./dotnet.svg",
+  "site": {
+    "url": "https://learn.microsoft.com/ja-jp/dotnet/core/introduction",
+    "text": ".NET とは何ですか? 概要 - Microsoft 公式ドキュメント"
+  },
+  "document": {
+    "url": "https://learn.microsoft.com/ja-jp/dotnet/",
+    "text": "Microsoft 公式ドキュメント"
+  },
+  "github": {
+    "url": "https://github.com/dotnet",
+    "text": ".NET Platform - GitHub Organization"
+  }
 }

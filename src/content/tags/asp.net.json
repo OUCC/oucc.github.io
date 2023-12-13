@@ -1,3 +1,7 @@
 {
-  "name": "ASP.NET Core"
+  "name": "ASP.NET Core",
+  "image": "./dotnet.svg",
+  "github": {
+    "url": "https://github.com/dotnet/aspnetcore"
+  }
 }
