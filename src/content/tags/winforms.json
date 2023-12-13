@@ -1,0 +1,15 @@
+{
+  "name": "Windows Forms",
+  "description": "Windows Forms (WinForms) はWindows 用の豊富なデスクトップ クライアント アプリを作成する UI フレームワークです。C# のUIフレームワークの中では最も古いためとても安定してます。",
+  "image": "./dotnet.svg",
+  "site": {
+    "url": "https://learn.microsoft.com/ja-jp/dotnet/desktop/winforms/"
+  },
+  "document": {
+    "url": "https://learn.microsoft.com/ja-jp/dotnet/api/system.windows.forms",
+    "text": "System.Windows.Forms 名前空間 - Microsoft 公式ドキュメント"
+  },
+  "github": {
+    "url": "https://github.com/dotnet/winforms"
+  }
+}
