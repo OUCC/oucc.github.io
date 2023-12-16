@@ -18,8 +18,8 @@ const { Content } = await blog.render()
 ---
 
 <div class="py-4 flex flex-col items-center">
-  <h1 class="text-5xl font-bold p-5 text-center">{blog.data.title}</h1>
-  <article class="w-full max-w-padded-container bg-white rounded-2xl p-4 my-10">
+  <h1 class="text-3xl md:text-4xl font-bold p-3 text-center">{blog.data.title}</h1>
+  <article class="w-full max-w-padded-container bg-white md:rounded-2xl p-4 my-10">
     <div class="p-1 text-lg mb-1">
       <a
         class="hover:underline flex gap-2 items-center"
@@ -45,7 +45,7 @@ const { Content } = await blog.render()
         >
       </div>
     </div>
-    <div class="w-full max-w-none pt-6 prose">
+    <div class="w-full max-w-none pt-6 prose break-words">
       <Content />
     </div>
   </article>
@@ -65,11 +65,15 @@ const { Content } = await blog.render()
     .prose code:not(pre > *)::before {
       @apply content-none;
     }
-    .prose > *:where(:not(h1, h2, h3, h4, h5, h6, pre, iframe)) {
+    .prose > *:where(:not(h1, h2, h3, h4, h5, h6, pre, iframe, img, svg, table)) {
       @apply mx-4;
     }
     .prose > *:where(h1, h2) {
       @apply border-b-2;
+    }
+
+    .prose > table {
+      @apply block overflow-x-auto w-full whitespace-nowrap px-2
     }
   }
 </style>
