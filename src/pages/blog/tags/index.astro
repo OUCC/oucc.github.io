@@ -6,11 +6,20 @@ import TagListSection from '@/components/blog/tag/TagListSection.astro'
 
 const tagEntries = await getCollection('tags')
 const statistics = await getTagStatistics()
-const tags = tagEntries.map((tag) => ({
-  ...tag,
-  articleCount: statistics[tag.id].length,
-  lastPostedTime: statistics[tag.id][0]?.time ?? 0,
-}))
+const tags = tagEntries
+  .filter(
+    (tag) =>
+      ![
+        // ignore tags
+        'dgv',
+        'astro',
+      ].includes(tag.id),
+  )
+  .map((tag) => ({
+    ...tag,
+    articleCount: statistics[tag.id].length,
+    lastPostedTime: statistics[tag.id][0]?.time ?? 0,
+  }))
 tags.sort((tag1, tag2) =>
   tag2.articleCount !== tag1.articleCount
     ? tag2.articleCount - tag1.articleCount

@@ -7,9 +7,10 @@ const blogsCollection = defineCollection({
     description: z
       .string()
       .min(10)
-      .transform((desc) =>
-        desc.length > 100 ? desc.slice(0, 100) + '…' : desc,
-      ),
+      .transform((desc) => {
+        desc = desc.replaceAll('\r\n', ' ').replaceAll('\n', ' ')
+        return desc.length > 100 ? desc.slice(0, 100) + '…' : desc
+      }),
     author: reference('authors'),
     tags: z.array(reference('tags')),
   }),
