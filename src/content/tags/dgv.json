@@ -1,8 +1,10 @@
 {
   "name": "DataGridView",
   "description": "Windows Forms のデータを表示するコントロールです。",
-  "document": {
-    "url": "https://learn.microsoft.com/ja-jp/dotnet/api/system.windows.forms.datagridview",
-    "text": "DataGridView クラス - Microsoft 公式ドキュメント"
-  }
+  "links": [
+    {
+      "url": "https://learn.microsoft.com/ja-jp/dotnet/api/system.windows.forms.datagridview",
+      "text": "DataGridView クラス - Microsoft 公式ドキュメント"
+    }
+  ]
 }

@@ -2,14 +2,18 @@
   "name": "C#",
   "description": "C#は、最新のタイプ セーフなオブジェクト指向のプログラミング言語です。 開発者は C# を使用することにより、.NET で稼働する、安全かつ堅牢な多くの種類のアプリケーションを構築できます。",
   "image": "./csharp.svg",
-  "site": {
-    "url": "https://dotnet.microsoft.com/ja-jp/learn/dotnet/what-is-dotnet"
-  },
-  "document": {
-    "url": "https://learn.microsoft.com/ja-jp/dotnet/csharp/programming-guide/"
-  },
-  "github": {
-    "url": "https://github.com/dotnet/runtime",
-    "text": ".NET Runtime - GitHub"
-  }
+  "links": [
+    {
+      "url": "https://dotnet.microsoft.com/ja-jp/learn/dotnet/what-is-dotnet",
+      "text": "C# - 公式サイト"
+    },
+    {
+      "url": "https://learn.microsoft.com/ja-jp/dotnet/csharp/programming-guide/",
+      "text": "C# - 公式ドキュメント"
+    },
+    {
+      "url": "https://github.com/dotnet/runtime",
+      "text": ".NET Runtime - GitHub"
+    }
+  ]
 }
