@@ -1,7 +1,10 @@
 {
   "name": "Unity",
   "image": "./unity.svg",
-  "site": {
-    "url": "https://unity.com"
-  }
+  "links": [
+    {
+      "url": "https://unity.com",
+      "text": "Unity - 公式サイト"
+    }
+  ]
 }

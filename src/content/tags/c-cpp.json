@@ -2,16 +2,18 @@
   "name": "C/C++",
   "description": "C/C++ は低レイヤな処理を得意とし、高速に実行できるコンパイル型言語です。歴史が長く、また組み込み機器のような特殊な環境でも動作します。C と C++ は別の言語ですが、C++ が基本的には C を拡張した言語であるため、ひっくるめて C/C++ と呼ばれることがあります。",
   "image": "./cpp.svg",
-  "site": {
-    "url": "https://isocpp.org/",
-    "text": "Standard C++"
-  },
-  "document": {
-    "url": "https://cpprefjp.github.io/",
-    "text": "cpprefjp - C++ 日本語リファレンス"
-  },
-  "github": {
-    "url": "https://github.com/isocpp",
-    "text": "Standard C++ Foundation - GitHub"
-  }
+  "links": [
+    {
+      "url": "https://isocpp.org/",
+      "text": "Standard C++"
+    },
+    {
+      "url": "https://cpprefjp.github.io/",
+      "text": "cpprefjp - C++ 日本語リファレンス"
+    },
+    {
+      "url": "https://github.com/isocpp",
+      "text": "Standard C++ Foundation - GitHub"
+    }
+  ]
 }

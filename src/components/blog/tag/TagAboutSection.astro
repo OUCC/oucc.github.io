@@ -7,43 +7,32 @@ interface Props {
   tag: CollectionEntry<'tags'>['data']
 }
 
-const { tag } = Astro.props
-
-const items: (
-  | (CollectionEntry<'tags'>['data']['site'] & { title: string })
-  | undefined
-)[] = [
-  tag.site && {
-    ...tag.site,
-    title: '公式サイト',
-    text: tag.site.text || `${tag.name} - 公式サイト`,
-  },
-  tag.document && {
-    ...tag.document,
-    title: '公式ドキュメント',
-    text: tag.document.text || `${tag.name} - 公式ドキュメント`,
-  },
-  tag.github && {
-    ...tag.github,
-    title: 'GitHub',
-    text: tag.github.text || `${tag.name} - GitHub`,
-  },
-]
+const {
+  tag: { name, description, links },
+} = Astro.props
 ---
 
 <Section background="white">
-  <Fragment slot="title">{tag.name} について</Fragment>
+  <Fragment slot="title">{name} について</Fragment>
 
   <div class="block">
-    {tag.description && <div class="mb-3">{tag.description}</div>}
+    {description && <div>{description}</div>}
     {
-      items.map(
-        (item) =>
-          item && (
-            <p>
-              {item.title}：<InlineLink href={item.url}>{item.text}</InlineLink>
-            </p>
-          ),
+      links.length === 0 ? (
+        ''
+      ) : (
+        <div class="px-2 py-3">
+          <h2 class="text-xl">外部リンク</h2>
+          <ul class="list-disc list-inside pl-2">
+            {links.map(({ url, text }) => (
+              <li>
+                <InlineLink href={url} class="no-underline hover:underline">
+                  {text}
+                </InlineLink>
+              </li>
+            ))}
+          </ul>
+        </div>
       )
     }
   </div>

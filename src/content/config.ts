@@ -42,20 +42,20 @@ const authorsCollection = defineCollection({
     }),
 })
 
-const tagsAboutSchema = z.object({
-  url: z.string().url(),
-  text: z.string().optional(),
-})
-
 const tagsCollection = defineCollection({
   type: 'data',
   schema: ({ image }) =>
     z.object({
       name: z.string().min(1),
       description: z.string().optional(),
-      site: tagsAboutSchema.optional(),
-      document: tagsAboutSchema.optional(),
-      github: tagsAboutSchema.optional(),
+      links: z
+        .array(
+          z.object({
+            url: z.string().url(),
+            text: z.string().min(1),
+          }),
+        )
+        .default([]),
       image: image().optional(),
     }),
 })

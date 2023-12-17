@@ -27,7 +27,7 @@ const ogpPath = (
   })
 ).src
 
-const isShowAbout = tag.description || tag.site || tag.document || tag.github
+const isShowAbout = tag.description || tag.links.length > 0
 ---
 
 <BlogLayout

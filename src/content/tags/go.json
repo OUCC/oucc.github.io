@@ -1,13 +1,18 @@
 {
   "name": "Go",
   "image": "./go.svg",
-  "site": {
-    "url": "https://go.dev/"
-  },
-  "document": {
-    "url": "https://go.dev/doc/"
-  },
-  "github": {
-    "url": "https://github.com/golang/go"
-  }
+  "links": [
+    {
+      "url": "https://go.dev/",
+      "text": "Go - 公式サイト"
+    },
+    {
+      "url": "https://go.dev/doc/",
+      "text": "Go - 公式ドキュメント"
+    },
+    {
+      "url": "https://github.com/golang/go",
+      "text": "Go - GitHub"
+    }
+  ]
 }
