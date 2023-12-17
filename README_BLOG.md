@@ -77,15 +77,9 @@ Example: `src/content/authors/octocat.json`
 - name : タグの表示名（必須）
 - description : タグの説明
 - image : アイコンの画像ファイル（詳細は後述）
-- site : 公式サイト
-  - url : 公式サイトのURL
-  - text : リンクの表示名 (指定のない場合 `タグ名 - 公式サイト` となります)
-- document : 公式ドキュメント
-  - url : 公式ドキュメントのURL
-  - text : リンクの表示名 (指定のない場合 `タグ名 - 公式ドキュメント` となります)
-- github : GitHubのリポジトリ
-  - url : GitHubのリポジトリのURL
-  - text : リンクの表示名 (指定のない場合 `タグ名 - GitHub` となります)
+- links : 関連リンクの配列です。GitHubや公式ドキュメントなどを追加してください。
+  - URL
+  - リンクの表示テキスト
 
 Example: `src/content/tags/csharp.json`
 
@@ -94,16 +88,20 @@ Example: `src/content/tags/csharp.json`
   "name": "C#",
   "description": "C#は、最新のタイプ セーフなオブジェクト指向のプログラミング言語です。 開発者は C# を使用することにより、.NET で稼働する、安全かつ堅牢な多くの種類のアプリケーションを構築できます。",
   "image": "./csharp.svg",
-  "site": {
-    "url": "https://dotnet.microsoft.com/ja-jp/learn/dotnet/what-is-dotnet"
-  },
-  "document": {
-    "url": "https://learn.microsoft.com/ja-jp/dotnet/csharp/programming-guide/"
-  },
-  "github": {
-    "url": "https://github.com/dotnet/runtime",
-    "text": ".NET Runtime - GitHub"
-  }
+  "links": [
+    {
+      "url": "https://dotnet.microsoft.com/ja-jp/learn/dotnet/what-is-dotnet",
+      "text": "C# - 公式サイト"
+    },
+    {
+      "url": "https://learn.microsoft.com/ja-jp/dotnet/csharp/programming-guide/",
+      "text": "C# - 公式ドキュメント"
+    },
+    {
+      "url": "https://github.com/dotnet/runtime",
+      "text": ".NET Runtime - GitHub"
+    }
+  ]
 }
 ```
 
