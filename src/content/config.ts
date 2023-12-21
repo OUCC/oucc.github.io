@@ -13,6 +13,10 @@ const blogsCollection = defineCollection({
       }),
     author: reference('authors'),
     tags: z.array(reference('tags')),
+    keywords: z
+      .array(z.string().min(1))
+      .optional()
+      .transform((value) => value ?? []),
   }),
 })
 
@@ -57,6 +61,7 @@ const tagsCollection = defineCollection({
         )
         .default([]),
       image: image().optional(),
+      fullSizeImage: z.boolean().optional(),
     }),
 })
 

@@ -11,6 +11,7 @@
     "typecheck": "astro check && tsc --noEmit",
     "lint": "prettier --check .",
     "format": "prettier --write .",
+    "json-schema": "quicktype --src ./src/content/_schema.ts --lang schema --out ./src/content/_schema.json",
     "validate-blog": "ts-node --esm tools/validate-blog.ts",
     "update-blogmeta": "ts-node --esm tools/update-blogmeta.ts"
   },
@@ -30,6 +31,7 @@
   "devDependencies": {
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.2",
+    "quicktype": "^23.0.80",
     "schema-dts": "^1.1.2",
     "ts-node": "^10.9.2"
   }

@@ -22,7 +22,7 @@ const statistics = await getEntries([...(await getBlogStatistics(blog.slug))])
   title={blog.data.title}
   description={blog.data.description}
   image={`/blog/articles/${blog.slug}/ogp.png`}
-  keywords={tags.map((t) => t.data.name).join(',')}
+  keywords={[...tags.map((t) => t.data.name), ...blog.data.keywords].join(',')}
 >
   <main class="bg-dot bg-dot-secondary">
     <BlogContent blog={blog} />
