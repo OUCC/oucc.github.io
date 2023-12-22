@@ -1,0 +1,14 @@
+{
+  "name": "Typst",
+  "image": "./typst.png",
+  "links": [
+    {
+      "url": "https://typst.app",
+      "text": "Typst 公式サイト"
+    },
+    {
+      "url": "https://github.com/typst/typst",
+      "text": "Typst - GitHub"
+    }
+  ]
+}

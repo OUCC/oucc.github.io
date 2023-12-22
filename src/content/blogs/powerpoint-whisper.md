@@ -1,7 +1,7 @@
 ---
 title: PowerPointの音声ファイルをWhisperで文字起こししてみた
 description: PowerPointの音声ファイルをWhisperで文字起こししてみた
-tags: [csharp, whisper, open-xml, power-point, transcribe]
+tags: [advent-calendar, csharp, whisper, open-xml, power-point, transcribe]
 author: aiueo-1234
 ---
 これは、[OUCCアドベントカレンダー](https://adventar.org/calendars/9315)の22日目の記事です。Qiitaにもマルチ投稿しています。
