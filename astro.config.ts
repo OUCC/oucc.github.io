@@ -3,6 +3,7 @@ import { loadEnv } from 'vite'
 import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
 import mdx from '@astrojs/mdx'
+import remarkLinkCard from 'remark-link-card'
 
 const { SITE_URL } = loadEnv(process.env.NODE_ENV!, process.cwd(), '')
 
@@ -29,6 +30,9 @@ export default defineConfig({
   },
   prefetch: {
     prefetchAll: true,
+  },
+  markdown: {
+    remarkPlugins: [remarkLinkCard],
   },
   integrations: [tailwind(), sitemap(), mdx()],
 })
