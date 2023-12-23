@@ -13,10 +13,6 @@ const blogsCollection = defineCollection({
       }),
     author: reference('authors'),
     tags: z.array(reference('tags')),
-    keywords: z
-      .array(z.string().min(1))
-      .optional()
-      .transform((value) => value ?? []),
   }),
 })
 
