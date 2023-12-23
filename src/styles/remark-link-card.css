@@ -7,22 +7,13 @@
   color: black;
   text-decoration: none;
 
-  border: 1px solid black;
-  border-radius: 0.25rem;
+  border: 1px solid rgba(00, 00, 00, 0.2);
+  border-radius: 0.5rem;
   display: flex;
   align-items: stretch;
 
   text-decoration-line: none !important;
   color: black !important;
-
-  transition:
-    background 200ms ease-in-out 0s,
-    box-shadow 200ms ease-in-out 0s;
-}
-
-.rlc-container:hover {
-  background-color: rgba(80, 80, 80, 0.1);
-  box-shadow: 0 4px 5px 2px rgba(80, 80, 80, 0.2);
 }
 
 .rlc-info {
@@ -32,7 +23,7 @@
   text-align: left;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .rlc-title {
@@ -43,11 +34,7 @@
 }
 
 .rlc-description {
-  font-size: 0.875rem;
-  color: #333;
-  overflow: hidden;
-  line-height: 1rem;
-  height: 2rem;
+  display: none !important;
 }
 
 .rlc-url-container {
@@ -66,7 +53,7 @@
 }
 
 .rlc-url {
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -81,8 +68,8 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
-  border-bottom-right-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 
   /* tailwind cssのprose内で使う際にmarginがproseで設定されているので無効にする */
   margin-top: 0 !important;
