@@ -19,7 +19,7 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: dist/cache
           key: ${{ runner.os }}-astro-build-${{ github.event_name == 'pull_request' && github.event.pull_request.id || 'main' }}
