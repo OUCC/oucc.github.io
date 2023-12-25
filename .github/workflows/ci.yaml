@@ -48,8 +48,9 @@ jobs:
       - run: npm run typecheck
 
   validate-blog:
-    if: startsWith(github.head_ref, 'blog/') && !startsWith(github.head_ref, 'blog/admin/')
-    needs: [build, lint, typecheck]
+    if: startsWith(github.head_ref, 'blog/') && !startsWith(github.head_ref, 'blog/admin/') && github.actor != 'github-actions[bot]'
+    # Lintは環境構築していない人のことを考えてCIで行う
+    needs: [typecheck, build]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -68,10 +69,16 @@ jobs:
       contents: write
     runs-on: ubuntu-22.04
     steps:
+      - uses: actions/create-github-app-token@v1
+        id: generate-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
       - uses: actions/checkout@v4
         # Checkout pull request HEAD commit instead of merge commit
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ steps.generate-token.outputs.token }}
       - uses: actions/setup-node@v3
         with:
           node-version-file: .node-version
@@ -81,6 +88,7 @@ jobs:
         run: |
           git fetch origin main
           git diff origin/main..HEAD --name-status | xargs npm run update-blogmeta --
+      - run: npm run format
       - name: Git Commit
         run: |
           git add -N .
