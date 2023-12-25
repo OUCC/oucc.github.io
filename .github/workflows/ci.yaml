@@ -49,6 +49,8 @@ jobs:
 
   validate-blog:
     if: startsWith(github.head_ref, 'blog/') && !startsWith(github.head_ref, 'blog/admin/') && github.actor != 'github-actions[bot]'
+    # Lintは環境構築していない人のことを考えてCIで行う
+    needs: [typecheck, build]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -86,7 +88,6 @@ jobs:
         run: |
           git fetch origin main
           git diff origin/main..HEAD --name-status | xargs npm run update-blogmeta --
-      - run: npm run build
       - run: npm run format
       - name: Git Commit
         run: |
