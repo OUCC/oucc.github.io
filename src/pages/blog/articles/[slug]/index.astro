@@ -4,6 +4,7 @@ import RelatedBlogSection from '@/components/blog/RelatedBlogSection.astro'
 import BlogLayout from '@/layouts/BlogLayout.astro'
 import { getBlogStatistics } from '@/content/_blog-statistics'
 import { getCollection, getEntries } from 'astro:content'
+import { getOgpPath } from './ogp.png'
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blogs')
@@ -16,12 +17,13 @@ export async function getStaticPaths() {
 const { blog } = Astro.props
 const tags = await getEntries(blog.data.tags)
 const statistics = await getEntries([...(await getBlogStatistics(blog.slug))])
+const ogpPath = await getOgpPath(blog)
 ---
 
 <BlogLayout
   title={blog.data.title}
   description={blog.data.description}
-  image={`/blog/articles/${blog.slug}/ogp.png`}
+  image={ogpPath}
   keywords={tags.map((t) => t.data.name).join(',')}
 >
   <main class="bg-dot bg-dot-secondary">

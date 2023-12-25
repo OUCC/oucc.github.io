@@ -3,6 +3,7 @@ import oucc from '@/assets/oucc.svg?raw'
 import fs from 'node:fs/promises'
 import sharp from 'sharp'
 import { lazy } from '@/utils/lazy'
+import { shorthash } from 'astro/runtime/server/shorthash.js'
 
 const fonts = lazy<Font[]>(() =>
   Promise.all(
@@ -32,6 +33,51 @@ const fonts = lazy<Font[]>(() =>
 const ouccLogo = lazy(async () =>
   (await sharp(Buffer.from(oucc)).png().toBuffer()).toString('base64'),
 )
+
+/** OGPが生成済みか判定します。生成されていなければOGPファイルを生成します。 */
+export async function existsOgp(slug: string, title: string, author: string) {
+  const filePath = `src/content/ogp-cache/${getOgpFileName(
+    slug,
+    title,
+    author,
+  )}.png`
+
+  if (
+    await fs
+      .access(filePath)
+      .then(() => true)
+      .catch(() => false)
+  ) {
+    return true
+  }
+
+  const ogp = await createOgImage(title, author)
+
+  await fs.writeFile(filePath, ogp)
+  return false
+}
+
+/** 指定したファイル以外のOGPファイルキャッシュを削除します */
+export async function cleanUpCache(fileNames: string[]) {
+  const files = await fs.readdir('src/content/ogp-cache')
+  await Promise.all(
+    files
+      .filter((file) => !fileNames.includes(file))
+      .map((file) => fs.rm(`src/content/ogp-cache/${file}`)),
+  )
+}
+
+/** OGPのキャシュファイル名 */
+export function getOgpFileName(slug: string, title: string, author: string) {
+  const hash = shorthash(
+    JSON.stringify({
+      version: 1, // スキーマを変えたときに更新する
+      title,
+      author,
+    }),
+  )
+  return `${slug}.${hash}`
+}
 
 export async function createOgImage(title: string, author: string) {
   const svg = await satori(
