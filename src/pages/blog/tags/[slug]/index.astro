@@ -37,7 +37,7 @@ const isShowAbout = tag.description || tag.links.length > 0
   summarySize="summary"
 >
   <BlogTitle title={tag.name} background="white">
-    <TagIcon slot="icon" tag={tag} size={80} />
+    <TagIcon slot="icon" tag={tag} size={tag.fullSizeImage ? 93 : 80} />
   </BlogTitle>
   <main class="flex flex-col h-full">
     {isShowAbout && <TagAboutSection tag={tag} />}

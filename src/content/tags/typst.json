@@ -1,6 +1,7 @@
 {
   "name": "Typst",
   "image": "./typst.png",
+  "fullSizeImage": true,
   "links": [
     {
       "url": "https://typst.app",
