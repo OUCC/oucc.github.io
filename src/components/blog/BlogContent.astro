@@ -3,6 +3,7 @@ import { getEntries, type CollectionEntry, getEntry } from 'astro:content'
 import TagSmallList from './tag/TagSmallList.astro'
 import AuthorIcon from './icon/AuthorIcon.astro'
 import { formatDate } from '@/utils/format-date'
+import '@/styles/remark-link-card.css'
 interface Props {
   blog: CollectionEntry<'blogs'>
 }
