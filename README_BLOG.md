@@ -77,7 +77,7 @@ Example: `src/content/authors/octocat.json`
 - name : タグの表示名（必須）
 - description : タグの説明
 - image : アイコンの画像ファイル（詳細は後述）
-- fullSizeImage : 背景全てに色がついている場合にしてください。アイコンとして表示されるときに円形に切り取られます。
+- fullSizeImage : `image`で指定した画像の背景が透過されていない場合は`true`を指定してください。画像が円形に切り取られます。
 - links : 関連リンクの配列です。GitHubや公式ドキュメントなどを追加してください。
   - URL
   - リンクの表示テキスト
