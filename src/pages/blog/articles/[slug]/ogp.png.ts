@@ -1,15 +1,14 @@
 import {
-  cleanUpCache,
   createOgImage,
-  existsOgp,
   getOgpFileName,
 } from '@/pages/blog/articles/[slug]/_OgImageGenerator'
+import fs from 'fs/promises'
 import { getImageWithSvgConvert } from '@/utils/getImageWithSvgConvert'
 import { lazy } from '@/utils/lazy'
 import type { APIContext } from 'astro'
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content'
 
-const ogpHits = lazy(async () => {
+const ogpCacheHits = lazy(async () => {
   const blogs = await Promise.all(
     (await getCollection('blogs')).map(async (blog) => ({
       ...blog,
@@ -19,37 +18,55 @@ const ogpHits = lazy(async () => {
       },
     })),
   )
-
-  await cleanUpCache(
-    blogs.map(
-      (blog) =>
-        `${getOgpFileName(
+  const targetFileNames = blogs.map(
+    (blog) =>
+      ({
+        file: `${getOgpFileName(
           blog.slug,
           blog.data.title,
           blog.data.author.data.name,
         )}.png`,
-    ),
+        slug: blog.slug,
+        title: blog.data.title,
+        author: blog.data.author.data.name,
+      }) as const,
   )
 
-  return Object.fromEntries(
-    await Promise.all(
-      blogs.map(async (blog) => {
-        return [
-          blog.slug,
-          await existsOgp(
-            blog.slug,
-            blog.data.title,
-            blog.data.author.data.name,
-          ),
-        ] as const
-      }),
+  const existingFileNames = await fs
+    .readdir('src/content/ogp-cache')
+    .catch(async () => {
+      await fs.mkdir('src/content/ogp-cache')
+      return [] as string[]
+    })
+
+  const clearTarget = existingFileNames.filter((fileName) =>
+    targetFileNames.every(({ file }) => file !== fileName),
+  )
+
+  const hitList = Object.fromEntries(
+    targetFileNames.map(
+      ({ slug, file }) => [slug, existingFileNames.includes(file)] as const,
     ),
   ) as Record<CollectionEntry<'blogs'>['slug'], boolean>
+  const addTarget = targetFileNames.filter(({ slug }) => !hitList[slug])
+
+  await Promise.all(
+    clearTarget
+      .map((file) => fs.rm(`src/content/ogp-cache/${file}`))
+      .concat(
+        addTarget.map(async ({ file, title, author }): Promise<void> => {
+          const ogp = await createOgImage(title, author)
+          await fs.writeFile(`src/content/ogp-cache/${file}`, ogp)
+        }),
+      ),
+  )
+
+  return hitList
 })
 
 export async function getStaticPaths() {
   const posts = await getCollection('blogs')
-  const hits = await ogpHits()
+  const hits = await ogpCacheHits()
 
   return posts
     .filter((blog) => !hits[blog.slug])
@@ -60,7 +77,7 @@ export async function getStaticPaths() {
 }
 
 export async function getOgpPath(blog: CollectionEntry<'blogs'>) {
-  const exists = (await ogpHits())[blog.slug]
+  const exists = (await ogpCacheHits())[blog.slug]
 
   if (exists) {
     const author = await getEntry(blog.data.author)
