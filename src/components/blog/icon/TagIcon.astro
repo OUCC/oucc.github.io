@@ -14,7 +14,12 @@ const { tag, size } = Astro.props
 <Image
   src={tag.image ?? defaultImage}
   alt={`${tag.name} のアイコン`}
-  class="aspect-square"
+  class:list={[
+    'aspect-square',
+    {
+      'rounded-full': tag.fullSizeImage,
+    },
+  ]}
   width={size}
   height={size}
 />

@@ -14,7 +14,6 @@ export async function getStaticPaths() {
 }
 
 const { blog } = Astro.props
-const tags = await getEntries(blog.data.tags)
 const statistics = await getEntries([...(await getBlogStatistics(blog.slug))])
 ---
 
@@ -22,7 +21,6 @@ const statistics = await getEntries([...(await getBlogStatistics(blog.slug))])
   title={blog.data.title}
   description={blog.data.description}
   image={`/blog/articles/${blog.slug}/ogp.png`}
-  keywords={tags.map((t) => t.data.name).join(',')}
 >
   <main class="bg-dot bg-dot-secondary">
     <BlogContent blog={blog} />

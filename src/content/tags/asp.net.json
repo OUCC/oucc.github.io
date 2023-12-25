@@ -1,6 +1,7 @@
 {
   "name": "ASP.NET Core",
   "image": "./dotnet.svg",
+  "fullSizeImage": true,
   "links": [
     {
       "url": "https://github.com/dotnet/aspnetcore",

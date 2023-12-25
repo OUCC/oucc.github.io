@@ -57,6 +57,7 @@ const tagsCollection = defineCollection({
         )
         .default([]),
       image: image().optional(),
+      fullSizeImage: z.boolean().optional(),
     }),
 })
 

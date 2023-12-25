@@ -49,5 +49,15 @@
     "editor.formatOnPaste": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "prettier.documentSelectors": ["**/*.astro"]
+  "prettier.documentSelectors": ["**/*.astro"],
+  "json.schemas": [
+    {
+      "fileMatch": ["/src/content/authors/*.json"],
+      "url": "/src/content/_AuthorSchema.json"
+    },
+    {
+      "fileMatch": ["/src/content/tags/*.json"],
+      "url": "/src/content/_TagSchema.json"
+    }
+  ]
 }
