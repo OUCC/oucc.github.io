@@ -53,13 +53,18 @@ export async function existsOgp(slug: string, title: string, author: string) {
 
   const ogp = await createOgImage(title, author)
 
-  await fs.writeFile(filePath, ogp)
+  try {
+    await fs.writeFile(filePath, ogp)
+  } catch {
+    await fs.mkdir('src/content/ogp-cache')
+    await fs.writeFile(filePath, ogp)
+  }
   return false
 }
 
 /** 指定したファイル以外のOGPファイルキャッシュを削除します */
 export async function cleanUpCache(fileNames: string[]) {
-  const files = await fs.readdir('src/content/ogp-cache')
+  const files = await fs.readdir('src/content/ogp-cache').catch(() => [])
   await Promise.all(
     files
       .filter((file) => !fileNames.includes(file))
