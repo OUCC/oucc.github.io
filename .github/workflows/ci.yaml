@@ -99,7 +99,7 @@ jobs:
             git commit -m "[Bot] Update Blog Meta"
             git push
           fi
-    
+
   deploy:
     if: github.ref == 'refs/heads/main'
     needs: [build, lint, typecheck]
