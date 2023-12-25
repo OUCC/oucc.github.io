@@ -1,40 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "BlogSchema": {
-      "title": "BlogSchema",
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string",
-          "title": "title"
-        },
-        "description": {
-          "type": "string",
-          "title": "description"
-        },
-        "author": {
-          "type": "string",
-          "title": "author"
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "tags"
-        },
-        "keywords": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "keywords"
-        }
-      },
-      "additionalProperties": false,
-      "required": ["author", "description", "keywords", "tags", "title"]
-    },
     "AuthorSchema": {
       "title": "AuthorSchema",
       "type": "object",
