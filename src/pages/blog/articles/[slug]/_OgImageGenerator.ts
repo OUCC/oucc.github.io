@@ -3,7 +3,6 @@ import oucc from '@/assets/oucc.svg?raw'
 import fs from 'node:fs/promises'
 import sharp from 'sharp'
 import { lazy } from '@/utils/lazy'
-import { shorthash } from 'astro/runtime/server/shorthash.js'
 
 const fonts = lazy<Font[]>(() =>
   Promise.all(
@@ -33,18 +32,6 @@ const fonts = lazy<Font[]>(() =>
 const ouccLogo = lazy(async () =>
   (await sharp(Buffer.from(oucc)).png().toBuffer()).toString('base64'),
 )
-
-/** OGPのキャシュファイル名 */
-export function getOgpFileName(slug: string, title: string, author: string) {
-  const hash = shorthash(
-    JSON.stringify({
-      version: 1, // スキーマを変えたときに更新する
-      title,
-      author,
-    }),
-  )
-  return `${slug}.${hash}`
-}
 
 export async function createOgImage(title: string, author: string) {
   const svg = await satori(
