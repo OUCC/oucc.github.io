@@ -67,13 +67,25 @@ function validateArgs(gitDiffs: string[][]): FileStatus[] | null {
  * blog meta のファイルの日付を更新します
  */
 function updateBlogMeta(gitDiffs: readonly FileStatus[]) {
-  const targetFiles = gitDiffs
-    .map(([status, filePath, toPath]) =>
-      toPath === undefined
-        ? ([status, path.parse(filePath)] as const)
-        : ([status, path.parse(toPath)] as const),
-    )
-    .filter(predicateTargetFiles)
+  // 重複削除
+  const updatedNames = Array.from(
+    new Set(
+      gitDiffs
+        .map(([status, filePath, toPath]) =>
+          toPath === undefined
+            ? ([status, path.parse(filePath)] as const)
+            : ([status, path.parse(toPath)] as const),
+        )
+        .filter(predicateTargetFiles)
+        .map(
+          ([_, { dir, name, ext }]) =>
+            ext === '.md' || ext === '.mdx'
+              ? name
+              : dir.slice('src/content/blogs/'.length).split('/')[0]!, // 画像ファイルのとき
+        ),
+    ),
+  )
+
   const updatedMetas = gitDiffs
     .map(([status, filePath, toPath]) => [status, toPath ?? filePath] as const)
     .filter(([status, filePath]) => {
@@ -83,12 +95,7 @@ function updateBlogMeta(gitDiffs: readonly FileStatus[]) {
       )
     })
 
-  for (const [_, { dir, name, ext }] of targetFiles) {
-    const updatedName =
-      ext === '.md' || ext === '.mdx'
-        ? name
-        : dir.slice('src/content/blogs/'.length).split('/')[0]!
-
+  for (const updatedName of updatedNames) {
     const blogMetaPath = `src/content/blog-metas/${updatedName}.json`
 
     let meta: BlogMeta | null = null
