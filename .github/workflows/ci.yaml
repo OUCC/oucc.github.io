@@ -54,7 +54,7 @@ jobs:
       - run: npm run typecheck
 
   validate-blog:
-    if: startsWith(github.head_ref, 'blog/') && !startsWith(github.head_ref, 'blog/admin/') && github.actor != 'github-actions[bot]'
+    if: startsWith(github.head_ref, 'blog/') && !startsWith(github.head_ref, 'blog/admin/') && github.actor != 'oucc-blog-ci[bot]'
     # Lintは環境構築していない人のことを考えてCIで行う
     needs: [typecheck, build]
     runs-on: ubuntu-22.04
