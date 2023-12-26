@@ -11,13 +11,13 @@ const { title, copy, compact = false } = Astro.props
 ---
 
 <section class:list={[{ 'h-64': !compact }, 'relative']}>
-  <div class="absolute w-full h-full inset-0 bg-slate-600">
+  <div class="absolute inset-0 h-full w-full bg-slate-600">
     <HeroSlideshow />
   </div>
-  <div class="absolute w-full h-full inset-0 bg-[#00000099]"></div>
-  <div class="isolate h-full p-5 flex justify-center">
+  <div class="absolute inset-0 h-full w-full bg-[#00000099]"></div>
+  <div class="isolate flex h-full justify-center p-5">
     <div
-      class="w-full max-w-container flex flex-col justify-end gap-2 text-white"
+      class="flex w-full max-w-container flex-col justify-end gap-2 text-white"
     >
       <h1 class="text-6xl font-extrabold drop-shadow-[4px_4px_0_#1a2872]">
         <span>{title}</span>

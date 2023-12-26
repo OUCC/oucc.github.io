@@ -10,7 +10,7 @@ const { variant = 'primary', ...attrs } = Astro.props
 
 <a
   class:list={[
-    'px-5 py-2.5 rounded-full font-bold',
+    'rounded-full px-5 py-2.5 font-bold',
     {
       'bg-primary text-white drop-shadow-primary-light hover:drop-shadow-primary-heavy':
         variant === 'primary',
@@ -24,7 +24,7 @@ const { variant = 'primary', ...attrs } = Astro.props
         variant === 'peing',
     },
     'active:drop-shadow-none',
-    'active:translate-y-1 transition-[filter,transform] ease-in-out',
+    'transition-[filter,transform] ease-in-out active:translate-y-1',
     attrs.class,
   ]}
   {...attrs}

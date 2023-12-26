@@ -13,15 +13,15 @@ const navList: { target: string; title: string }[] = [
 ]
 ---
 
-<div class="flex text-lg px-9 pt-1 gap-3 flex-nowrap">
+<div class="flex flex-nowrap gap-3 px-9 pt-1 text-lg">
   {
     navList.map(({ target, title }) => (
       <a
         href={target}
         class:list={[
-          'text-gray-700 hover:text-black whitespace-nowrap',
+          'whitespace-nowrap text-gray-700 hover:text-black',
           {
-            'after:block after:bg-primary after:h-1 after:rounded-t-lg':
+            'after:block after:h-1 after:rounded-t-lg after:bg-primary':
               current === target || current === target + '/',
             'pb-1': current !== target && current !== target + '/',
           },

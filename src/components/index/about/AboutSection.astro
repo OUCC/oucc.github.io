@@ -41,16 +41,16 @@ const items: Item[] = [
     <span class="inline-block">OUCCって</span>
     <span class="inline-block">どんなサークル？</span>
   </Fragment>
-  <ul class="flex flex-col items-center md:flex-row md:items-stretch gap-5">
+  <ul class="flex flex-col items-center gap-5 md:flex-row md:items-stretch">
     {
       items.map(({ icon, description }) => (
-        <li class="flex-1 max-w-[32rem] flex items-stretch">
+        <li class="flex max-w-[32rem] flex-1 items-stretch">
           <AboutCard>
             <Fragment slot="icon">
               {typeof icon === 'string' ? (
-                <Icon name={icon} alt="" class="w-20 h-20 align-top" />
+                <Icon name={icon} alt="" class="h-20 w-20 align-top" />
               ) : (
-                <Image src={icon} alt="" class="w-20 h-20 object-contain" />
+                <Image src={icon} alt="" class="h-20 w-20 object-contain" />
               )}
             </Fragment>
             {description.map((x) => (

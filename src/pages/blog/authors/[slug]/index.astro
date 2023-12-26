@@ -47,7 +47,7 @@ const isShowAboutSection = author.data.description || author.data.github
     </Fragment>
   </BlogTitle>
   {isShowAboutSection && <AuthorAboutSection author={author.data} />}
-  <main class="flex flex-col h-full">
+  <main class="flex h-full flex-col">
     <BlogListSection
       title={`${author.data.name} さんの投稿した記事`}
       blogs={blogEntries.filter((b) => b.data.author.id === author.id)}

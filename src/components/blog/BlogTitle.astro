@@ -9,7 +9,7 @@ const { title, background } = Astro.props
 
 <h1
   class:list={[
-    'py-6 text-6xl flex justify-center items-center gap-x-5 bg-dot',
+    'bg-dot flex items-center justify-center gap-x-5 py-6 text-6xl',
     {
       'bg-dot-white': background === 'white',
       'bg-dot-primary': background === 'primary',
@@ -19,7 +19,7 @@ const { title, background } = Astro.props
 >
   {
     Astro.slots.has('icon') && (
-      <div class="bg-white rounded-full aspect-square h-[95px] flex justify-center items-center bg-none border">
+      <div class="flex aspect-square h-[95px] items-center justify-center rounded-full border bg-white bg-none">
         <slot name="icon" />
       </div>
     )
