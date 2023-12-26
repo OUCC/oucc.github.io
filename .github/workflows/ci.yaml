@@ -21,9 +21,7 @@ jobs:
       - run: npm ci
       - uses: actions/cache@v3
         with:
-          path: |
-            dist/cache
-            src/content/ogp-cache
+          path: dist/cache
           key: ${{ runner.os }}-astro-build-${{ github.event_name == 'pull_request' && github.event.pull_request.id || 'main' }}
           restore-keys: ${{ runner.os }}-astro-build-
       - run: npm run build

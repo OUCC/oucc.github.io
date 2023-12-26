@@ -33,9 +33,9 @@ const ogpCacheHits = lazy(async () => {
   )
 
   const existingFileNames = await fs
-    .readdir('src/content/ogp-cache')
+    .readdir('dist/cache/article-ogps')
     .catch(async () => {
-      await fs.mkdir('src/content/ogp-cache')
+      await fs.mkdir('dist/cache/article-ogps')
       return [] as string[]
     })
 
@@ -52,11 +52,11 @@ const ogpCacheHits = lazy(async () => {
 
   await Promise.all(
     clearTarget
-      .map((file) => fs.rm(`src/content/ogp-cache/${file}`))
+      .map((file) => fs.rm(`dist/cache/article-ogps/${file}`))
       .concat(
         addTarget.map(async ({ file, title, author }): Promise<void> => {
           const ogp = await createOgImage(title, author)
-          await fs.writeFile(`src/content/ogp-cache/${file}`, ogp)
+          await fs.writeFile(`dist/cache/article-ogps/${file}`, ogp)
         }),
       ),
   )
@@ -89,8 +89,11 @@ export async function getOgpPath(blog: CollectionEntry<'blogs'>) {
 
     return (
       await getImageWithSvgConvert({
-        src: (await import(`../../../../content/ogp-cache/${ogpFilename}.png`))
-          .default,
+        src: (
+          await import(
+            `../../../../../dist/cache/article-ogps/${ogpFilename}.png`
+          )
+        ).default,
         format: 'png',
       })
     ).src
