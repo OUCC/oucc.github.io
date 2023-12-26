@@ -18,22 +18,22 @@ const author = await getEntry(blog.data.author)
 const { Content } = await blog.render()
 ---
 
-<div class="py-4 flex flex-col items-center">
-  <h1 class="text-3xl md:text-4xl font-bold p-3 text-center">
+<div class="flex flex-col items-center py-4">
+  <h1 class="p-3 text-center text-3xl font-bold md:text-4xl">
     {blog.data.title}
   </h1>
   <article
-    class="w-full max-w-padded-container bg-white md:rounded-2xl p-4 my-10"
+    class="my-10 w-full max-w-padded-container bg-white p-4 md:rounded-2xl"
   >
-    <div class="p-1 text-lg mb-1">
+    <div class="mb-1 p-1 text-lg">
       <a
-        class="hover:underline flex gap-2 items-center"
+        class="flex items-center gap-2 hover:underline"
         href={`/blog/authors/${author.id}`}
         ><AuthorIcon {...author.data} size={28} />{author.data.name}</a
       >
     </div>
     <TagSmallList tags={tags} />
-    <div class="text-sm text-gray-700 flex gap-3 p-2">
+    <div class="flex gap-3 p-2 text-sm text-gray-700">
       {
         blogMeta.updateDate && (
           <div>
@@ -50,7 +50,7 @@ const { Content } = await blog.render()
         >
       </div>
     </div>
-    <div class="w-full max-w-none pt-6 prose break-words">
+    <div class="prose w-full max-w-none break-words pt-6">
       <Content />
     </div>
   </article>
@@ -62,7 +62,7 @@ const { Content } = await blog.render()
 
   @layer components {
     .prose code:not(pre > *) {
-      @apply bg-gray-200 rounded px-1 font-normal;
+      @apply rounded bg-gray-200 px-1 font-normal;
     }
     .prose code:not(pre > *)::after {
       @apply content-none;
@@ -79,7 +79,7 @@ const { Content } = await blog.render()
     }
 
     .prose > table {
-      @apply block overflow-x-auto w-full whitespace-nowrap px-2;
+      @apply block w-full overflow-x-auto whitespace-nowrap px-2;
     }
   }
 </style>

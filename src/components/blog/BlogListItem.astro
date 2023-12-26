@@ -14,16 +14,16 @@ const author = await getEntry(blog.author)
 const tags = await getEntries(blog.tags)
 ---
 
-<li class="block bg-white rounded-xl p-5 border space-y-1">
+<li class="block space-y-1 rounded-xl border bg-white p-5">
   <a href={`/blog/articles/${slug}`}>
-    <h2 class="px-2 text-xl font-bold line-clamp-2 hover:underline">
+    <h2 class="line-clamp-2 px-2 text-xl font-bold hover:underline">
       {blog.title}
     </h2>
   </a>
   <TagSmallList tags={tags} />
-  <div class="px-2 flex gap-3 text-gray-600">
+  <div class="flex gap-3 px-2 text-gray-600">
     <div class="hover:underline">
-      <a href={`/blog/authors/${author.id}`} class="flex gap-2 items-center"
+      <a href={`/blog/authors/${author.id}`} class="flex items-center gap-2"
         ><AuthorIcon {...author.data} size={22} />{author.data.name}</a
       >
     </div>

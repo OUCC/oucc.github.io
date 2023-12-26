@@ -4,12 +4,12 @@ import ouccImage from '@/assets/oucc.svg'
 import FooterLink from './FooterLink.astro'
 ---
 
-<footer class="py-8 flex flex-wrap justify-center items-center gap-8">
-  <div class="px-4 flex flex-wrap justify-center items-center gap-4">
+<footer class="flex flex-wrap items-center justify-center gap-8 py-8">
+  <div class="flex flex-wrap items-center justify-center gap-4 px-4">
     <Image src={ouccImage} alt="OUCC" class="w-12" />
     <span class="text-sm">© 2023 大阪大学コンピュータクラブ</span>
   </div>
-  <div class="px-4 flex flex-wrap justify-center items-center gap-4">
+  <div class="flex flex-wrap items-center justify-center gap-4 px-4">
     <FooterLink to="/oucc-rules.pdf">規約</FooterLink>
     <FooterLink to="/privacy">プライバシーポリシー</FooterLink>
   </div>

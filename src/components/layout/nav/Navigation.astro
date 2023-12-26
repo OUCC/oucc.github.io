@@ -5,9 +5,9 @@ import NavigationListItem from './NavigationListItem.astro'
 import DrWani from './DrWani.astro'
 ---
 
-<nav class="w-full h-full bg-white flex flex-col">
-  <div class="py-2 flex justify-center">
-    <Image src={ouccImage} alt="OUCC" class="w-20 h-20 object-contain" />
+<nav class="flex h-full w-full flex-col bg-white">
+  <div class="flex justify-center py-2">
+    <Image src={ouccImage} alt="OUCC" class="h-20 w-20 object-contain" />
   </div>
   <ul class="flex flex-col text-center">
     <NavigationListItem to="/">トップページ</NavigationListItem>
@@ -21,13 +21,13 @@ import DrWani from './DrWani.astro'
       X (旧Twitter)
     </NavigationListItem>
   </ul>
-  <div class="grow relative [container-type:size]">
+  <div class="relative grow [container-type:size]">
     <div
       class:list={[
-        'absolute w-full h-full overflow-hidden flex items-end justify-center',
+        'absolute flex h-full w-full items-end justify-center overflow-hidden',
         // <DrWani>の高さが145pxなので、コンテナの高さが145px未満の場合は表示しない
         'invisible [@container(min-height:145px)]:visible',
-        'opacity-0 [@container(min-height:145px)]:opacity-100 transition-[visibility,opacity]',
+        'opacity-0 transition-[visibility,opacity] [@container(min-height:145px)]:opacity-100',
       ]}
     >
       <DrWani />

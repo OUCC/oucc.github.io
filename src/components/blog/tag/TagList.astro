@@ -9,7 +9,7 @@ interface Props {
 const { tags } = Astro.props
 ---
 
-<ul class="flex sm:flex-row flex-col flex-wrap gap-3">
+<ul class="flex flex-col flex-wrap gap-3 sm:flex-row">
   {
     tags.map((tag) => (
       <TagListItemCard
