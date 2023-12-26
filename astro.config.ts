@@ -28,6 +28,8 @@ export default defineConfig({
     '/group/handaitaisen/handai_taisen.html': '/',
     '/blog/articles': '/blog',
   },
+  outDir: './dist/out',
+  cacheDir: './dist/cache',
   prefetch: {
     prefetchAll: true,
   },

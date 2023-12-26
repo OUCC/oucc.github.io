@@ -19,10 +19,16 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - uses: actions/cache@v3
+        with:
+          path: dist/cache
+          key: ${{ runner.os }}-astro-build-${{ github.event_name == 'pull_request' && github.event.pull_request.id || 'main' }}
+          restore-keys: ${{ runner.os }}-astro-build-
       - run: npm run build
       - uses: actions/upload-pages-artifact@v1
+        if: github.ref == 'refs/heads/main'
         with:
-          path: dist
+          path: dist/out
           retention-days: 90
 
   lint:
