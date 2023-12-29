@@ -1,0 +1,48 @@
+---
+interface Props {
+  current: Item['path']
+}
+
+interface Item {
+  path: '/blog/' | '/blog/tags/'
+  text: string
+}
+
+const items: Item[] = [
+  {
+    path: '/blog/',
+    text: 'ブログ一覧',
+  },
+  {
+    path: '/blog/tags/',
+    text: 'タグ一覧',
+  },
+]
+
+const { current } = Astro.props
+---
+
+<div class="bg-dot bg-dot-white flex justify-center">
+  <div class="w-full max-w-padded-container">
+    <ul class="flex gap-2 px-8 pt-3">
+      {
+        items.map((item) => (
+          <li class:list={[]}>
+            <a
+              class:list={[
+                'whitespace-nowrap rounded-t-xl border-x-2 border-t-2 border-secondary px-2 py-1',
+                {
+                  'bg-white': item.path !== current,
+                  'bg-secondary': item.path === current,
+                },
+              ]}
+              href={item.path}
+            >
+              {item.text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

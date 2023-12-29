@@ -2,7 +2,9 @@
 import BlogLayout from '@/layouts/BlogLayout.astro'
 import { getCollection } from 'astro:content'
 import { getTagStatistics } from '@/content/_blog-statistics'
-import TagListSection from '@/components/blog/tag/TagListSection.astro'
+import TagSearchSection from '@/components/blog/tag/TagSearchSection'
+import { getClientTag } from '@/content/config'
+import ListViewTab from '@/components/blog/ListViewTab.astro'
 
 const tagEntries = await getCollection('tags')
 const statistics = await getTagStatistics()
@@ -28,7 +30,14 @@ tags.sort((tag1, tag2) =>
 ---
 
 <BlogLayout title="タグ一覧" description="ブログのタグ一覧です。">
+  <ListViewTab current="/blog/tags/" />
   <main class="flex h-full flex-col">
-    <TagListSection title="タグ一覧" tags={tags} />
+    <TagSearchSection
+      tags={tags.map((tag) => ({
+        ...getClientTag(tag),
+        articleCount: tag.articleCount,
+      }))}
+      client:load
+    />
   </main>
 </BlogLayout>

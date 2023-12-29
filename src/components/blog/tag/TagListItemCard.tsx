@@ -1,0 +1,22 @@
+import TagIcon from '../icon/TagIcon.preact'
+import type { TagSearchObj } from './TagSearchSection'
+
+export default function TagListItemCard({
+  id,
+  articleCount,
+  ...tag
+}: TagSearchObj) {
+  return (
+    <li class="group block space-y-1 rounded-xl border bg-white sm:basis-[calc((100%-0.75rem)/2)]">
+      <a class="flex h-full w-full items-center p-4" href={`/blog/tags/${id}`}>
+        <TagIcon tag={tag} size={40} />
+        <div class="px-2">
+          <h2 class="line-clamp-1 text-xl font-bold group-hover:underline">
+            {tag.name}
+          </h2>
+          <p class="text-sm text-gray-600">記事数 : {articleCount}</p>
+        </div>
+      </a>
+    </li>
+  )
+}

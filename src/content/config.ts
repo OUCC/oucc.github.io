@@ -1,4 +1,10 @@
-import { z, defineCollection, reference } from 'astro:content'
+import {
+  z,
+  defineCollection,
+  reference,
+  type CollectionEntry,
+} from 'astro:content'
+import defaultTagImage from '@/assets/hashtag.svg'
 
 const blogsCollection = defineCollection({
   type: 'content',
@@ -41,6 +47,17 @@ const authorsCollection = defineCollection({
       image: image().optional(),
     }),
 })
+
+export type ClientTag = ReturnType<typeof getClientTag>
+
+/** クライアントで使用するタグオブジェクトを取得します */
+export function getClientTag(tag: CollectionEntry<'tags'>) {
+  return {
+    id: tag.id,
+    ...tag.data,
+    image: tag.data.image?.src ?? defaultTagImage.src,
+  }
+}
 
 const tagsCollection = defineCollection({
   type: 'data',

@@ -2,12 +2,14 @@
 import BlogLayout from '@/layouts/BlogLayout.astro'
 import { getCollection } from 'astro:content'
 import BlogListSection from '@/components/blog/BlogListSection.astro'
+import ListViewTab from '@/components/blog/ListViewTab.astro'
 
 const blogEntries = await getCollection('blogs')
 ---
 
 <BlogLayout title="記事一覧" description="メンバーのブログです。">
+  <ListViewTab current="/blog/" />
   <main class="flex h-full flex-col">
-    <BlogListSection title="最新の記事一覧" blogs={blogEntries} />
+    <BlogListSection blogs={blogEntries} />
   </main>
 </BlogLayout>
