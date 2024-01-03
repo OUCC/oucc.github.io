@@ -26,7 +26,7 @@ export default function Icon({
 }: Props) {
   return (
     <span
-      role="img"
+      aria-role="img"
       aria-label={alt}
       class={`inline-block bg-current [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain] ${
         className ?? ''
