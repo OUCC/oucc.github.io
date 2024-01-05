@@ -1,15 +1,18 @@
 ---
+import { formatUrl } from '@/utils/validateUrl'
 interface Props {
   to: string
   targetBlank?: boolean
 }
 
 const { to, targetBlank } = Astro.props
+
+const formattedTo = formatUrl(to)
 ---
 
 <li class="border-t last:border-b">
   <a
-    href={to}
+    href={formattedTo}
     target={targetBlank ? '_blank' : undefined}
     class:list={[
       'block bg-white p-4 font-bold',

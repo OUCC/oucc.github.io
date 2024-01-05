@@ -1,6 +1,7 @@
 ---
 import { BlogCategoryMapping } from '@/content/config'
 
+import { validateUrl } from '@/utils/validateUrl'
 const current = Astro.url.pathname
 
 const navList = [
@@ -20,6 +21,8 @@ const navList = [
     isHere: '/blog/tags/' === current,
   },
 ] as const satisfies { target: string; title: string; isHere: boolean }[]
+
+for (const { target } of navList) validateUrl(target)
 ---
 
 <div class="flex flex-nowrap gap-3 px-9 font-sans text-lg font-medium">

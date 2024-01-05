@@ -4,6 +4,7 @@ import Image from '@/components/common/Image.astro'
 import ouccImage from '@/assets/oucc.svg'
 import LinkButton from '@/components/common/button/LinkButton.astro'
 import Navigation from './Navigation.astro'
+import { formatUrl } from '@/utils/validateUrl'
 
 interface Props {
   showJoinLink?: boolean
@@ -18,6 +19,8 @@ const {
   rootPath = '/',
   headerTitle,
 } = Astro.props
+
+const formattedRootPath = formatUrl(rootPath)
 ---
 
 <header
@@ -39,7 +42,7 @@ const {
         class="w-5"
       />
     </button>
-    <a href={rootPath} class="flex basis-0 items-center">
+    <a href={formattedRootPath} class="flex basis-0 items-center">
       <span class="aspect-square h-full">
         <Image
           src={ouccImage}
