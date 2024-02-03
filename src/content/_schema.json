@@ -1,89 +1,77 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "definitions": {
-        "AuthorSchema": {
-            "title": "AuthorSchema",
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "title": "name"
-                },
-                "description": {
-                    "type": "string",
-                    "title": "description"
-                },
-                "github": {
-                    "type": "string",
-                    "title": "github"
-                },
-                "image": {
-                    "type": "string",
-                    "title": "image"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "name"
-            ]
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AuthorSchema": {
+      "title": "AuthorSchema",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name"
         },
-        "TagSchema": {
-            "title": "TagSchema",
+        "description": {
+          "type": "string",
+          "title": "description"
+        },
+        "github": {
+          "type": "string",
+          "title": "github"
+        },
+        "image": {
+          "type": "string",
+          "title": "image"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name"]
+    },
+    "TagSchema": {
+      "title": "TagSchema",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name"
+        },
+        "description": {
+          "type": "string",
+          "title": "description"
+        },
+        "category": {
+          "enum": ["circle", "other", "tech"],
+          "type": "string",
+          "title": "category"
+        },
+        "image": {
+          "type": "string",
+          "title": "image"
+        },
+        "fullSizeImage": {
+          "type": "boolean",
+          "title": "fullSizeImage"
+        },
+        "links": {
+          "type": "array",
+          "items": {
             "type": "object",
             "properties": {
-                "name": {
-                    "type": "string",
-                    "title": "name"
-                },
-                "description": {
-                    "type": "string",
-                    "title": "description"
-                },
-                "category": {
-                    "enum": [
-                        "circle",
-                        "other",
-                        "tech"
-                    ],
-                    "type": "string",
-                    "title": "category"
-                },
-                "image": {
-                    "type": "string",
-                    "title": "image"
-                },
-                "fullSizeImage": {
-                    "type": "boolean",
-                    "title": "fullSizeImage"
-                },
-                "links": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "url": {
-                                "type": "string",
-                                "title": "url"
-                            },
-                            "text": {
-                                "type": "string",
-                                "title": "text"
-                            }
-                        },
-                        "additionalProperties": false,
-                        "required": [
-                            "text",
-                            "url"
-                        ]
-                    },
-                    "title": "links"
-                }
+              "url": {
+                "type": "string",
+                "title": "url"
+              },
+              "text": {
+                "type": "string",
+                "title": "text"
+              }
             },
             "additionalProperties": false,
-            "required": [
-                "category",
-                "name"
-            ]
+            "required": ["text", "url"]
+          },
+          "title": "links"
         }
+      },
+      "additionalProperties": false,
+      "required": ["category", "name"]
     }
+  }
 }
