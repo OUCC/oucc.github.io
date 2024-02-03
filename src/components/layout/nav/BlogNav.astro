@@ -26,10 +26,11 @@ const navList = [
       <a
         href={target}
         class:list={[
-          'whitespace-nowrap text-gray-700 hover:text-black',
+          'whitespace-nowrap',
           {
-            'after:block after:h-1 after:rounded-t-lg after:bg-primary': isHere,
-            'pb-1': !isHere,
+            'text-black after:block after:h-1 after:rounded-t-lg after:bg-primary':
+              isHere,
+            'pb-1 text-gray-700 hover:text-black': !isHere,
           },
         ]}
       >
