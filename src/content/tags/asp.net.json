@@ -1,5 +1,6 @@
 {
   "name": "ASP.NET Core",
+  "category": "tech",
   "image": "./dotnet.svg",
   "fullSizeImage": true,
   "links": [

@@ -1,4 +1,5 @@
 {
   "name": "Docker",
+  "category": "tech",
   "image": "./docker.svg"
 }

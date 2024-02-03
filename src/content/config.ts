@@ -42,12 +42,25 @@ const authorsCollection = defineCollection({
     }),
 })
 
+export const TagCategoryMapping = [
+  ['tech', '技術'],
+  ['circle', 'サークル'],
+  ['other', '雑記'],
+] as const satisfies [string, string][]
+export type TagCategory = (typeof TagCategoryMapping)[number][0]
+
 const tagsCollection = defineCollection({
   type: 'data',
   schema: ({ image }) =>
     z.object({
       name: z.string().min(1),
       description: z.string().optional(),
+      category: z.enum(
+        TagCategoryMapping.map(([category]) => category) as [
+          TagCategory,
+          ...TagCategory[],
+        ],
+      ),
       links: z
         .array(
           z.object({

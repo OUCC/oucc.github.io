@@ -1,0 +1,34 @@
+---
+import { TagCategoryMapping, type TagCategory } from '@/content/config'
+
+export type TagNavCategory = 'all' | TagCategory
+
+interface Props {
+  category: TagNavCategory
+}
+const { category } = Astro.props
+const tagCategoryEntries = [['all', '全般'], ...TagCategoryMapping] as const
+---
+
+<nav
+  class="flex w-full whitespace-nowrap pb-6 pt-2 text-center font-sans text-lg font-medium"
+>
+  {
+    tagCategoryEntries.map(([c, text], i) => (
+      <a
+        href={c === 'all' ? '/blog/tags/' : `/blog/tags/${c}/`}
+        class:list={[
+          'block basis-28 border-y border-r border-slate-300 py-1 max-sm:basis-1/4',
+          {
+            'bg-slate-100': c === category,
+            'bg-white transition-colors hover:bg-slate-100': c !== category,
+            'rounded-l-xl border-l': i === 0,
+            'rounded-r-xl': i === tagCategoryEntries.length - 1,
+          },
+        ]}
+      >
+        {text}
+      </a>
+    ))
+  }
+</nav>

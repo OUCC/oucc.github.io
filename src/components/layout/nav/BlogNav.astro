@@ -1,29 +1,35 @@
 ---
+import { TagCategoryMapping } from '@/content/config'
+
 const current = Astro.url.pathname
 
-const navList: { target: string; title: string }[] = [
+const navList = [
   {
-    target: '/blog',
+    target: '/blog/',
     title: '記事一覧',
+    isHere: current === '/blog/',
   },
   {
-    target: '/blog/tags',
+    target: '/blog/tags/',
     title: 'タグ一覧',
+    isHere: [
+      '/blog/tags/',
+      ...TagCategoryMapping.map(([category]) => `/blog/tags/${category}/`),
+    ].includes(current),
   },
-]
+] as const satisfies { target: string; title: string; isHere: boolean }[]
 ---
 
-<div class="flex flex-nowrap gap-3 px-9 pt-1 text-lg">
+<div class="flex flex-nowrap gap-3 px-9 pt-1 font-sans text-lg font-medium">
   {
-    navList.map(({ target, title }) => (
+    navList.map(({ target, title, isHere }) => (
       <a
         href={target}
         class:list={[
           'whitespace-nowrap text-gray-700 hover:text-black',
           {
-            'after:block after:h-1 after:rounded-t-lg after:bg-primary':
-              current === target || current === target + '/',
-            'pb-1': current !== target && current !== target + '/',
+            'after:block after:h-1 after:rounded-t-lg after:bg-primary': isHere,
+            'pb-1': !isHere,
           },
         ]}
       >

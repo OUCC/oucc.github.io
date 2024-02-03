@@ -11,7 +11,7 @@ const { title, background } = Astro.props
   class:list={[
     'bg-dot flex items-center justify-center gap-x-5 py-6 text-6xl',
     {
-      'bg-dot-white': background === 'white',
+      'bg-dot-white border-t': background === 'white',
       'bg-dot-primary': background === 'primary',
       'bg-dot-secondary': background === 'secondary',
     },
