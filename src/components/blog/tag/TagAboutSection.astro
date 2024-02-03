@@ -2,21 +2,32 @@
 import type { CollectionEntry } from 'astro:content'
 import Section from '../../common/Section.astro'
 import InlineLink from '@/components/common/InlineLink.astro'
+import { TagCategoryEntries } from '@/content/config'
 
 interface Props {
   tag: CollectionEntry<'tags'>['data']
 }
 
 const {
-  tag: { name, description, links },
+  tag: { name, description, links, category },
 } = Astro.props
+
+const categoryText = TagCategoryEntries.find(([c]) => c === category)![1]
 ---
 
 <Section background="white">
-  <Fragment slot="title">{name} について</Fragment>
+  <Fragment slot="title">
+    <div class="flex items-center justify-between">
+      <div>{name} について</div><a
+        href={`/blog/tags/${category}/`}
+        class="block rounded-full border border-slate-300 bg-white px-4 py-1 text-base font-normal hover:bg-slate-100"
+        >{categoryText}</a
+      >
+    </div>
+  </Fragment>
 
   <div class="block">
-    {description && <div>{description}</div>}
+    <div>{description || `${categoryText}に関連するタグです。`}</div>
     {
       links.length === 0 ? (
         ''

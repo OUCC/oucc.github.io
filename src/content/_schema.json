@@ -38,7 +38,7 @@
           "title": "description"
         },
         "category": {
-          "enum": ["circle", "other", "tech"],
+          "enum": ["club", "other", "tech"],
           "type": "string",
           "title": "category"
         },

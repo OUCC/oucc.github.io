@@ -1,5 +1,5 @@
 ---
-import { TagCategoryMapping } from '@/content/config'
+import { TagCategoryEntries } from '@/content/config'
 
 const current = Astro.url.pathname
 
@@ -14,7 +14,7 @@ const navList = [
     title: 'タグ一覧',
     isHere: [
       '/blog/tags/',
-      ...TagCategoryMapping.map(([category]) => `/blog/tags/${category}/`),
+      ...TagCategoryEntries.map(([category]) => `/blog/tags/${category}/`),
     ].includes(current),
   },
 ] as const satisfies { target: string; title: string; isHere: boolean }[]

@@ -76,6 +76,7 @@ Example: `src/content/authors/octocat.json`
 
 - name : タグの表示名（必須）
 - description : タグの説明
+- category : タグのカテゴリー。`tech`(技術関連), `club`(クラブ関連), `other`(その他) から選択できます。
 - image : アイコンの画像ファイル（詳細は後述）
 - fullSizeImage : `image`で指定した画像の背景が透過されていない場合は`true`を指定してください。画像が円形に切り取られます。
 - links : 関連リンクの配列です。GitHubや公式ドキュメントなどを追加してください。
@@ -90,6 +91,7 @@ Example: `src/content/tags/dotnet.json`
 {
   "name": ".NET",
   "description": ".NET は C#, F#, VB.NET などが実行可能な仮想マシンです。(JVM に似ています) クラスプラットフォームであるためどんな環境でも同じコードで実行できます。",
+  "category": "tech",
   "image": "./dotnet.svg",
   "fullSizeImage": true,
   "links": [

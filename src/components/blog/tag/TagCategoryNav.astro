@@ -1,5 +1,5 @@
 ---
-import { TagCategoryMapping, type TagCategory } from '@/content/config'
+import { TagCategoryEntries, type TagCategory } from '@/content/config'
 
 export type TagNavCategory = 'all' | TagCategory
 
@@ -7,7 +7,7 @@ interface Props {
   category: TagNavCategory
 }
 const { category } = Astro.props
-const tagCategoryEntries = [['all', '全般'], ...TagCategoryMapping] as const
+const tagCategoryEntries = [['all', '全般'], ...TagCategoryEntries] as const
 ---
 
 <nav

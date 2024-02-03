@@ -1,9 +1,9 @@
 ---
 import TagListPage from '@/components/blog/tag/TagListPage.astro'
-import { TagCategoryMapping } from '@/content/config'
+import { TagCategoryEntries } from '@/content/config'
 
 export function getStaticPaths() {
-  return TagCategoryMapping.map(([category]) => ({
+  return TagCategoryEntries.map(([category]) => ({
     params: { category },
     props: { category },
   }))
