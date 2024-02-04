@@ -1,7 +1,6 @@
 {
   "name": "Tello",
   "description": "Tello、Tello eduはドローン界のAppleと言われるDJIと、CPU部分をIntelで共同開発し、Ryze Techから販売されているトイドローンです。",
-  "category": "tech",
   "links": [
     {
       "url": "https://www.ryzerobotics.com/",

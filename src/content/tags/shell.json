@@ -1,6 +1,5 @@
 {
   "name": "Shell",
   "description": "Shell はコンピュータを人間が操作するための UI の総称ですが、狭義には Bash や Zsh のようなコマンドラインインタプリタ（CLI）を指します。UI として利用することはもちろん、パイプやリダイレクトを用いた高度な情報処理や、shell script を用いた自動化など、広く活用されています。",
-  "category": "tech",
   "image": "./bash.svg"
 }

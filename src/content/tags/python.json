@@ -1,7 +1,6 @@
 {
   "name": "Python",
   "description": "Python はインタープリタ型の高水準汎用プログラミング言語です。",
-  "category": "tech",
   "image": "./python.svg",
   "links": [
     {

@@ -1,14 +1,24 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import TagIcon from '../icon/TagIcon.astro'
+import { BlogCategoryMapping, type BlogCategory } from '@/content/config'
 interface Props {
+  blogCategory: BlogCategory
   tags: CollectionEntry<'tags'>[]
 }
 
-const { tags } = Astro.props
+const { blogCategory, tags } = Astro.props
 ---
 
 <ul class="flex flex-wrap gap-2">
+  <li>
+    <a
+      href={`/blog/category=${blogCategory}/`}
+      class="rounded-full bg-white px-2 py-1 text-justify text-sm ring-1 ring-primary"
+      >{BlogCategoryMapping[blogCategory]}</a
+    >
+  </li>
+
   {
     tags.map((tag) => (
       <li>

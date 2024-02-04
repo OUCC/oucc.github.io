@@ -1,5 +1,11 @@
 import { z, defineCollection, reference } from 'astro:content'
 
+export const BlogCategoryMapping = {
+  tech: '技術',
+  club: 'クラブ',
+  other: '雑記',
+} as const satisfies Record<string, string>
+export type BlogCategory = keyof typeof BlogCategoryMapping
 const blogsCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -11,6 +17,9 @@ const blogsCollection = defineCollection({
         desc = desc.replaceAll('\r\n', ' ').replaceAll('\n', ' ')
         return desc.length > 100 ? desc.slice(0, 100) + '…' : desc
       }),
+    category: z.enum(
+      Object.keys(BlogCategoryMapping) as [BlogCategory, ...BlogCategory[]],
+    ),
     author: reference('authors'),
     tags: z.array(reference('tags')),
   }),
@@ -42,25 +51,12 @@ const authorsCollection = defineCollection({
     }),
 })
 
-export const TagCategoryEntries = [
-  ['tech', '技術'],
-  ['club', 'クラブ'],
-  ['other', '雑記'],
-] as const satisfies [string, string][]
-export type TagCategory = (typeof TagCategoryEntries)[number][0]
-
 const tagsCollection = defineCollection({
   type: 'data',
   schema: ({ image }) =>
     z.object({
       name: z.string().min(1),
       description: z.string().optional(),
-      category: z.enum(
-        TagCategoryEntries.map(([category]) => category) as [
-          TagCategory,
-          ...TagCategory[],
-        ],
-      ),
       links: z
         .array(
           z.object({

@@ -37,11 +37,6 @@
           "type": "string",
           "title": "description"
         },
-        "category": {
-          "enum": ["club", "other", "tech"],
-          "type": "string",
-          "title": "category"
-        },
         "image": {
           "type": "string",
           "title": "image"
@@ -71,7 +66,7 @@
         }
       },
       "additionalProperties": false,
-      "required": ["category", "name"]
+      "required": ["name"]
     }
   }
 }

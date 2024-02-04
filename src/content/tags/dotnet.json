@@ -1,7 +1,6 @@
 {
   "name": ".NET",
   "description": ".NET は C#, F#, VB.NET などが実行可能な仮想マシンです。(JVM に似ています) クラスプラットフォームであるためどんな環境でも同じコードで実行できます。",
-  "category": "tech",
   "image": "./dotnet.svg",
   "fullSizeImage": true,
   "links": [

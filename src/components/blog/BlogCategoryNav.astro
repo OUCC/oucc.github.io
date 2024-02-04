@@ -1,13 +1,16 @@
 ---
-import { TagCategoryEntries, type TagCategory } from '@/content/config'
+import { BlogCategoryMapping, type BlogCategory } from '@/content/config'
 
-export type TagNavCategory = 'all' | TagCategory
+export type TagNavCategory = 'all' | BlogCategory
 
 interface Props {
   category: TagNavCategory
 }
 const { category } = Astro.props
-const tagCategoryEntries = [['all', '全般'], ...TagCategoryEntries] as const
+const tagCategoryEntries = [
+  ['all', '全般'],
+  ...Object.entries(BlogCategoryMapping),
+] as const
 ---
 
 <nav
@@ -16,7 +19,7 @@ const tagCategoryEntries = [['all', '全般'], ...TagCategoryEntries] as const
   {
     tagCategoryEntries.map(([c, text], i) => (
       <a
-        href={c === 'all' ? '/blog/tags/' : `/blog/tags/${c}/`}
+        href={c === 'all' ? '/blog/' : `/blog/category=${c}/`}
         class:list={[
           'block basis-28 border-y border-r border-slate-300 py-1 max-sm:basis-1/4',
           {

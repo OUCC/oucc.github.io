@@ -11,7 +11,6 @@ export interface AuthorSchema {
 export interface TagSchema {
   name: string
   description?: string
-  category: 'tech' | 'club' | 'other'
   image?: string
   fullSizeImage?: boolean
   links?: {

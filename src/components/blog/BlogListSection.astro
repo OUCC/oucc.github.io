@@ -13,5 +13,6 @@ const { title, blogs } = Astro.props
 
 <Section background="secondary">
   <Fragment slot="title">{title}</Fragment>
+  <slot name="nav" />
   <BlogList blogs={blogs} />
 </Section>
