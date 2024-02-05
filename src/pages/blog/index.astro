@@ -1,13 +1,5 @@
 ---
-import BlogLayout from '@/layouts/BlogLayout.astro'
-import { getCollection } from 'astro:content'
-import BlogListSection from '@/components/blog/BlogListSection.astro'
-
-const blogEntries = await getCollection('blogs')
+import IndexPage from './_IndexPage.astro'
 ---
 
-<BlogLayout title="記事一覧" description="メンバーのブログです。">
-  <main class="flex h-full flex-col">
-    <BlogListSection title="最新の記事一覧" blogs={blogEntries} />
-  </main>
-</BlogLayout>
+<IndexPage category="all" />

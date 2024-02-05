@@ -1,0 +1,17 @@
+---
+import { BlogCategoryMapping, type BlogCategory } from '@/content/config'
+import IndexPage from './_IndexPage.astro'
+
+export function getStaticPaths() {
+  return (Object.keys(BlogCategoryMapping) as BlogCategory[]).map(
+    (category) => ({
+      params: { category: `category=${category}` },
+      props: { category },
+    }),
+  )
+}
+
+const { category } = Astro.props
+---
+
+<IndexPage category={category} />

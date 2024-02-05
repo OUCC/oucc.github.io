@@ -20,7 +20,7 @@ const tags = await getEntries(blog.tags)
       {blog.title}
     </h2>
   </a>
-  <TagSmallList tags={tags} />
+  <TagSmallList blogCategory={blog.category} tags={tags} />
   <div class="flex gap-3 px-2 text-gray-600">
     <div class="hover:underline">
       <a href={`/blog/authors/${author.id}`} class="flex items-center gap-2"

@@ -14,6 +14,7 @@ OUCC BLOG の仕様について記載しています。何もわからない場�
 ---
 title: タイトル
 description: 説明
+category: 記事のカテゴリー。tech(技術関連), club(クラブ関連), other(その他) から選択できます。
 author: 著者
 tags:
   - タグ1

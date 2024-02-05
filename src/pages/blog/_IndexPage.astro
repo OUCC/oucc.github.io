@@ -1,0 +1,25 @@
+---
+import BlogLayout from '@/layouts/BlogLayout.astro'
+import { getCollection } from 'astro:content'
+import BlogListSection from '@/components/blog/BlogListSection.astro'
+import type { BlogCategory } from '@/content/config'
+import BlogCategoryNav from '@/components/blog/BlogCategoryNav.astro'
+
+interface Props {
+  category: 'all' | BlogCategory
+}
+
+const { category } = Astro.props
+
+const blogEntries = (await getCollection('blogs')).filter(
+  ({ data: { category: c } }) => category === 'all' || c === category,
+)
+---
+
+<BlogLayout title="記事一覧" description="メンバーのブログです。">
+  <main class="flex h-full flex-col">
+    <BlogListSection title="最新の記事一覧" blogs={blogEntries}>
+      <Fragment slot="nav"><BlogCategoryNav category={category} /></Fragment>
+    </BlogListSection>
+  </main>
+</BlogLayout>

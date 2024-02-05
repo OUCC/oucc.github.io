@@ -32,7 +32,7 @@ const { Content } = await blog.render()
         ><AuthorIcon {...author.data} size={28} />{author.data.name}</a
       >
     </div>
-    <TagSmallList tags={tags} />
+    <TagSmallList blogCategory={blog.data.category} tags={tags} />
     <div class="flex gap-3 p-2 text-sm text-gray-700">
       {
         blogMeta.updateDate && (

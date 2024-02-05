@@ -1,5 +1,11 @@
 import { z, defineCollection, reference } from 'astro:content'
 
+export const BlogCategoryMapping = {
+  tech: '技術',
+  club: 'クラブ',
+  other: '雑記',
+} as const satisfies Record<string, string>
+export type BlogCategory = keyof typeof BlogCategoryMapping
 const blogsCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -11,6 +17,9 @@ const blogsCollection = defineCollection({
         desc = desc.replaceAll('\r\n', ' ').replaceAll('\n', ' ')
         return desc.length > 100 ? desc.slice(0, 100) + '…' : desc
       }),
+    category: z.enum(
+      Object.keys(BlogCategoryMapping) as [BlogCategory, ...BlogCategory[]],
+    ),
     author: reference('authors'),
     tags: z.array(reference('tags')),
   }),
