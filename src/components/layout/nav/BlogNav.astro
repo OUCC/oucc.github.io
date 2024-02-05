@@ -22,7 +22,7 @@ const navList = [
 ] as const satisfies { target: string; title: string; isHere: boolean }[]
 ---
 
-<div class="flex flex-nowrap gap-3 px-9 pt-1 font-sans text-lg font-medium">
+<div class="flex flex-nowrap gap-3 px-9 font-sans text-lg font-medium">
   {
     navList.map(({ target, title, isHere }) => (
       <a
@@ -32,11 +32,21 @@ const navList = [
           {
             'text-black after:block after:h-1 after:rounded-t-lg after:bg-primary':
               isHere,
-            'pb-1 text-gray-700 hover:text-black': !isHere,
+            'text-gray-700 hover:text-black': !isHere,
           },
         ]}
       >
-        <span class="inline-block py-1">{title}</span>
+        <span
+          class:list={[
+            'inline-block pb-1 pt-2',
+            {
+              'pb-1': isHere,
+              'pb-2': !isHere,
+            },
+          ]}
+        >
+          {title}
+        </span>
       </a>
     ))
   }

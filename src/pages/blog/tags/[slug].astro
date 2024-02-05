@@ -26,6 +26,8 @@ const ogpPath = (
     format: 'png',
   })
 ).src
+
+const isShowAbout = tag.description || tag.links.length > 0
 ---
 
 <BlogLayout
@@ -38,7 +40,7 @@ const ogpPath = (
     <TagIcon slot="icon" tag={tag} size={tag.fullSizeImage ? 93 : 80} />
   </BlogTitle>
   <main class="flex h-full flex-col">
-    <TagAboutSection tag={tag} />
+    {isShowAbout && <TagAboutSection tag={tag} />}
     <BlogListSection
       title={`${tag.name} に関する記事`}
       blogs={blogEntries.filter((b) => b.data.tags.some((t) => t.id === id))}

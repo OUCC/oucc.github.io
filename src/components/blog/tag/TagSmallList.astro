@@ -14,7 +14,7 @@ const { blogCategory, tags } = Astro.props
   <li>
     <a
       href={`/blog/category=${blogCategory}/`}
-      class="rounded-full bg-white px-2 py-1 text-justify text-sm ring-1 ring-primary"
+      class="rounded-full bg-white px-2 py-1 text-justify text-sm ring-1 ring-primary hover:bg-gray-200"
       >{BlogCategoryMapping[blogCategory]}</a
     >
   </li>

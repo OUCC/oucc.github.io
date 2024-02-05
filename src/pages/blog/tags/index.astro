@@ -3,6 +3,7 @@ import BlogLayout from '@/layouts/BlogLayout.astro'
 import { getCollection } from 'astro:content'
 import { getTagStatistics } from '@/content/_blog-statistics'
 import TagListSection from '@/components/blog/tag/TagListSection.astro'
+
 const tagEntries = await getCollection('tags')
 const statistics = await getTagStatistics()
 const tags = tagEntries
