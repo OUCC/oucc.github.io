@@ -1,18 +1,11 @@
 ---
-import { formatUrl } from '@/utils/validateUrl'
 import type { HTMLAttributes } from 'astro/types'
 
 type Props = Omit<HTMLAttributes<'a'>, 'slot'>
 
 const { class: className, href, ...attrs } = Astro.props
-
-const formattedHref = href && formatUrl(href)
 ---
 
-<a
-  href={formattedHref}
-  class:list={['text-blue-600 underline', className]}
-  {...attrs}
->
+<a href={href} class:list={['text-blue-600 underline', className]} {...attrs}>
   <slot />
 </a>

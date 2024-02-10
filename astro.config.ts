@@ -7,7 +7,7 @@ import remarkLinkCard from 'remark-link-card'
 import RemarkLinkRewrite, {
   type RemarkLinkRewriteOptions,
 } from 'remark-link-rewrite'
-import { formatUrl } from './src/utils/validateUrl'
+import { getFormatUrl } from './src/utils/validateUrl'
 
 const { SITE_URL } = loadEnv(process.env.NODE_ENV!, process.cwd(), '')
 
@@ -43,7 +43,7 @@ export default defineConfig({
       remarkLinkCard,
       [
         RemarkLinkRewrite,
-        { replacer: formatUrl } satisfies RemarkLinkRewriteOptions,
+        { replacer: getFormatUrl(SITE_URL) } satisfies RemarkLinkRewriteOptions,
       ],
     ],
   },
