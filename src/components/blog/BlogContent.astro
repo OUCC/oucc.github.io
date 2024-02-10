@@ -28,7 +28,7 @@ const { Content } = await blog.render()
     <div class="mb-1 p-1 text-lg">
       <a
         class="flex items-center gap-2 hover:underline"
-        href={`/blog/authors/${author.id}`}
+        href={`/blog/authors/${author.id}/`}
         ><AuthorIcon {...author.data} size={28} />{author.data.name}</a
       >
     </div>

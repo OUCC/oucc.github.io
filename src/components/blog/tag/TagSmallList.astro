@@ -23,7 +23,7 @@ const { blogCategory, tags } = Astro.props
     tags.map((tag) => (
       <li>
         <a
-          href={`/blog/tags/${tag.id}`}
+          href={`/blog/tags/${tag.id}/`}
           class="flex items-center gap-1 rounded-full bg-gray-100 p-1 text-justify text-sm hover:bg-gray-200"
         >
           <TagIcon tag={tag.data} size={18} />

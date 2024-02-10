@@ -4,6 +4,10 @@ import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
 import mdx from '@astrojs/mdx'
 import remarkLinkCard from 'remark-link-card'
+import RemarkLinkRewrite, {
+  type RemarkLinkRewriteOptions,
+} from 'remark-link-rewrite'
+import { getFormatUrl } from './src/utils/validateUrl'
 
 const { SITE_URL } = loadEnv(process.env.NODE_ENV!, process.cwd(), '')
 
@@ -26,15 +30,22 @@ export default defineConfig({
     '/group/programming/activity.html': '/',
     '/group/programming/works.html': '/',
     '/group/handaitaisen/handai_taisen.html': '/',
-    '/blog/articles': '/blog',
+    '/blog/articles': '/blog/',
   },
   outDir: './dist/out',
   cacheDir: './dist/cache',
   prefetch: {
     prefetchAll: true,
   },
+  trailingSlash: 'always',
   markdown: {
-    remarkPlugins: [remarkLinkCard],
+    remarkPlugins: [
+      remarkLinkCard,
+      [
+        RemarkLinkRewrite,
+        { replacer: getFormatUrl(SITE_URL) } satisfies RemarkLinkRewriteOptions,
+      ],
+    ],
   },
   integrations: [tailwind(), sitemap(), mdx()],
 })
