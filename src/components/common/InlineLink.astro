@@ -3,9 +3,9 @@ import type { HTMLAttributes } from 'astro/types'
 
 type Props = Omit<HTMLAttributes<'a'>, 'slot'>
 
-const { class: className, href, ...attrs } = Astro.props
+const { class: className, ...attrs } = Astro.props
 ---
 
-<a href={href} class:list={['text-blue-600 underline', className]} {...attrs}>
+<a class:list={['text-blue-600 underline', className]} {...attrs}>
   <slot />
 </a>
