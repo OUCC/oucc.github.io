@@ -1,3 +1,15 @@
 {
-  "name": "Whisper"
+  "name": "Whisper",
+  "description": "WhisperはOpenAIによって提供されている汎用音声認識モデルです。多様な音声の大規模データセットで学習され、多言語音声認識、音声翻訳、言語識別を実行できるマルチタスクモデルでもあります。",
+  "image": "./openai.svg",
+  "links": [
+    {
+      "url": "https://github.com/openai/whisper",
+      "text": "Whisper - GitHub"
+    },
+    {
+      "url": "https://openai.com/research/whisper",
+      "text": "Whisper - 公式サイト"
+    }
+  ]
 }

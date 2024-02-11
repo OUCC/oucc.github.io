@@ -1,3 +1,5 @@
 {
-  "name": "JavaScript"
+  "name": "JavaScript",
+  "image": "./javascript.svg",
+  "fullSizeImage": true
 }
