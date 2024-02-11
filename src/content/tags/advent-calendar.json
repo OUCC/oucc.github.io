@@ -1,3 +1,38 @@
 {
-  "name": "Advent Calendar"
+  "name": "Advent Calendar",
+  "description": "12月に部員が投稿するアドベントカレンダーの記事です。",
+  "links": [
+    {
+      "url": "https://adventar.org/calendars/9315",
+      "text": "OUCC Advent Calendar 2023 - Adventar"
+    },
+    {
+      "url": "https://adventar.org/calendars/7859",
+      "text": "OUCC Advent Calendar 2022 - Adventar"
+    },
+    {
+      "url": "https://adventar.org/calendars/6722",
+      "text": "OUCC Advent Calendar 2021 - Adventar"
+    },
+    {
+      "url": "https://adventar.org/calendars/5546",
+      "text": "OUCC Advent Calendar 2020 - Adventar"
+    },
+    {
+      "url": "https://adventar.org/calendars/4650",
+      "text": "OUCC Advent Calendar 2019 - Adventar"
+    },
+    {
+      "url": "https://adventar.org/calendars/1389",
+      "text": "OUCC Advent Calendar 2016 - Adventar"
+    },
+    {
+      "url": "https://adventar.org/calendars/730",
+      "text": "OUCC Advent Calendar 2015 - Adventar"
+    },
+    {
+      "url": "https://adventar.org/calendars/449",
+      "text": "OUCC Advent Calendar 2014 - Adventar"
+    }
+  ]
 }
