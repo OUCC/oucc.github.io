@@ -4,9 +4,8 @@ description: PDFにおける誤字修正や覆い隠しの図形を削除する�
 category: tech
 author: MrMocchy
 tags:
-  - Python
-  - PDF
-  - LT
+  - python
+  - pdf
 ---
 
 
