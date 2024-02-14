@@ -2,7 +2,7 @@
 title: PyMuPDFでPDF編集できた！
 description: PDFにおける誤字修正や覆い隠しの図形を削除する方法の紹介。
 category: tech
-author: 著者
+author: MrMocchy
 tags:
   - Python
   - PDF
