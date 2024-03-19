@@ -1,0 +1,127 @@
+---
+import Section from '@/components/common/Section.astro'
+import WorkshopCard from './WorkshopCard.astro'
+
+export interface Item {
+  date: Date
+  title: string
+  description: string
+}
+
+export function thisYearDate(
+  month: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
+  date: number,
+  hour?: number,
+) {
+  return hour === undefined
+    ? new Date(2024, month - 1, date)
+    : new Date(2024, month - 1, date, hour)
+}
+
+export const items: Item[] = [
+  {
+    date: thisYearDate(4, 11),
+    title: 'Python',
+    description: 'Pythonの基礎を学びます。',
+  },
+  {
+    date: thisYearDate(4, 13),
+    title: '機械学習',
+    description: '機械学習について学びます。',
+  },
+  {
+    date: thisYearDate(4, 14),
+    title: 'C/C++',
+    description: 'C言語とC++の基礎を学びます。',
+  },
+  {
+    date: thisYearDate(4, 18),
+    title: '競プロ',
+    description: '競技プログラミングについて学びます。',
+  },
+  {
+    date: thisYearDate(4, 20),
+    title: 'Linux(Bash)',
+    description:
+      'サーバや組み込み用途で広く利用されているOSであるLinuxについて学びます。',
+  },
+  {
+    date: thisYearDate(4, 21),
+    title: 'Git',
+    description:
+      'ソースコードの編集履歴管理システムであるGitの基礎を学びます。共同開発に役立ちます。',
+  },
+  {
+    date: thisYearDate(4, 25),
+    title: 'C#',
+    description: 'C#の基礎を学びます。C#はUnityでも使用されています。',
+  },
+  {
+    date: thisYearDate(4, 27),
+    title: 'Unity (1日目)',
+    description: 'Unityを用いたゲーム制作を学びます。',
+  },
+  {
+    date: thisYearDate(4, 28),
+    title: 'Unity (2日目)',
+    description:
+      'Unityを用いたゲーム制作を学びます。前日のUnity講習会を講習会を受講された方を対象としています。',
+  },
+  {
+    date: thisYearDate(5, 9),
+    title: 'Blender',
+    description: 'Blenderを用いた3Dモデリングについて学びます。',
+  },
+  {
+    date: thisYearDate(5, 11),
+    title: 'Markdown/HTML',
+    description: 'ドキュメントの作成するに役立つMarkdownに付いて勉強します。',
+  },
+  {
+    date: thisYearDate(5, 12),
+    title: 'HTML/CSS',
+    description: 'HTML/CSSを用いた基本的なWebサイトの制作について学びます。',
+  },
+  {
+    date: thisYearDate(5, 16),
+    title: 'JavaScript',
+    description:
+      'Webサービスで最もよく使われているJavaScriptに付いて学びます。',
+  },
+  {
+    date: thisYearDate(5, 18),
+    title: 'Astro',
+    description:
+      '静的サイトを作成するツールであるAstroについて学びます。このサイトもこれを用いて作成されています。',
+  },
+  {
+    date: thisYearDate(5, 19),
+    title: 'AWS',
+    description: 'Amazonが運営するクラウドサービス AWSについて学びます。',
+  },
+]
+
+const dateFormat = new Intl.DateTimeFormat('ja-JP', {
+  weekday: 'short',
+  month: 'numeric',
+  day: 'numeric',
+})
+---
+
+<Section background="secondary">
+  <Fragment slot="title">2024年度の講習会</Fragment>
+  <div class="flex flex-col gap-5">
+    <p>
+      2024年度の講習会はオンラインと対面のハイブリッドで実施します。参加方法について詳しくは、画面右上の「Join
+      OUCC!」ボタンから公開Discordサーバーにご参加のうえご確認ください。
+    </p>
+    <p>各回1～3時間程度の予定となっています。途中退室も可能です。</p>
+    <ul class="flex flex-wrap gap-5">
+      {
+        items.map(({ date, ...item }) => (
+          <WorkshopCard {...item} date={dateFormat.format(date)} />
+        ))
+      }
+    </ul>
+  </div>
+</Section>
