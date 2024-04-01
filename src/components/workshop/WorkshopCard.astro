@@ -4,9 +4,10 @@ interface Props {
   title: string
   date: string
   description: string
+  place?: string
 }
 
-const { title, date, description } = Astro.props
+const { title, date, description, place } = Astro.props
 ---
 
 <li
@@ -16,6 +17,8 @@ const { title, date, description } = Astro.props
   <p class="flex items-center gap-2 text-slate-600">
     <Icon name="clock" alt="開催日時" class="w-4" />
     <span>{date}</span>
+    <Icon name="map-pin" alt="開催場所" class="-mr-1 ml-2 w-4" />
+    <span>{place ?? '未定'}</span>
   </p>
   <p class="text-justify-ja">
     {description}
