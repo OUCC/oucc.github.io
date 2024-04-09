@@ -30,13 +30,13 @@ export const items: Item[] = [
     place: 'C406',
   },
   {
-    date: date(4, 13, 20),
+    date: date(4, 13, 14),
     title: '機械学習',
     description: '機械学習について学びます。',
     place: 'オンラインのみ',
   },
   {
-    date: date(4, 14, 20),
+    date: date(4, 14, 14),
     title: 'C/C++',
     description: 'C言語とC++の基礎を学びます。',
     place: 'オンラインのみ',
@@ -48,64 +48,64 @@ export const items: Item[] = [
     place: 'C406',
   },
   {
-    date: date(4, 20, 20),
+    date: date(4, 20, 14),
     title: 'Linux(Bash)',
     description:
       'サーバや組み込み用途で広く利用されているOSであるLinuxについて学びます。',
     place: 'オンラインのみ',
   },
   {
-    date: date(4, 21, 20),
+    date: date(4, 21, 14),
     title: 'Git',
     description:
       'ソースコードの編集履歴管理システムであるGitの基礎を学びます。共同開発に役立ちます。',
     place: 'オンラインのみ',
   },
   {
-    date: date(4, 25),
+    date: date(4, 25, 18, 30),
     title: 'C#',
     description: 'C#の基礎を学びます。C#はUnityでも使用されています。',
   },
   {
-    date: date(4, 27),
+    date: date(4, 27, 14),
     title: 'Unity (1日目)',
     description: 'Unityを用いたゲーム制作を学びます。',
   },
   {
-    date: date(4, 28),
+    date: date(4, 28, 14),
     title: 'Unity (2日目)',
     description:
       'Unityを用いたゲーム制作を学びます。前日のUnity講習会を講習会を受講された方を対象としています。',
   },
   {
-    date: date(5, 9),
+    date: date(5, 9, 18, 30),
     title: 'Blender',
     description: 'Blenderを用いた3Dモデリングについて学びます。',
   },
   {
-    date: date(5, 11),
+    date: date(5, 11, 14),
     title: 'Markdown/HTML',
     description: 'ドキュメントの作成するに役立つMarkdownに付いて勉強します。',
   },
   {
-    date: date(5, 12),
+    date: date(5, 12, 14),
     title: 'HTML/CSS',
     description: 'HTML/CSSを用いた基本的なWebサイトの制作について学びます。',
   },
   {
-    date: date(5, 16),
+    date: date(5, 16, 18, 30),
     title: 'TypeScript',
     description:
       '最近のWebサービス開発でよく使われているTypeScriptについて学びます。',
   },
   {
-    date: date(5, 18),
+    date: date(5, 18, 14),
     title: 'Astro',
     description:
       '静的サイトを作成するツールであるAstroについて学びます。このサイトもこれを用いて作成されています。',
   },
   {
-    date: date(5, 19),
+    date: date(5, 19, 14),
     title: 'クラウド',
     description: 'クラウドサービスについて学びます。',
   },
@@ -118,11 +118,6 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
   hour: '2-digit',
   minute: '2-digit',
 })
-const dateOnlyFormat = new Intl.DateTimeFormat('ja-JP', {
-  weekday: 'short',
-  month: 'numeric',
-  day: 'numeric',
-})
 ---
 
 <Section background="secondary">
@@ -133,15 +128,14 @@ const dateOnlyFormat = new Intl.DateTimeFormat('ja-JP', {
       OUCC!」ボタンから公開Discordサーバーにご参加のうえご確認ください。
     </p>
     <p>各回1～3時間程度の予定となっています。途中退室も可能です。</p>
+    <p class="-mx-1 text-sm">
+      ※ 4/25 (木)
+      以降の日程は変更する可能性があります。最新の情報はDiscordで確認できます。
+    </p>
     <ul class="flex flex-wrap gap-5">
       {
         items.map(({ date, ...item }) => (
-          <WorkshopCard
-            {...item}
-            date={(date.getHours() === 0 ? dateOnlyFormat : dateFormat).format(
-              date,
-            )}
-          />
+          <WorkshopCard {...item} date={dateFormat.format(date)} />
         ))
       }
     </ul>
