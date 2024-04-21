@@ -8,6 +8,7 @@ import RemarkLinkRewrite, {
   type RemarkLinkRewriteOptions,
 } from 'remark-link-rewrite'
 import { getFormatUrl } from './src/utils/validateUrl'
+import pagefind from './src/integrations/pagefind'
 
 const { SITE_URL } = loadEnv(process.env.NODE_ENV!, process.cwd(), '')
 
@@ -47,5 +48,5 @@ export default defineConfig({
       ],
     ],
   },
-  integrations: [tailwind(), sitemap(), mdx()],
+  integrations: [tailwind(), pagefind(), sitemap(), mdx()],
 })

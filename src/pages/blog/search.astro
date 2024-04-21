@@ -1,0 +1,11 @@
+---
+import '@pagefind/default-ui/css/ui.css'
+import BlogLayout from '@/layouts/BlogLayout.astro'
+import SearchSection from '@/components/blog/search/SearchSection.astro'
+---
+
+<BlogLayout title="記事検索" description="ブログ内の記事を検索します。">
+  <main class="flex min-h-[80vh] flex-col">
+    <SearchSection />
+  </main>
+</BlogLayout>

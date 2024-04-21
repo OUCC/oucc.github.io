@@ -1,0 +1,27 @@
+---
+import Section from '@/components/common/Section.astro'
+import '@pagefind/default-ui/css/ui.css'
+---
+
+<Section background="secondary">
+  <Fragment slot="title">記事検索</Fragment>
+  <div id="search" class="rounded-xl bg-white p-4"></div>
+</Section>
+
+<script>
+  import { PagefindUI } from '@pagefind/default-ui'
+
+  window.addEventListener('DOMContentLoaded', () => {
+    new PagefindUI({
+      element: document.getElementById('search')!,
+      bundlePath: '/blog/articles/pagefind/',
+      showImages: false,
+      excerptLength: 60,
+    })
+  })
+</script>
+<style>
+  #search {
+    --pagefind-ui-background: #ffffff;
+  }
+</style>
