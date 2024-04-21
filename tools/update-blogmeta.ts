@@ -80,8 +80,11 @@ function updateBlogMeta(gitDiffs: readonly FileStatus[]) {
         .map(
           ([_, { dir, name, ext }]) =>
             ext === '.md' || ext === '.mdx'
-              ? name
-              : dir.slice('src/content/blogs/'.length).split('/')[0]!, // 画像ファイルのとき
+              ? name.toLowerCase()
+              : dir
+                  .slice('src/content/blogs/'.length)
+                  .split('/')[0]!
+                  .toLowerCase(), // 画像ファイルのとき
         ),
     ),
   )
