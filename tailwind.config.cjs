@@ -1,5 +1,6 @@
 const { rgba } = require('polished')
 const plugin = require('tailwindcss/plugin')
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
 const colors = {
   primary: '#1a2872',
@@ -53,6 +54,9 @@ module.exports = {
           },
         },
       }),
+      fontFamily: {
+        sans: ['Inter', ...fontFamily.sans],
+      },
     },
   },
   plugins: [

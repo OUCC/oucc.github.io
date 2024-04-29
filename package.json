@@ -20,6 +20,7 @@
     "@astrojs/mdx": "^2.0.1",
     "@astrojs/sitemap": "^3.0.3",
     "@astrojs/tailwind": "^5.0.3",
+    "@fontsource/inter": "^5.0.18",
     "@pagefind/default-ui": "^1.1.0",
     "@tailwindcss/typography": "^0.5.10",
     "astro": "^4.0.4",
