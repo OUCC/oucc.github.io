@@ -84,33 +84,39 @@ export const items: Item[] = [
     title: 'Linux(Bash)',
     description:
       'サーバや組み込み用途で広く利用されているOSであるLinuxについて学びます。',
+    place: 'C301',
   },
   {
     date: date(5, 11, 14),
     title: 'Markdown/HTML',
     description: 'ドキュメントの作成するに役立つMarkdownに付いて勉強します。',
+    place: 'C301',
   },
   {
     date: date(5, 12, 14),
     title: 'HTML/CSS',
     description: 'HTML/CSSを用いた基本的なWebサイトの制作について学びます。',
+    place: 'オンラインのみ',
   },
   {
     date: date(5, 16, 18, 30),
     title: 'TypeScript',
     description:
       '最近のWebサービス開発でよく使われているTypeScriptについて学びます。',
+    place: 'C301',
   },
   {
     date: date(5, 18, 14),
     title: 'Astro',
     description:
       '静的サイトを作成するツールであるAstroについて学びます。このサイトもこれを用いて作成されています。',
+    place: 'C301',
   },
   {
     date: date(5, 19, 14),
     title: 'クラウド',
     description: 'クラウドサービスについて学びます。',
+    place: 'オンラインのみ',
   },
 ]
 
@@ -131,10 +137,6 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
       OUCC!」ボタンから公開Discordサーバーにご参加のうえご確認ください。
     </p>
     <p>各回1～3時間程度の予定となっています。途中退室も可能です。</p>
-    <p class="-mx-1 text-sm">
-      ※ 4/25 (木)
-      以降の日程は変更する可能性があります。最新の情報はDiscordで確認できます。
-    </p>
     <ul class="flex flex-wrap gap-5">
       {
         items.map(({ date, ...item }) => (
