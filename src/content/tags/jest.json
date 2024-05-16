@@ -1,0 +1,11 @@
+{
+  "name": "Jest",
+  "description": "JavaScriptのテストフレームワークです",
+  "links": [
+    {
+      "url": "https://jestjs.io/",
+      "text": "公式サイト"
+    },
+    { "url": "https://github.com/jestjs/jest", "text": "jest - GitHub" }
+  ]
+}

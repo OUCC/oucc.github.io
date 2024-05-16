@@ -1,0 +1,6 @@
+{
+  "name": "Node.js",
+  "description": "V8で実装されたJavaScriptの実行環境です。",
+  "image": "./node.svg",
+  "links": [{ "url": "https://nodejs.org/", "text": "公式サイト" }]
+}
