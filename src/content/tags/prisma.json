@@ -1,0 +1,15 @@
+{
+  "name": "Prisma",
+  "description": "次世代のJavaScrip製ORMです。TypeScriptによる型補完を全面サポートしています。",
+  "image": "./prisma.svg",
+  "links": [
+    {
+      "url": "https://www.prisma.io/",
+      "text": "公式サイト"
+    },
+    {
+      "url": "https://github.com/prisma/prisma",
+      "text": "Prisma - GitHub"
+    }
+  ]
+}
