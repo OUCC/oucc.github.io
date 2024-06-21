@@ -53,11 +53,11 @@
   "json.schemas": [
     {
       "fileMatch": ["/src/content/authors/*.json"],
-      "url": "/src/content/_AuthorSchema.json"
+      "url": "/.astro/collections/authors.schema.json"
     },
     {
       "fileMatch": ["/src/content/tags/*.json"],
-      "url": "/src/content/_TagSchema.json"
+      "url": "/.astro/collections/tags.schema.json"
     }
   ]
 }

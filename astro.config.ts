@@ -48,5 +48,8 @@ export default defineConfig({
       ],
     ],
   },
+  experimental: {
+    contentCollectionJsonSchema: true,
+  },
   integrations: [tailwind(), pagefind(), sitemap(), mdx()],
 })
