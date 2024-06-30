@@ -1,0 +1,16 @@
+{
+  "name": "esbuild",
+  "description": "esbuildは高速で簡単に使えるバンドラーです。",
+  "image": "./esbuild.svg",
+  "fullSizeImage": true,
+  "links": [
+    {
+      "text": "esbuild - 公式サイト",
+      "url": "https://esbuild.github.io/"
+    },
+    {
+      "text": "esbuild - GitHub",
+      "url": "https://github.com/evanw/esbuild"
+    }
+  ]
+}
