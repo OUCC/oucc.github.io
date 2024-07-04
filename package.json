@@ -43,6 +43,7 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "schema-dts": "^1.1.2",
     "sirv": "^2.0.4",
-    "tsx": "^4.16.2"
+    "tsx": "^4.16.2",
+    "vite": "^5.3.3"
   }
 }

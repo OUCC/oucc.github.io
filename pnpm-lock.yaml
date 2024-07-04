@@ -72,6 +72,9 @@ importers:
       tsx:
         specifier: ^4.16.2
         version: 4.16.2
+      vite:
+        specifier: ^5.3.3
+        version: 5.3.3(@types/node@20.14.9)
 
 packages:
 
