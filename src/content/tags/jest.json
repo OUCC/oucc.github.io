@@ -1,6 +1,8 @@
 {
   "name": "Jest",
   "description": "JavaScriptのテストフレームワークです",
+  "image": "./jest.svg",
+  "fullSizeImage": true,
   "links": [
     {
       "url": "https://jestjs.io/",

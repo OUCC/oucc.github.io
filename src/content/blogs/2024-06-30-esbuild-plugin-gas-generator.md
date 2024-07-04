@@ -3,7 +3,7 @@ title: ESModuleをGASで実行できるようにする
 description: esbuildを用いてESModuleをGAS環境で実行できるようにするプラグインを作成しました。
 category: tech
 author: miyaji
-tags: [node, esbuild, javascript]
+tags: [node, esbuild, javascript, gas]
 ---
 
 exportした関数のエントリーポイントを自動で生成するesbuildプラグイン **esbuild-plugin-gas-generator** を作成しました。
