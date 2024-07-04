@@ -1,0 +1,5 @@
+{
+  "name": "GAS",
+  "description": "Google Apps Script (GAS) とは、Googleによって開発されたスクリプトプラットフォームである軽量のアプリケーション開発のためのGoogleのワークスペースプラットフォームです。",
+  "image": "./gas.svg"
+}
