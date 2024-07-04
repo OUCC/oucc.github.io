@@ -36,7 +36,7 @@ tags:
 以下のようにコマンドを使うことで手動で更新することもできます。
 
 ```bash
-$ npm run update-blogmeta -- src/content/blogs/NEW-POST1.md src/content/blogs/NEW-POST2.md
+$ pnpm run update-blogmeta -- src/content/blogs/NEW-POST1.md src/content/blogs/NEW-POST2.md
 ```
 
 ## 著者の追加

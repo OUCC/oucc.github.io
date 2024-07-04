@@ -11,8 +11,14 @@
     "typecheck": "astro check && tsc --noEmit",
     "lint": "prettier --check .",
     "format": "prettier --write .",
-    "validate-blog": "ts-node --esm tools/validate-blog.ts",
-    "update-blogmeta": "ts-node --esm tools/update-blogmeta.ts"
+    "validate-blog": "tsx tools/validate-blog.ts",
+    "update-blogmeta": "tsx tools/update-blogmeta.ts"
+  },
+  "packageManager": "pnpm@9.4.0",
+  "engines": {
+    "node": "^20.15.0",
+    "pnpm": "^9.4.0",
+    "npm": "please_use_pnpm_instead"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -37,6 +43,6 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "schema-dts": "^1.1.2",
     "sirv": "^2.0.4",
-    "ts-node": "^10.9.2"
+    "tsx": "^4.16.2"
   }
 }

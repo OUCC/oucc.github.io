@@ -4,7 +4,17 @@ OUCC のウェブサイトです。静的サイトジェネレータ Astro を�
 
 このプロジェクトでは Prettier によってコードのフォーマットを統一しています。ファイルの保存時に自動的に Prettier でフォーマットするようエディタを設定してください。
 
-このプロジェクトではシンボリックリンクを扱っているので`git config --global core.symlinks true`を設定してください
+シンボリックリンクを扱うためclone前に以下のコマンドを実行してください
+
+```sh
+git config --global core.symlinks true
+```
+
+pnpmを使用しているため以下のコマンドを実行してください。
+
+```sh
+corepack enable pnpm
+```
 
 ## ディレクトリ構成
 
@@ -32,17 +42,17 @@ cf. [ディレクトリ構成 🚀 Astroドキュメント](https://docs.astro.b
 
 ## コマンド
 
-| Command                   | Action                                                                |
-| :------------------------ | :-------------------------------------------------------------------- |
-| `npm install`             | 開発に必要なパッケージをインストールする                              |
-| `npm run dev`             | 開発サーバーを起動する                                                |
-| `npm run build`           | 本番ビルドを `./dist/out/` に書き出し、ブログのインデックスを作成する |
-| `npm run preview`         | 書き出した本番ビルドをプレビューする                                  |
-| `npm run typecheck`       | 型チェックを実行する                                                  |
-| `npm run lint`            | コードのフォーマットが正しいかチェックする                            |
-| `npm run format`          | コードのフォーマットを自動で修正する                                  |
-| `npm run validate-blog`   | 指定したファイルがブログの更新の際に変更して良いか判定します          |
-| `npm run update-blogmeta` | 指定したファイルに対応するブログのメタ情報を更新します                |
+| Command                    | Action                                                                |
+| :------------------------- | :-------------------------------------------------------------------- |
+| `pnpm install`             | 開発に必要なパッケージをインストールする                              |
+| `pnpm run dev`             | 開発サーバーを起動する                                                |
+| `pnpm run build`           | 本番ビルドを `./dist/out/` に書き出し、ブログのインデックスを作成する |
+| `pnpm run preview`         | 書き出した本番ビルドをプレビューする                                  |
+| `pnpm run typecheck`       | 型チェックを実行する                                                  |
+| `pnpm run lint`            | コードのフォーマットが正しいかチェックする                            |
+| `pnpm run format`          | コードのフォーマットを自動で修正する                                  |
+| `pnpm run validate-blog`   | 指定したファイルがブログの更新の際に変更して良いか判定します          |
+| `pnpm run update-blogmeta` | 指定したファイルに対応するブログのメタ情報を更新します                |
 
 ## ブログ
 
