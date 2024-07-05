@@ -1,0 +1,15 @@
+{
+  "name": "TypeScript",
+  "description": "TypeScriptはJavaScriptの上に構築された強く型付けされたプログラミング言語です。",
+  "image": "./typescript.svg",
+  "links": [
+    {
+      "url": "https://www.typescriptlang.org/",
+      "text": "TypeScript - 公式サイト"
+    },
+    {
+      "url": "https://github.com/microsoft/TypeScript",
+      "text": "TypeScript - GitHub"
+    }
+  ]
+}
