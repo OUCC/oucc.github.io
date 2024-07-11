@@ -28,7 +28,7 @@ jobs:
           key: ${{ runner.os }}-astro-build-${{ github.event_name == 'pull_request' && github.event.pull_request.id || 'main' }}
           restore-keys: ${{ runner.os }}-astro-build-
       - run: pnpm run build
-      - uses: actions/upload-pages-artifact@v1
+      - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main'
         with:
           path: dist/out
