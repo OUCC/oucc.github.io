@@ -79,7 +79,7 @@ jobs:
       - run: pnpm install
       - run: |
           git fetch origin main
-          git diff origin/main..HEAD --name-only | xargs pnpm run validate-blog --
+          git diff origin/main..HEAD --name-only | xargs pnpm run validate-blog
 
   update-blogmeta:
     needs: [validate-blog]
@@ -108,7 +108,7 @@ jobs:
       - name: Update Blog Meta
         run: |
           git fetch origin main
-          git diff origin/main..HEAD --name-status | xargs pnpm run update-blogmeta --
+          git diff origin/main..HEAD --name-status | xargs pnpm run update-blogmeta
       - run: pnpm run format
       - name: Git Commit
         run: |
