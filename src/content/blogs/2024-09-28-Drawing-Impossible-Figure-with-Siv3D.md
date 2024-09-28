@@ -5,6 +5,7 @@ category: tech
 author: MrMocchy
 tags:
   - c-cpp
+  - siv3d
 ---
 
 
