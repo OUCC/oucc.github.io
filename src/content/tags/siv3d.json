@@ -1,0 +1,16 @@
+{
+  "name": "Siv3D",
+  "description": "Siv3D（シブスリーディー）は、音や画像、AI を使ったゲームやアプリを、モダンな C++ コードで楽しく簡単にプログラミングできるオープンソースのフレームワークです。",
+  "image": "./siv3d.jpg",
+  "fullSizeImage": true,
+  "links": [
+    {
+      "url": "https://siv3d.github.io/ja-jp/",
+      "text": "Siv3D 公式サイト"
+    },
+    {
+      "url": "https://github.com/Siv3D/OpenSiv3D",
+      "text": "GitHub"
+    }
+  ]
+}
