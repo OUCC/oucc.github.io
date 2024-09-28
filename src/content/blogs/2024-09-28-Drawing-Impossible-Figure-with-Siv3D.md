@@ -54,27 +54,31 @@ Siv3D v0.6.15 を使用。
 ## 各種レンダーテクスチャ
 
 3D空間に立方体のフレームを全て普通に描画したレンダーテクスチャ。
-![全体を描画したレンダーテクスチャ](./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/whole.png)
+
+<img alt="全体を描画したレンダーテクスチャ" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/whole.png" height="200">
 
 手前の辺以外のフレームを普通に描画したレンダーテクスチャ。
-![手前の辺以外を描画したレンダーテクスチャ](./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/back.png)
+
+<img alt="手前の辺以外を描画したレンダーテクスチャ" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/back.png" height="200">
 
 そして、肝心のマスクのレンダーテクスチャ。
 描画方法はほとんど同じで、各部の色だけを、背景を黒、環境光を白、日光を黒（なし）、奥の辺を白、間の辺を黒に設定したもの。
 これも手前の辺は描画しない。
-![マスク用のレンダーテクスチャ](./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/mask.png)
+
+<img alt="マスク用のレンダーテクスチャ" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/mask.png" height="200">
 
 そしてこれらをこのように合成する。
-![レンダーテクスチャの合成フロー](./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/flow.png)
+
+<img alt="レンダーテクスチャの合成フロー" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/flow.png" height="200">
 
 すると不可能図形が描画されるのだ！
 
-![不可能図形の描画結果](./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.png)
+<img alt="不可能図形の描画結果" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.png" height="200">
 
 まあこれは見たことあるだろうけど、こう視点を動かして見るのは新鮮だったりしないだろうか。
 ただ見ていると少し気分が悪くなるかもしれない。
 
-![不可能図形の描画結果.gif](./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.gif)
+<img alt="不可能図形の描画結果.gif" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.gif" height="200">
 
 ## コード
 
