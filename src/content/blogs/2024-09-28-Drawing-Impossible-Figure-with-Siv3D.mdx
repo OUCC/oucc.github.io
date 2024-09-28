@@ -7,16 +7,22 @@ tags:
   - c-cpp
   - siv3d
 ---
-
+import Image from '@/components/common/Image.astro'
+import Mask from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/mask.png"
+import Back from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/back.png"
+import Whole from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/whole.png"
+import Result from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.png"
+import Flow from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/flow.png"
+import Gif from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.gif"
 
 ## 不可能図形とは
 
 こういうやつ。
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Impossible_cube_illusion_angle.svg" height="200" alt="ある角度から見ると、幾何学の法則を無視しているように見える立方体 (wikipedia)">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Impossible_objects.svg" height="200" alt="2つの有名な不可能図形。ペンローズの三角形とブリヴェット（悪魔のフォーク）(wikipedia)">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Impossible_staircase.svg" height="200" alt="ペンローズの階段 (wikipedia)">
-
+<ul style="display: flex;">
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Impossible_cube_illusion_angle.svg" height="200" width="200" alt="ある角度から見ると、幾何学の法則を無視しているように見える立方体 (wikipedia)"></li>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Impossible_objects.svg" height="200" width="200" alt="2つの有名な不可能図形。ペンローズの三角形とブリヴェット（悪魔のフォーク）(wikipedia)"></li>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Impossible_staircase.svg" height="200" width="200" alt="ペンローズの階段 (wikipedia)"></li>
+</ul>
 https://ja.wikipedia.org/wiki/不可能図形
 
 エッシャーの作品などで有名。
@@ -29,9 +35,11 @@ Siv3D v0.6.15 を使用。
 （今回使用した機能はプラットフォームに依存しないから書かなくていいかもしれないけど、Windowsで Visual Studio Community 2022 を使用。）
 
 主に使用したSiv3Dの機能は、
+
 - 3D描画
 - レンダーテクスチャ
 - 2Dカスタムシェーダ
+
 の3つ。
 
 ## 不可能図形の描画
@@ -55,30 +63,49 @@ Siv3D v0.6.15 を使用。
 
 3D空間に立方体のフレームを全て普通に描画したレンダーテクスチャ。
 
-<img alt="全体を描画したレンダーテクスチャ" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/whole.png" height="200">
+<figure>
+ <Image src={Whole} width="200" height="200" />
+ <figcaption> 全体を描画したレンダーテクスチャ </figcaption>
+</figure>
+
 
 手前の辺以外のフレームを普通に描画したレンダーテクスチャ。
 
-<img alt="手前の辺以外を描画したレンダーテクスチャ" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/back.png" height="200">
+<figure>
+ <Image src={Back} width="200" height="200" />
+ <figcaption> 手前の辺以外を描画したレンダーテクスチャ </figcaption>
+</figure>
 
 そして、肝心のマスクのレンダーテクスチャ。
 描画方法はほとんど同じで、各部の色だけを、背景を黒、環境光を白、日光を黒（なし）、奥の辺を白、間の辺を黒に設定したもの。
 これも手前の辺は描画しない。
 
-<img alt="マスク用のレンダーテクスチャ" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/mask.png" height="200">
+<figure>
+ <Image src={Mask} width="200" height="200" />
+ <figcaption> マスク用のレンダーテクスチャ </figcaption>
+</figure>
 
 そしてこれらをこのように合成する。
 
-<img alt="レンダーテクスチャの合成フロー" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/flow.png" height="200">
+<figure>
+ <Image src={Flow} width="200" height="200" />
+ <figcaption> レンダーテクスチャの合成フロー </figcaption>
+</figure>
 
 すると不可能図形が描画されるのだ！
 
-<img alt="不可能図形の描画結果" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.png" height="200">
+<figure>
+ <Image src={Result} width="200" height="200" />
+ <figcaption> 不可能図形の描画結果 </figcaption>
+</figure>
 
 まあこれは見たことあるだろうけど、こう視点を動かして見るのは新鮮だったりしないだろうか。
 ただ見ていると少し気分が悪くなるかもしれない。
 
-<img alt="不可能図形の描画結果.gif" src="./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/result.gif" height="200">
+<figure>
+ <Image src={Gif} width="200" height="200" />
+ <figcaption> 不可能図形の描画結果の動画（gif） </figcaption>
+</figure>
 
 ## コード
 
