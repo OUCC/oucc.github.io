@@ -4,6 +4,7 @@ description: 説明
 category: tech
 author: TaPet
 tags:
+  - browser
 ---
 
 ## bookmarks.htmlとは
