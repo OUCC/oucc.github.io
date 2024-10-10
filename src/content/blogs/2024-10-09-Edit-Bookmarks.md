@@ -1,6 +1,6 @@
 ---
 title: ブックマーク(bookmarks.html)を編集してみる
-description: 説明
+description: ブラウザのブックマークをhtmlで出力し、xmlパーサーでパースできるようにして、編集しました。
 category: tech
 author: TaPet
 tags:
