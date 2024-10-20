@@ -1,0 +1,12 @@
+{
+  "name": "Cloudflare",
+  "description": "Cloudflareは格安でCDNやセキュリティサービスを提供しているネットワークサービスです。また、エッジコンピューティングを利用したサーバーレス関数も提供しています",
+  "fullSizeImage": true,
+  "image": "./cloudflare.png",
+  "links": [
+    {
+      "text": "Cloudflare - 公式サイト",
+      "url": "https://www.cloudflare.com/ja-jp/"
+    }
+  ]
+}
