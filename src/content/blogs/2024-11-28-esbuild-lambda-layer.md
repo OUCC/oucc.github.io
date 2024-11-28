@@ -3,7 +3,7 @@ title: esbuildで効率の良いLambda Layerを作る
 description: "esbuildを使ってLambdaとLambda Layer用のバンドル方法をCDKを交えて説明します。"
 category: tech
 author: miyaji
-tags: ["esbuild", "javascript", "aws", "aws-lambda", "aws-cdk"]
+tags: ["advent-calendar", "esbuild", "javascript", "aws", "aws-lambda", "aws-cdk"]
 ---
 
 CDKでLambdaには`NodejsFunction`というバンドルとminifyを行うConstructがあるものの、Lambda Layerにはそのようなものがありません。そこで、esbuildを使ってLambdaとLambda Layerの両方のバンドルを行なっていきます。
