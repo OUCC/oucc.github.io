@@ -1,0 +1,16 @@
+{
+  "name": "AWS CDK",
+  "description": "AWS Cloud Development Kit（AWS CDK）は、プログラミング言語を使用してインフラストラクチャをコードとして定義できるツールです。クラウドリソースを効率的かつ再利用可能に構築・管理するための強力なツールセットを提供します。",
+  "image": "./aws-cdk.png",
+  "fullSizeImage": true,
+  "links": [
+    {
+      "text": "aws-cdk - GitHub",
+      "url": "https://github.com/aws/aws-cdk"
+    },
+    {
+      "text": "AWS Cloud Development Kit - AWS",
+      "url": "https://aws.amazon.com/jp/cdk/"
+    }
+  ]
+}
