@@ -1,0 +1,12 @@
+{
+  "name": "Lambda",
+  "description": "AWS Lambdaは、サーバー管理の必要なくコードを実行できるサーバーレスコンピューティングサービスです。イベント駆動型で、自動スケーリングに対応し、使用したリソース分だけ課金されます。",
+  "image": "./aws-lambda.svg",
+  "fullSizeImage": true,
+  "links": [
+    {
+      "text": "AWS Lambda - AWS",
+      "url": "https://aws.amazon.com/jp/lambda/"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "AWS",
+  "description": "Amazon Web Services（AWS）は、クラウドコンピューティングのプラットフォームであり、ストレージ、計算能力、ネットワーキング、データベースなど、幅広いクラウドサービスを提供します。",
+  "image": "./aws.svg",
+  "links": [
+    {
+      "url": "https://aws.amazon.com/jp/",
+      "text": "Amazon Web Services - ホーム"
+    }
+  ]
+}
