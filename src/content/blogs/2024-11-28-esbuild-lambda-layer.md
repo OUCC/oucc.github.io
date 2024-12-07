@@ -6,6 +6,8 @@ author: miyaji
 tags: ["advent-calendar", "esbuild", "javascript", "aws", "aws-lambda", "aws-cdk"]
 ---
 
+この記事は [OUCC Advent Calendar 2024](https://adventar.org/calendars/10655) の 1日目の記事です。
+
 CDKでLambdaには`NodejsFunction`というバンドルとminifyを行うConstructがあるものの、Lambda Layerにはそのようなものがありません。そこで、esbuildを使ってLambdaとLambda Layerの両方のバンドルを行なっていきます。
 
 ## esbuildのCode Splitting
