@@ -10,7 +10,7 @@ author: member
 category: tech
 tags: [advent-calendar]
 ---
-import Image from "@/components/common/Image.astro"
+import { Image } from "astro:assets"
 import Screenshot from "./487/スクリーンショット-2021-12-15-152205-1024x719.png"
 
 <p><a href="https://adventar.org/calendars/6722">OUCC Advent Calendar 2021</a> 16日目の記事です。　執筆者: ちょくぽ <br/>前回はShiokaiさんの <a href="/blog/articles/512/" title="/blog/articles/512">GrabPassで取得したテクスチャが意外と後まで使える</a> でした。</p>
@@ -27,7 +27,7 @@ import Screenshot from "./487/スクリーンショット-2021-12-15-152205-1024
 
 <p>確かに使用色がばらけるほど目立ちますが、ゲームや動画・キャラデザの文脈では目立ちすぎると目が疲れる・悪目立ちといった印象になるので、メイン色範囲(直線)1本、アクセント1,2色程度に留めましょう。</p>
 
-<figure class="wp-block-image size-large"><Image src={Screenshot} alt="OUCC Advent Calendar 2021 day16 pic1" class="wp-image-501" /></figure>
+<figure class="wp-block-image size-large"><Image src={Screenshot} layout="responsive" alt="OUCC Advent Calendar 2021 day16 pic1" class="wp-image-501" /></figure>
 
 <p> </p>
 

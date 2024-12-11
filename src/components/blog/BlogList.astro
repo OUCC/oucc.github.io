@@ -10,13 +10,13 @@ interface Props {
 const { blogs, sorted } = Astro.props
 
 const blogMetas = await Promise.all(
-  blogs.map((b) => getEntry({ collection: 'blog-metas', id: b.slug })),
+  blogs.map((b) => getEntry({ collection: 'blog-metas', id: b.id })),
 )
 
 const sortedBlogs = blogs.map((b, i) => ({
   ...b.data,
   ...(blogMetas[i]?.data ?? { postDate: new Date() }),
-  slug: b.slug,
+  slug: b.id,
 }))
 if (!sorted) {
   sortedBlogs.sort(

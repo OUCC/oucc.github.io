@@ -7,7 +7,7 @@ tags:
   - c-cpp
   - siv3d
 ---
-import Image from '@/components/common/Image.astro'
+import { Image } from "astro:assets"
 import Mask from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/mask.png"
 import Back from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/back.png"
 import Whole from "./2024-09-28-Drawing-Impossible-Figure-with-Siv3D/whole.png"
@@ -64,7 +64,7 @@ Siv3D v0.6.15 を使用。
 3D空間に立方体のフレームを全て普通に描画したレンダーテクスチャ。
 
 <figure>
- <Image src={Whole} width="200" height="200" />
+ <Image src={Whole} alt="" width="200" height="200" />
  <figcaption> 全体を描画したレンダーテクスチャ </figcaption>
 </figure>
 
@@ -72,7 +72,7 @@ Siv3D v0.6.15 を使用。
 手前の辺以外のフレームを普通に描画したレンダーテクスチャ。
 
 <figure>
- <Image src={Back} width="200" height="200" />
+ <Image src={Back} alt="" width="200" height="200" />
  <figcaption> 手前の辺以外を描画したレンダーテクスチャ </figcaption>
 </figure>
 
@@ -81,21 +81,21 @@ Siv3D v0.6.15 を使用。
 これも手前の辺は描画しない。
 
 <figure>
- <Image src={Mask} width="200" height="200" />
+ <Image src={Mask} alt="" width="200" height="200" />
  <figcaption> マスク用のレンダーテクスチャ </figcaption>
 </figure>
 
 そしてこれらをこのように合成する。
 
 <figure>
- <Image src={Flow} width="200" height="200" />
+ <Image src={Flow} alt="" width="200" height="200" />
  <figcaption> レンダーテクスチャの合成フロー </figcaption>
 </figure>
 
 すると不可能図形が描画されるのだ！
 
 <figure>
- <Image src={Result} width="200" height="200" />
+ <Image src={Result} alt="" width="200" height="200" />
  <figcaption> 不可能図形の描画結果 </figcaption>
 </figure>
 
@@ -103,7 +103,7 @@ Siv3D v0.6.15 を使用。
 ただ見ていると少し気分が悪くなるかもしれない。
 
 <figure>
- <Image src={Gif} width="200" height="200" />
+ <Image src={Gif} alt="" width="200" height="200" />
  <figcaption> 不可能図形の描画結果の動画（gif） </figcaption>
 </figure>
 

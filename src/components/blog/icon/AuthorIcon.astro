@@ -1,21 +1,36 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import defaultImage from '@/assets/avatar.svg'
-import Image from '@/components/common/Image.astro'
+import DefaultImage from '@/assets/avatar.svg'
+import { Image } from 'astro:assets'
 type Props = CollectionEntry<'authors'>['data'] & { size: number }
 
 const { size, ...author } = Astro.props
-
-const src =
-  author.image ?? author.github !== undefined
-    ? `https://github.com/${author.github}.png`
-    : defaultImage
 ---
 
-<Image
-  src={src}
-  alt={`${author.name} のアイコン`}
-  class="aspect-square rounded-full"
-  width={size}
-  height={size}
-/>
+{
+  author.image ? (
+    <Image
+      src={author.image}
+      alt={`${author.name} のアイコン`}
+      layout="responsive"
+      class="aspect-square rounded-full"
+      width={size}
+      height={size}
+    />
+  ) : author.github ? (
+    <img
+      src={`https://github.com/${author.github}.png`}
+      alt={`${author.name} のアイコン`}
+      class="aspect-square rounded-full"
+      width={size}
+      height={size}
+    />
+  ) : (
+    <DefaultImage
+      role="img"
+      aria-label={`${author.name} のアイコン`}
+      class="aspect-square rounded-full"
+      size={size}
+    />
+  )
+}
