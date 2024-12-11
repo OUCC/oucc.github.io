@@ -1,13 +1,12 @@
 ---
-import Image from '@/components/common/Image.astro'
-import ouccImage from '@/assets/oucc.svg'
+import OuccImage from '@/assets/oucc.svg'
 import NavigationListItem from './NavigationListItem.astro'
 import DrWani from './DrWani.astro'
 ---
 
 <nav class="flex h-full w-full flex-col bg-white">
   <div class="flex justify-center py-2">
-    <Image src={ouccImage} alt="OUCC" class="h-20 w-20 object-contain" />
+    <OuccImage role="img" aria-label="OUCC" class="h-20 w-20 object-contain" />
   </div>
   <ul class="flex flex-col text-center">
     <NavigationListItem to="/">トップページ</NavigationListItem>

@@ -1,5 +1,10 @@
 ---
-import { getEntries, type CollectionEntry, getEntry } from 'astro:content'
+import {
+  getEntries,
+  type CollectionEntry,
+  getEntry,
+  render,
+} from 'astro:content'
 import TagSmallList from './tag/TagSmallList.astro'
 import AuthorIcon from './icon/AuthorIcon.astro'
 import { formatDate } from '@/utils/format-date'
@@ -11,11 +16,11 @@ interface Props {
 const { blog } = Astro.props
 const { data: blogMeta } = (await getEntry({
   collection: 'blog-metas',
-  id: blog.slug,
+  id: blog.id,
 })) ?? { data: { postDate: new Date(), updateDate: undefined } }
 const tags = await getEntries(blog.data.tags)
 const author = await getEntry(blog.data.author)
-const { Content } = await blog.render()
+const { Content } = await render(blog)
 ---
 
 <div class="flex flex-col items-center py-4">

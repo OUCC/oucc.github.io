@@ -1,6 +1,6 @@
 ---
+import { Image } from 'astro:assets'
 import Section from '@/components/common/Section.astro'
-import Image from '@/components/common/Image.astro'
 import discordImage from '@/assets/discord.webp'
 import meetingImage from '@/assets/online_kaigi_woman.webp'
 ---
@@ -12,6 +12,7 @@ import meetingImage from '@/assets/online_kaigi_woman.webp'
       <Image
         class="w-full"
         src={discordImage}
+        layout="responsive"
         alt="普段のDiscordでの会話"
         sizes="100%"
       />
@@ -20,7 +21,13 @@ import meetingImage from '@/assets/online_kaigi_woman.webp'
       </div>
     </div>
     <div class="flex max-w-[32rem] flex-col gap-2.5">
-      <Image class="w-full" src={meetingImage} alt="部会の様子" sizes="100%" />
+      <Image
+        class="w-full"
+        layout="responsive"
+        src={meetingImage}
+        alt="部会の様子"
+        sizes="100%"
+      />
       <div class="text-justify-ja">
         毎月部会を開催し、部の運営に関わることを話し合っています。部会は原則として参加必須ですが、事情がある場合は欠席し後日議事録を確認することもできます。
       </div>

@@ -8,19 +8,19 @@ import { getCollection, getEntries } from 'astro:content'
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blogs')
   return blogEntries.map((blog) => ({
-    params: { slug: blog.slug },
+    params: { slug: blog.id },
     props: { blog },
   }))
 }
 
 const { blog } = Astro.props
-const statistics = await getEntries([...(await getBlogStatistics(blog.slug))])
+const statistics = await getEntries([...(await getBlogStatistics(blog.id))])
 ---
 
 <BlogLayout
   title={blog.data.title}
   description={blog.data.description}
-  image={`/blog/articles/${blog.slug}/ogp.png`}
+  image={`/blog/articles/${blog.id}/ogp.png`}
 >
   <main class="bg-dot bg-dot-secondary">
     <BlogContent blog={blog} />

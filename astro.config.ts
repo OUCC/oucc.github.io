@@ -39,6 +39,12 @@ export default defineConfig({
     prefetchAll: true,
   },
   trailingSlash: 'always',
+  experimental: {
+    responsiveImages: true,
+    svg: {
+      mode: 'sprite',
+    },
+  },
   markdown: {
     remarkPlugins: [
       remarkLinkCard,
@@ -47,9 +53,6 @@ export default defineConfig({
         { replacer: getFormatUrl(SITE_URL) } satisfies RemarkLinkRewriteOptions,
       ],
     ],
-  },
-  experimental: {
-    contentCollectionJsonSchema: true,
   },
   integrations: [tailwind(), pagefind(), sitemap(), mdx()],
 })
