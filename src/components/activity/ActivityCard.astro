@@ -1,7 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro'
+import { Image } from 'astro:assets'
 import Icon from '@/components/common/Icon.astro'
-import Image from '@/components/common/Image.astro'
 import LinkButton from '@/components/common/button/LinkButton.astro'
 
 interface Props {
@@ -20,7 +20,13 @@ const { title, image, link } = Astro.props
   </h3>
   {
     image && (
-      <Image class="w-full" src={image} alt={`${title}の様子`} sizes="100%" />
+      <Image
+        class="w-full"
+        layout="responsive"
+        src={image}
+        alt={`${title}の様子`}
+        sizes="100%"
+      />
     )
   }
   <div class="text-justify-ja">

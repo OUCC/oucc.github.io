@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import TagIcon from '../icon/TagIcon.astro'
-import { BlogCategoryMapping, type BlogCategory } from '@/content/config'
+import { BlogCategoryMapping, type BlogCategory } from '@/content.config'
 interface Props {
   blogCategory: BlogCategory
   tags: CollectionEntry<'tags'>[]

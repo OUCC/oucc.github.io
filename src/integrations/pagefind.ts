@@ -48,11 +48,6 @@ export default function pagefind(): AstroIntegration {
           outDir = fileURLToPath(
             new URL(config.base?.replace(/^\//, ''), config.outDir),
           )
-        } else if (
-          config.adapter?.name === '@astrojs/node' &&
-          config.output === 'hybrid'
-        ) {
-          outDir = fileURLToPath(config.build.client!)
         } else {
           outDir = fileURLToPath(config.outDir)
         }

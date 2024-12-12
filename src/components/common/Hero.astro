@@ -28,8 +28,7 @@ const { title, copy, compact = false } = Astro.props
             typeof title === 'string'
               ? title
               : title.reduce((prev, cur, index) => {
-                  if(index === 0)
-                    return cur
+                  if (index === 0) return cur
                   else
                     // 改行の発生を抑制
                     // prettier-ignore
