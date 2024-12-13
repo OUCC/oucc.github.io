@@ -13,34 +13,20 @@ const { tag, size } = Astro.props
 
 {
   tag.image ? (
-    tag.image.format === 'svg' ? (
-      <Image
-        src={tag.image}
-        alt={`${tag.name} のアイコン`}
-        class:list={[
-          'aspect-square',
-          {
-            'rounded-full': tag.fullSizeImage,
-          },
-        ]}
-        width={size}
-        height={size}
-      />
-    ) : (
-      <Image
-        src={tag.image}
-        alt={`${tag.name} のアイコン`}
-        layout="responsive"
-        class:list={[
-          'aspect-square',
-          {
-            'rounded-full': tag.fullSizeImage,
-          },
-        ]}
-        width={size}
-        height={size}
-      />
-    )
+    <Image
+      src={tag.image}
+      alt={`${tag.name} のアイコン`}
+      loading="lazy"
+      layout={tag.image.format === 'svg' ? 'none' : 'responsive'}
+      class:list={[
+        'aspect-square',
+        {
+          'rounded-full': tag.fullSizeImage,
+        },
+      ]}
+      width={size}
+      height={size}
+    />
   ) : (
     <DefaultImage
       role="img"

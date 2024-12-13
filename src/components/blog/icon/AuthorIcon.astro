@@ -12,7 +12,8 @@ const { size, ...author } = Astro.props
     <Image
       src={author.image}
       alt={`${author.name} のアイコン`}
-      layout="responsive"
+      loading="lazy"
+      layout={author.image.format === 'svg' ? 'none' : 'responsive'}
       class="aspect-square rounded-full"
       width={size}
       height={size}
@@ -21,6 +22,7 @@ const { size, ...author } = Astro.props
     <img
       src={`https://github.com/${author.github}.png`}
       alt={`${author.name} のアイコン`}
+      loading="lazy"
       class="aspect-square rounded-full"
       width={size}
       height={size}
