@@ -1,4 +1,6 @@
 import { z, defineCollection, reference } from 'astro:content'
+import { glob } from 'astro/loaders'
+import path from 'node:path'
 
 export const BlogCategoryMapping = {
   tech: '技術',
@@ -7,7 +9,7 @@ export const BlogCategoryMapping = {
 } as const satisfies Record<string, string>
 export type BlogCategory = keyof typeof BlogCategoryMapping
 const blogsCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/content/blogs' }),
   schema: z.object({
     title: z.string().min(1),
     description: z
@@ -26,7 +28,7 @@ const blogsCollection = defineCollection({
 })
 
 const blogsMetaCollection = defineCollection({
-  type: 'data',
+  loader: glob({ pattern: '*.json', base: 'src/content/blog-metas' }),
   schema: z.object({
     postDate: z
       .string()
@@ -41,7 +43,11 @@ const blogsMetaCollection = defineCollection({
 })
 
 const authorsCollection = defineCollection({
-  type: 'data',
+  loader: glob({
+    pattern: '*.json',
+    base: 'src/content/authors',
+    generateId: (o) => path.basename(o.entry).replace('.json', ''),
+  }),
   schema: ({ image }) =>
     z.object({
       name: z.string().min(1),
@@ -52,7 +58,11 @@ const authorsCollection = defineCollection({
 })
 
 const tagsCollection = defineCollection({
-  type: 'data',
+  loader: glob({
+    pattern: '*.json',
+    base: 'src/content/tags',
+    generateId: (o) => path.basename(o.entry).replace('.json', ''),
+  }),
   schema: ({ image }) =>
     z.object({
       name: z.string().min(1),

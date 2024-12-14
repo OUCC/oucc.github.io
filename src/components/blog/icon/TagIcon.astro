@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import defaultImage from '@/assets/hashtag.svg'
-import Image from '@/components/common/Image.astro'
+import DefaultImage from '@/assets/hashtag.svg'
+import { Image } from 'astro:assets'
 
 interface Props {
   tag: CollectionEntry<'tags'>['data']
@@ -11,15 +11,28 @@ interface Props {
 const { tag, size } = Astro.props
 ---
 
-<Image
-  src={tag.image ?? defaultImage}
-  alt={`${tag.name} のアイコン`}
-  class:list={[
-    'aspect-square',
-    {
-      'rounded-full': tag.fullSizeImage,
-    },
-  ]}
-  width={size}
-  height={size}
-/>
+{
+  tag.image ? (
+    <Image
+      src={tag.image}
+      alt={`${tag.name} のアイコン`}
+      loading="lazy"
+      layout={tag.image.format === 'svg' ? 'none' : 'responsive'}
+      class:list={[
+        'aspect-square',
+        {
+          'rounded-full': tag.fullSizeImage,
+        },
+      ]}
+      width={size}
+      height={size}
+    />
+  ) : (
+    <DefaultImage
+      role="img"
+      aria-label={`${tag.name} のアイコン`}
+      class="aspect-square"
+      size={size}
+    />
+  )
+}

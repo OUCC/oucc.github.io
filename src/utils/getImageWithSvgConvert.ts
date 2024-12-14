@@ -15,7 +15,7 @@ export const getImageWithSvgConvert = async (
   // `src`がPromiseである場合、そのPromiseが解決されるまで待機する。
   const src =
     typeof options.src === 'object' && 'then' in options.src
-      ? (await options.src).default ?? (await options.src)
+      ? ((await options.src).default ?? (await options.src))
       : options.src
 
   // 入力画像がSVGかつ出力フォーマット指定がSVG以外のとき

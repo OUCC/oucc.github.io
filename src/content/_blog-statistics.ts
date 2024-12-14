@@ -1,29 +1,29 @@
 import { lazy } from '@/utils/lazy'
-import { type CollectionEntry, getCollection, getEntry } from 'astro:content'
-import type { BlogCategory } from './config'
+import { getCollection, getEntry } from 'astro:content'
+import type { BlogCategory } from '@/content.config'
 
-type TagId = CollectionEntry<'tags'>['id']
-type BlogSlug = CollectionEntry<'blogs'>['slug']
+type TagId = string
+type BlogId = string
 export type TagStatistics = Readonly<
-  Record<TagId, readonly Readonly<{ slug: BlogSlug; time: number }>[]>
+  Record<TagId, readonly Readonly<{ id: BlogId; time: number }>[]>
 >
 export type BlogStatistics = Readonly<
   Record<
-    BlogSlug,
-    readonly Readonly<{ collection: 'blogs'; slug: BlogSlug; score: number }>[]
+    BlogId,
+    readonly Readonly<{ collection: 'blogs'; id: BlogId; score: number }>[]
   >
 >
 
 const statistics = lazy(async () => {
   const blogs = await getCollection('blogs')
   const blogMetas = await Promise.all(
-    blogs.map((b) => getEntry({ collection: 'blog-metas', id: b.slug })),
+    blogs.map((b) => getEntry({ collection: 'blog-metas', id: b.id })),
   )
   const tags = await getCollection('tags')
 
   const blogWithMeta = blogs
     .map((b, i) => ({
-      slug: b.slug,
+      id: b.id,
       category: b.data.category,
       tags: b.data.tags,
       time:
@@ -51,16 +51,18 @@ const statistics = lazy(async () => {
   } as const satisfies Record<BlogCategory, any>
 
   const blogStatistics = Object.fromEntries(
-    blogWithMeta.map(({ slug, category, tags }) => {
-      const result: { [K in BlogSlug]?: { score: number; time: number } } = {}
+    blogWithMeta.map(({ id, category, tags }) => {
+      const result: { [K in BlogId]: { score: number; time: number } } = {}
 
-      for (const { slug, time } of categoryStatistics[category])
-        (result[slug] ??= { score: 0, time }).score += 2
+      for (const { id, time } of categoryStatistics[category])
+        (result[id] ??= { score: 0, time }).score += 2
 
-      for (const { slug, time } of tags.flatMap(({ id }) => tagStatistics[id]))
+      for (const { id: slug, time } of tags.flatMap(
+        ({ id }) => tagStatistics[id]!,
+      ))
         (result[slug] ??= { score: 0, time }).score += 1
 
-      delete result[slug]
+      delete result[id]
       const resultArr = Object.entries(result)
         .sort(
           (
@@ -68,27 +70,27 @@ const statistics = lazy(async () => {
             [__, { score: score2, time: time2 }],
           ) => (score1 !== score2 ? score2 - score1 : time2 - time1),
         )
-        .map(([slug, { score }]) => ({
-          slug,
+        .map(([id, { score }]) => ({
+          id,
           score,
           collection: 'blogs',
-        })) as BlogStatistics[BlogSlug]
+        })) as BlogStatistics[BlogId]
 
-      return [slug, resultArr] as const
+      return [id, resultArr] as const
     }),
   ) as BlogStatistics
 
   return { blogStatistics, tagStatistics } as const
 })
 
-export async function getBlogStatistics(slug: BlogSlug) {
+export async function getBlogStatistics(slug: BlogId) {
   const { blogStatistics } = await statistics()
-  return blogStatistics[slug]
+  return blogStatistics[slug]!
 }
 
 export async function getTagStatistics(): Promise<TagStatistics>
 export async function getTagStatistics(id: TagId): Promise<TagStatistics[TagId]>
 export async function getTagStatistics(id?: TagId) {
   const { tagStatistics } = await statistics()
-  return id === undefined ? tagStatistics : tagStatistics[id]
+  return id === undefined ? tagStatistics : tagStatistics[id]!
 }

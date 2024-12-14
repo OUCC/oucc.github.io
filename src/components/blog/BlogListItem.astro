@@ -5,7 +5,7 @@ import AuthorIcon from './icon/AuthorIcon.astro'
 import TagSmallList from './tag/TagSmallList.astro'
 type Props = CollectionEntry<'blogs'>['data'] &
   CollectionEntry<'blog-metas'>['data'] & {
-    slug: CollectionEntry<'blogs'>['slug']
+    slug: CollectionEntry<'blogs'>['id']
   }
 
 const { slug, ...blog } = Astro.props

@@ -1,5 +1,5 @@
 ---
-import Image from './Image.astro'
+import { Image } from 'astro:assets'
 import vrchatImage from '@/assets/vrchat.webp'
 import kc3Image from '@/assets/kc3.webp'
 import exhibition2Image from '@/assets/exhibition2.webp'
@@ -8,11 +8,17 @@ import codeImage from '@/assets/code.webp'
 ---
 
 <div class="slideshow relative h-full w-full">
-  <Image src={vrchatImage} alt="" sizes="100vw" loading="eager" />
-  <Image src={kc3Image} alt="" sizes="100vw" />
-  <Image src={exhibition2Image} alt="" sizes="100vw" />
-  <Image src={bushitsuImage} alt="" sizes="100vw" />
-  <Image src={codeImage} alt="" sizes="100vw" />
+  <Image
+    src={vrchatImage}
+    layout="responsive"
+    alt=""
+    sizes="100vw"
+    loading="eager"
+  />
+  <Image src={kc3Image} layout="responsive" alt="" sizes="100vw" />
+  <Image src={exhibition2Image} layout="responsive" alt="" sizes="100vw" />
+  <Image src={bushitsuImage} layout="responsive" alt="" sizes="100vw" />
+  <Image src={codeImage} layout="responsive" alt="" sizes="100vw" />
 </div>
 
 <style>

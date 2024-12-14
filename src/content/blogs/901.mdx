@@ -14,7 +14,7 @@ tags:
   - automation
   - advent-calendar
 ---
-import Image from '@/components/common/Image.astro'
+import { Image } from "astro:assets"
 import Screenshot from "./901/スクリーンショット (4).png"
 
 ### 前書き
@@ -275,7 +275,7 @@ def pauseCheck():
 ### プレイ画面
 
 <figure>
- <Image src={Screenshot} width="840" height="455" />
+ <Image src={Screenshot} alt="" width="840" height="455" />
  <figcaption> AutoInfinitode2プレイ画面</figcaption>
 </figure>
 {/* [caption id="attachment_903" align="alignnone" width="840"]<img src="https://blog.oucc.org/wp-content/uploads/2022/12/スクリーンショット-4-1024x555.png" alt="" width="840" height="455" class="size-large wp-image-903" /> AutoInfinitode2プレイ画面[/caption] */}
