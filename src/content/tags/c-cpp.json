@@ -4,16 +4,16 @@
   "image": "./cpp.svg",
   "links": [
     {
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/",
+      "text": "ISO/IEC JTC1/SC22/WG14 - C"
+    },
+    {
       "url": "https://isocpp.org/",
       "text": "Standard C++"
     },
     {
       "url": "https://cpprefjp.github.io/",
       "text": "cpprefjp - C++ 日本語リファレンス"
-    },
-    {
-      "url": "https://github.com/isocpp",
-      "text": "Standard C++ Foundation - GitHub"
     }
   ]
 }

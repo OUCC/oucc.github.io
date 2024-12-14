@@ -1,4 +1,15 @@
 {
   "name": "Git",
-  "image": "./git.svg"
+  "description": "Git は分散型バージョン管理システムで、コミットと呼ばれるソースコードのある時点でのスナップショットを蓄積していくこと、（一般的には）単一のリモートリポジトリを元に各ユーザがそれぞれのローカルリポジトリを持つことを特徴とします。",
+  "image": "./git.svg",
+  "links": [
+    {
+      "url": "https://git-scm.com/",
+      "text": "Git"
+    },
+    {
+      "url": "https://github.com/",
+      "text": "GitHub"
+    }
+  ]
 }
