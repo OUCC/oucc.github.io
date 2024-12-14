@@ -446,7 +446,7 @@ internal static async Task<string> Transcript(DataPart audio, OpenAIService open
 
 <details><summary>Program.cs</summary>
 
-```cs:Program.cs
+```cs
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using OpenAI;
@@ -561,9 +561,9 @@ return await rootCommand.InvokeAsync(args);
 
 </details>
 
-<details><summary>Healper.cs</summary>
+<details><summary>Helper.cs</summary>
 
-```cs:Helper.cs
+```cs
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Presentation;
 using OpenAI.Managers;
