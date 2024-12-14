@@ -1,7 +1,7 @@
 ---
 title: GPT/UEFI/Secure Boot 環境で無料ツールだけで Windows をクローン
 description: |
-    この記事は OUCC Advent Calendar 2024 の 13 日目の記事です。GPT/UEFI 環境で有料ソフトを使わずに、無料で Windows のディスククローンを実現する方法を説明します。
+    この記事は OUCC Advent Calendar 2024 の 13 日目の記事です。GPT/UEFI/Secure Boot 環境で有料ソフトを使わずに、無料で Windows のディスククローンを実現する方法を説明します。
 author: watamario15
 category: tech
 tags: [advent-calendar]
