@@ -1,0 +1,15 @@
+{
+  "name": "Typia",
+  "description": "Typia は TypeScript の型からランタイムの関数を生成するライブラリです。型から高速なバリデータやシリアライザを作成できます",
+  "image": "./typia.png",
+  "links": [
+    {
+      "text": "Typia 公式サイト",
+      "url": "https://typia.io/"
+    },
+    {
+      "text": "Typia - GitHub",
+      "url": "https://github.com/samchon/typia"
+    }
+  ]
+}

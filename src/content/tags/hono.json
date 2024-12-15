@@ -1,0 +1,15 @@
+{
+  "name": "Hono",
+  "description": "Hono は、 TypeScript および JavaScript のためのオープンソースな Web フレームワークである。 Web 標準に従っているという特徴がある。",
+  "image": "./hono.svg",
+  "links": [
+    {
+      "text": "Hono 公式サイト",
+      "url": "https://hono.dev/"
+    },
+    {
+      "text": "Hono - GitHub",
+      "url": "https://github.com/honojs/hono"
+    }
+  ]
+}
