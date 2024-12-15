@@ -1,0 +1,14 @@
+{
+  "name": "Open API",
+  "description": "OpenAPIは、RESTful APIを設計・記述するための標準仕様です。APIの構造や動作を記述することで、開発者間のコミュニケーションを効率化し、API設計・実装・テストをスムーズに進めることができます。",
+  "links": [
+    {
+      "text": "OpenAPI Specification v3.0.4",
+      "url": "https://spec.openapis.org/oas/v3.0.4"
+    },
+    {
+      "text": "OpenAPI Specification v3.1.1",
+      "url": "https://spec.openapis.org/oas/v3.1.1"
+    }
+  ]
+}
