@@ -5,10 +5,23 @@ import { Image } from 'astro:assets'
 type Props = CollectionEntry<'authors'>['data'] & { size: number }
 
 const { size, ...author } = Astro.props
+
+const SvgImage =
+  author.image &&
+  author.image.format === 'svg' &&
+  typeof author.image === 'function' &&
+  (author.image as typeof DefaultImage)
 ---
 
 {
-  author.image ? (
+  SvgImage ? (
+    <SvgImage
+      role="img"
+      aria-label={`${author.name} のアイコン`}
+      class="aspect-square rounded-full"
+      size={size}
+    />
+  ) : author.image ? (
     <Image
       src={author.image}
       alt={`${author.name} のアイコン`}

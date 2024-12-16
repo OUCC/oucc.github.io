@@ -9,10 +9,23 @@ interface Props {
 }
 
 const { tag, size } = Astro.props
+
+const SvgImage =
+  tag.image &&
+  tag.image.format === 'svg' &&
+  typeof tag.image === 'function' &&
+  (tag.image as typeof DefaultImage)
 ---
 
 {
-  tag.image ? (
+  SvgImage ? (
+    <SvgImage
+      role="img"
+      aria-label={`${tag.name} のアイコン`}
+      class="aspect-square rounded-full"
+      size={size}
+    />
+  ) : tag.image ? (
     <Image
       src={tag.image}
       alt={`${tag.name} のアイコン`}

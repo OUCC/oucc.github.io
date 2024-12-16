@@ -3,7 +3,7 @@ title: Hono + Typia で OpenAPI ドキュメントを生成する
 description: Hono + Typia で作成した Hono の型から OpenAPI ドキュメントを生成するライブラリを作りました。
 category: tech
 author: miyaji
-tags: [advent-calendar, javascript, typescript, openapi, hono, typia]
+tags: [advent-calendar, javascript, typescript, openapi, hono, typia, rest-api]
 ---
 
 この記事は、[OUCC Advent Calendar 2024](https://adventar.org/calendars/10655) の 15 日目の記事です。昨日は watamario さんの [AtCoder Beginners Selection の Shift only を x86 の bsf 命令で解く](/blog/articles/2024-12-14-bsf/) でした。本日は、私が作成したHono + Typia で作成した Hono の型から OpenAPI ドキュメントを生成するライブラリについて説明します。
