@@ -57,9 +57,11 @@ const statistics = lazy(async () => {
       for (const { id, time } of categoryStatistics[category])
         (result[id] ??= { score: 0, time }).score += 2
 
-      for (const { id: slug, time } of tags.flatMap(
-        ({ id }) => tagStatistics[id]!,
-      ))
+      for (const { id: slug, time } of tags.flatMap(({ id }) => {
+        const tag = tagStatistics[id]
+        if (!tag) throw new Error(`Tag ${id} not found`)
+        return tag
+      }))
         (result[slug] ??= { score: 0, time }).score += 1
 
       delete result[id]
@@ -85,12 +87,18 @@ const statistics = lazy(async () => {
 
 export async function getBlogStatistics(slug: BlogId) {
   const { blogStatistics } = await statistics()
-  return blogStatistics[slug]!
+  const blog = blogStatistics[slug]
+  if (!blog) throw new Error(`Blog ${slug} not found`)
+  return blog
 }
 
 export async function getTagStatistics(): Promise<TagStatistics>
 export async function getTagStatistics(id: TagId): Promise<TagStatistics[TagId]>
 export async function getTagStatistics(id?: TagId) {
   const { tagStatistics } = await statistics()
-  return id === undefined ? tagStatistics : tagStatistics[id]!
+  if (id === undefined) return tagStatistics
+
+  const tag = tagStatistics[id]
+  if (!tag) throw new Error(`Tag ${id} not found`)
+  return tag
 }
