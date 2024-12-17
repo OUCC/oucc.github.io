@@ -3,7 +3,7 @@ title: Hono + Typia で OpenAPI ドキュメントを生成する
 description: Hono + Typia で作成した Hono の型から OpenAPI ドキュメントを生成するライブラリを作りました。
 category: tech
 author: miyaji
-tags: [advent-calendar, javascript, typescript, openapi, hono, typia]
+tags: [advent-calendar, javascript, typescript, openapi, hono, typia, rest-api]
 ---
 
 この記事は、[OUCC Advent Calendar 2024](https://adventar.org/calendars/10655) の 15 日目の記事です。昨日は watamario さんの [AtCoder Beginners Selection の Shift only を x86 の bsf 命令で解く](/blog/articles/2024-12-14-bsf/) でした。本日は、私が作成したHono + Typia で作成した Hono の型から OpenAPI ドキュメントを生成するライブラリについて説明します。
@@ -14,13 +14,13 @@ https://github.com/miyaji255/hono-typia-openapi
 
 ## 動機
 
-Hono には [@honojs/zod-openapi](https://hono.dev/examples/zod-openapi) というライブラリがあり、これを利用することでOpenAPIドキュメントを生成することができます。
+Hono には [@hono/zod-openapi](https://hono.dev/examples/zod-openapi) というライブラリがあり、これを利用することでOpenAPIドキュメントを生成することができます。
 
 しかし、このライブラリはその名の通りZodにしか対応しておらず、書き方もHonoから大きく変えることになり使いづらいです。TypiaはZodよりも高速なので[^1]、できることならばTypiaを使いたいところです。そこで、Honoの持つSchemaの型からOpenAPIドキュメントを生成するライブラリを作成しました。
 
 また、型から生成することにより完全なゼロランタイムでOpenAPIドキュメントを生成することができます。
 
-ちなみに、同じように @honojs/zod-openapi が使いづらいということで [Hono OpenAPI](https://github.com/rhinobase/hono-openapi) というライブラリも作成されています。これは Zod の他にも Valibot, Ark, TypeBox に対応していますが、Typia には対応していません。
+ちなみに、同じように @hono/zod-openapi が使いづらいということで [Hono OpenAPI](https://github.com/rhinobase/hono-openapi) というライブラリも作成されています。これは Zod の他にも Valibot, Ark, TypeBox に対応していますが、Typia には対応していません。
 
 ## 使い方
 
@@ -170,7 +170,7 @@ export default defineConfig({
 
 ### Hono app の作成方法
 
-Hono app は`@honojs/typia-validator`を使用することで自動的に型が指定されます。
+Hono app は`@hono/typia-validator`を使用することで自動的に型が指定されます。
 
 注意事項としてはメソッドチェーンの形式で書かないと型が正しく扱われないことです。これは Hono Client も同様なのですが、メソッドチェーンにしないと変数の型がスキーマを表す型にならないためです。
 
@@ -178,7 +178,7 @@ Hono app は`@honojs/typia-validator`を使用することで自動的に型が�
 
 ```typescript
 import { Hono } from 'hono';
-import { typiaValidator } from '@honojs/typia-validator/http';
+import { typiaValidator } from '@hono/typia-validator/http';
 import typia, { type tags } from 'typia';
 
 interface User {
@@ -221,7 +221,7 @@ if文で環境変数を見ているのは開発環境でのみ swagger UI を表
 
 ```typescript
 import { Hono } from 'hono';
-import { typiaValidator } from '@honojs/typia-validator/http';
+import { typiaValidator } from '@hono/typia-validator/http';
 import typia, { type tags } from 'typia';
 
 interface User {
