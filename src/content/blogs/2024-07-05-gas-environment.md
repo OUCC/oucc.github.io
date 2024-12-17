@@ -44,26 +44,15 @@ import GasGeneratorPlugin from 'esbuild-plugin-gas-generator'
 build({
   entryPoints: ['src/index.ts'],
   bundle: true,
-  format: "esm",
+  format: "iife",
   outfile: 'dist/index.js',
-  plugins: [GasGeneratorPlugin()],
+  plugins: [GasGeneratorPlugin({
+    appsscript: "appsscript.json"
+  })],
 }).catch((e) => {
     console.error(e)
     process.exit(1)
 })
-```
-
-さらに、`appsscript.json`を自動でコピーするように次のようなプラグインを足します。
-
-```ts
-const copyAppsScriptPlugin = {
-  name: "copy-appsscript",
-  setup(build) {
-    build.onEnd(async () => {
-      await copyFile('appsscript.json', 'dist/appsscript.json')
-    })
-  }
-}
 ```
 
 esbuildには標準でwatchモードがあります。これを使うとファイルを変更すると自動的にビルドされます。引数で分岐してbuildとwatchを切り替えることができるようにした、最終的なビルドスクリプトは次のようになります。
@@ -78,17 +67,11 @@ async function main() {
     entryPoints: ["src/index.ts"],
     bundle: true,
     outfile: "dist/index.js",
-    format: "esm",
+    format: "iife",
     plugins: [
-      GasGeneratorPlugin(),
-      {
-        name: "copy-appsscript",
-        setup(build) {
-          build.onEnd(async () => {
-            await copyFile("appsscript.json", "dist/appsscript.json")
-          })
-        }
-      }
+      GasGeneratorPlugin({
+        appsscript: "appsscript.json"
+      }),
     ],
   } as const satisfies BuildOptions
 
