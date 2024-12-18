@@ -1,6 +1,6 @@
 ---
 title: Typstで漢数字ナンバリング
-description: 
+description: この記事では、Typstにおける漢数字ナンバリングの仕様と、その際に発生する中国語と日本語の違いによる問題点について解説しています。さらに、それを補正するための文字列置換を活用した簡単な対応策を紹介します。
 category: tech
 author: miyaji
 tags: [advent-calendar, typst]
