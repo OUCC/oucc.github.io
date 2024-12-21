@@ -3,7 +3,7 @@ title: Mermaidのグラフをpdfにする
 description: Mermaidで作成した図表のみのpdfを作成する。
 category: tech
 author: TaPet
-tags: [advent-calendar, Markdown]
+tags: [advent-calendar, markdown]
 ---
 
 この記事は[OUCC Advent Calendar 2024](https://adventar.org/calendars/10655)の21日目の記事です。
