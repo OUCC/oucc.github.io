@@ -6,13 +6,22 @@ author: TaPet
 tags: [advent-calendar, markdown]
 ---
 
+import {Image} from 'astro:assets';
+import mdToPdf from './2024-12-21-Mermaid-to-pdf/md-to-pdf.png';
+import Inkscape from '2024-12-21-Mermaid-to-pdf/Inkscape.png';
+import rsvgConvert from '2024-12-21-Mermaid-to-pdf/rsvg-convert.png';
+import Cairosvg from '2024-12-21-Mermaid-to-pdf/Cairosvg.png';
+import headless1 from '2024-12-21-Mermaid-to-pdf/sample_1.png';
+import headless2 from '2024-12-21-Mermaid-to-pdf/sample_2.png';
+
+
 この記事は[OUCC Advent Calendar 2024](https://adventar.org/calendars/10655)の21日目の記事です。
 
 ## 記事作成後の気づき
 [SVGからPDFへの変換はHeadless Chromeでやろう（と思ったけどやっぱりrsvg-convertでやろう）](https://qiita.com/s417-lama/items/747be70c35204d4e1b39#headless-chrome)の最後にも書いてありましたが、Headless Chromeを使うと、ラスタ画像になっていました。~~(ちゃんと読んでないのが悪い)~~ これでは、この記事の目的は達成できていません。(ラスター画像なら、[mermaid-cli](https://github.com/mermaid-js/mermaid-cli)で作成できる。)
 →svgファイルをいじって、ほかの方法で文字が表示されるようにするしかない？
 
-ほかの方法で、変換できれば記事を更新します。
+ほかの方法で変換できれば記事を更新します。
 
 ---
 
@@ -20,44 +29,39 @@ tags: [advent-calendar, markdown]
 最終的な方法だけ見たい方は、[結論](#結論)を見てください。
 
 ## やりたかったこと
-学校の課題で、$\LaTeX$ でレポートを書く必要がありました。
+学校の課題で、 LaTeXでレポートを書く必要がありました。
 その際、状態遷移図を乗せる必要があったので、Mermaidで簡単に作ってしまおうと思いましたが、作った画像をどう表示させようか悩みました。
-$\LaTeX$にsvgを張るのは面倒 ($\LaTeX$のことをよくわかってない) ので、pdfにして表示しようと思いましたが、うまく変換できませんでした。
+LaTeXにsvgを張るのは面倒 (LaTeXのことをよくわかってない) ので、pdfにして表示しようと思いましたが、うまく変換できませんでした。
 ~~なお、ベクター画像でなければならない理由はない。やりたかっただけ~~
 
 ## 試した方法
-
+pdfは載せられないので、pngに変換して載せます。
 ### Markdown内に書いて、pdfで出力
 いくつかの変換方法を試しましたが、文書として出力されるため、画像のみのpdfは出力できませんでした。
 pdf内にグラフが小さく表示されてしまいます。
 
-
-<img src="2024-12-21-Mermaid-to-pdf/md-to-pdf.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
+<Image src={mdToPdf} alt="" width="600px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/>
 
 ### Mermaid → svg → pdf
 [mermaid-cli](https://github.com/mermaid-js/mermaid-cli) というMermaidをsvg/png/pdfに変換できる、cliアプリケーションが見つかりました。これで、Mermaidをsvgに変換し、それをpdfに変換する方法を試しました。
 #### Inkscape
 Inkscapeで、`inkscape --export-type="pdf" sample.svg`などとして、pdfに変換しようと思いましたが、うまくいかず、黒塗りの画像が出てきてしまいました。mermaid-cliで生成されるsvgには、Inkscapeが想定していない情報も書いてあるようで、そのために処理がうまくいかないようでした。
 
-<img src="2024-12-21-Mermaid-to-pdf/Inkscape.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
-
-
+<Image src={Inkscape} alt="" width="600px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/>
 
 #### 別の方法
 [SVGからPDFへの変換はHeadless Chromeでやろう（と思ったけどやっぱりrsvg-convertでやろう）](https://qiita.com/s417-lama/items/747be70c35204d4e1b39#headless-chrome)を見つけ、そこで紹介されていた、rsvg-convert、Cairosvgは、文字が描画されませんでした。
 
-
-rsvg-convert
-<img src="2024-12-21-Mermaid-to-pdf/rsvg-convert.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
-Cairosvg
-<img src="2024-12-21-Mermaid-to-pdf/Cairosvg.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
+<ul style="display: flex;">
+<il><figure><Image src={rsvgConvert} alt="" width="300px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/><figcaption>rsvg-convert</figcaption></figure></il>
+<il><figure><Image src={Cairosvg} alt="" width="300px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/><figcaption>Cairosvg</figcaption></figure></il>
+</ul>
 
 Headless Chromeでは、ページいっぱいの大きさのグラフが載ったpdfを作成できました。
-(1ページ目)
-<img src="2024-12-21-Mermaid-to-pdf/sample_1.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
-(2ページ目)
-<img src="2024-12-21-Mermaid-to-pdf/sample_2.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
-
+<ul style="display: flex;">
+<il><figure><Image src={headless1} alt="" width="300px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/><figcaption>1ページ目</figcaption></figure></il>
+<il><figure><Image src={headless2} alt="" width="300px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/><figcaption>2ページ目</figcaption></figure></il>
+</ul>
 
 ## 結論
 Mermaidのみを、ファイルに書き、[mermaid-cli](https://github.com/mermaid-js/mermaid-cli)で、svgに変換し、[SVGからPDFへの変換はHeadless Chromeでやろう（と思ったけどやっぱりrsvg-convertでやろう）](https://qiita.com/s417-lama/items/747be70c35204d4e1b39#headless-chrome)で紹介されている、[svg2pdf.bash](https://gist.github.com/s417-lama/84bf66de1096c4587e8187092fb41684)を使って、pdfに変換する。
@@ -65,7 +69,6 @@ Mermaidのみを、ファイルに書き、[mermaid-cli](https://github.com/merm
 
 <details>
 <summary>サンプル</summary>
-
 
 Mermaidファイルの記述
 
@@ -90,8 +93,8 @@ d-->e
 
 出来上がったpdf
 (1ページ目)
-<img src="2024-12-21-Mermaid-to-pdf/sample_1.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
+<Image src={headless1} alt="" width="600px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;" />
 (2ページ目)
-<img src="2024-12-21-Mermaid-to-pdf/sample_2.png" width="25%" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;">
+<Image src={headless2} alt="" width="600px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;" />
 
 </details>
