@@ -13,6 +13,7 @@ import rsvgConvert from '2024-12-21-Mermaid-to-pdf/rsvg-convert.png';
 import Cairosvg from '2024-12-21-Mermaid-to-pdf/Cairosvg.png';
 import headless1 from '2024-12-21-Mermaid-to-pdf/sample_1.png';
 import headless2 from '2024-12-21-Mermaid-to-pdf/sample_2.png';
+import svg from '2024-12-21-Mermaid-to-pdf/sample.svg'
 
 
 この記事は[OUCC Advent Calendar 2024](https://adventar.org/calendars/10655)の21日目の記事です。
@@ -82,19 +83,12 @@ d-->e
 ```
 
 Mermaid
-```mermaid
-graph TD
-a-->b
-a-->c
-b-->d
-c-->e
-d-->e
-```
+<Image src={svg} alt=""/>
 
-出来上がったpdf
-(1ページ目)
-<Image src={headless1} alt="" width="600px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;" />
-(2ページ目)
-<Image src={headless2} alt="" width="600px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;" />
+PDF
+<ul style="display: flex;">
+<il><figure><Image src={headless1} alt="" width="300px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/><figcaption>1ページ目</figcaption></figure></il>
+<il><figure><Image src={headless2} alt="" width="300px" style="padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"/><figcaption>2ページ目</figcaption></figure></il>
+</ul>
 
 </details>
