@@ -18,11 +18,17 @@ import svg from '2024-12-21-Mermaid-to-pdf/sample.svg'
 
 この記事は[OUCC Advent Calendar 2024](https://adventar.org/calendars/10655)の21日目の記事です。
 
+## 追記
+[mermaid-cli](https://github.com/mermaid-js/mermaid-cli)を使って、
+```bash
+mmdc --pdfFit -i input.mmd -o output.pdf
+```
+で行けました。
+[みやじ](https://oucc.org/blog/authors/miyaji/)さんに教えていただきました。ありがとうございます。
+
 ## 記事作成後の気づき
 [SVGからPDFへの変換はHeadless Chromeでやろう（と思ったけどやっぱりrsvg-convertでやろう）](https://qiita.com/s417-lama/items/747be70c35204d4e1b39#headless-chrome)の最後にも書いてありましたが、Headless Chromeを使うと、ラスタ画像になっていました。~~(ちゃんと読んでないのが悪い)~~ これでは、この記事の目的は達成できていません。(ラスター画像なら、[mermaid-cli](https://github.com/mermaid-js/mermaid-cli)で作成できる。)
 →svgファイルをいじって、ほかの方法で文字が表示されるようにするしかない？
-
-ほかの方法で変換できれば記事を更新します。
 
 ---
 
@@ -71,9 +77,9 @@ Mermaidのみを、ファイルに書き、[mermaid-cli](https://github.com/merm
 <details>
 <summary>サンプル</summary>
 
-Mermaidファイルの記述
+Mermaidファイル(sample.mmd)の記述
 
-```sample.mmd
+```mermaid
 graph TD
 a-->b
 a-->c
@@ -82,7 +88,7 @@ c-->e
 d-->e
 ```
 
-Mermaid
+sample.mmdの出力内容
 <Image src={svg} alt=""/>
 
 PDF
