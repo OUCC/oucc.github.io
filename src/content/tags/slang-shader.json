@@ -1,0 +1,14 @@
+{
+  "name": "Slang Shader",
+  "description": "Slangは、モダンで高度な機能を備えたShader言語、およびそれによって記述されたShaderのコンパイラです。独自のグラフィックス・レイヤーを持ち、単一のShaderコードを多様なターゲットで実行可能にします。",
+  "links": [
+    {
+      "url": "https://shader-slang.com/",
+      "text": "The Slang Shading Language - 公式サイト"
+    },
+    {
+      "url": "https://github.com/shader-slang/slang",
+      "text": "Slang - GitHub"
+    }
+  ]
+}
