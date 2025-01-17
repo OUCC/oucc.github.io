@@ -9,6 +9,8 @@ import TagSmallList from './tag/TagSmallList.astro'
 import AuthorIcon from './icon/AuthorIcon.astro'
 import { formatDate } from '@/utils/format-date'
 import '@/styles/remark-link-card.css'
+import TableOfContents from './TableOfContents.astro'
+
 interface Props {
   blog: CollectionEntry<'blogs'>
 }
@@ -20,7 +22,15 @@ const { data: blogMeta } = (await getEntry({
 })) ?? { data: { postDate: new Date(), updateDate: undefined } }
 const tags = await getEntries(blog.data.tags)
 const author = await getEntry(blog.data.author)
-const { Content } = await render(blog)
+const { Content, headings } = await render(blog)
+
+const hasH1 = headings.some((heading) => heading.depth === 1)
+const tocHeadings = hasH1
+  ? headings.filter((heading) => heading.depth <= 2)
+  : headings.filter((heading) => heading.depth <= 3).map((heading) => ({
+      ...heading,
+      depth: heading.depth - 1,
+    }))
 ---
 
 <div class="flex flex-col items-center py-4">
@@ -62,6 +72,7 @@ const { Content } = await render(blog)
     <div class="prose w-full max-w-none break-words pt-6" data-pagefind-body>
       <Content />
     </div>
+    <TableOfContents headings={tocHeadings} />
   </article>
 </div>
 

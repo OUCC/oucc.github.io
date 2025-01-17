@@ -1,0 +1,23 @@
+---
+interface Heading {
+  depth: number
+  slug: string
+  text: string
+}
+
+interface Props {
+  headings: Heading[]
+}
+
+const { headings } = Astro.props
+---
+
+<nav class="fixed top-24 right-5 w-48 bg-gray-100 p-4 border border-gray-300 rounded-lg">
+  <ul>
+    {headings.map((heading) => (
+      <li class={`ml-${heading.depth * 2}`}>
+        <a href={`#${heading.slug}`} class="text-blue-600 hover:underline">{heading.text}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
