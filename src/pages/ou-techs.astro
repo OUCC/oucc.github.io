@@ -1,0 +1,18 @@
+---
+import Hero from '@/components/common/Hero.astro'
+import OutechsCirclesSection from '@/components/ou-techs/OutechsCirclesSection.astro'
+import OutechsIntroSection from '@/components/ou-techs/OutechsIntroSection.astro'
+import Layout from '@/layouts/Layout.astro'
+---
+
+<Layout
+  title="OU Techs"
+  description="阪大の技術系サークルでイベントを開催する団体です"
+  showJoinLink
+>
+  <Hero title="OU Techs" copy="OU Techs とは？" compact />
+  <main>
+    <OutechsIntroSection />
+    <OutechsCirclesSection />
+  </main>
+</Layout>
