@@ -1,0 +1,92 @@
+---
+import type { ComponentProps } from 'astro/types'
+import CircleListItem from './CircleListItem.astro'
+import OuccLogo from '@/assets/oucc.svg'
+import ToolBoxLogo from '@/assets/tool-box-logo.jpg'
+import RainbouLogo from '@/assets/rainbou-logo.png'
+import SairibasuLogo from '@/assets/sairibasu-logo.png'
+import GdscOsakaLogo from '@/assets/gdsc-osaka-logo.jpg'
+import GgcLogo from '@/assets/ggc-logo.png'
+import WanihackaseLogo from '@/assets/wanihackase-logo.png'
+import RobohanLogo from '@/assets/robohan-logo.png'
+
+const circles: ComponentProps<typeof CircleListItem>[] = [
+  {
+    name: 'OUCC',
+    description:
+      'OUCC（大阪大学コンピュータクラブ）は、コンピュータを使ったものづくりに関心を持つ学生が交流するサークルです。最近はゲーム制作やアプリ制作を行っています。',
+    logo: OuccLogo,
+    homepage: 'https://oucc.org',
+    github: 'https://github.com/OUCC',
+    x: 'https://x.com/OUCC',
+  },
+  {
+    name: 'ToolBox',
+    description:
+      '「自由なモノづくり」をテーマにモットーに個性的な作品を製作している、大阪大学公認団体です。電子工作、プログラミングなどをメインに，ハードウェアからソフトウェアまで幅広く自由に活動しています。',
+    logo: ToolBoxLogo,
+    homepage: 'https://outoolbox.wixsite.com/tool',
+    x: 'https://x.com/OuToolbox',
+  },
+  {
+    name: 'RAINBOU',
+    description:
+      'RAINBOUは、大阪大学の競技プログラミング部で、ICPCなど国内外のコンテストで活躍する学生が集まるサークルです。部内では定期的な勉強会やイベントを通じて技術を磨き、初心者から経験者までが互いに切磎琢磨できる環境が整っています。',
+    logo: RainbouLogo,
+    homepage: 'https://rainbou.org',
+    github: 'https://github.com/rainbou-kpr',
+    x: 'https://x.com/rainbou_kpr',
+  },
+  {
+    name: '再履バス同好会 技術部',
+    description:
+      '再履バス同好会とは、再履バス (阪大のキャンパス間連絡バス) を愛でながら様々な企画・提案を行っている大阪大学非公認団体です。技術部では条項人数計測装置の開発などを行っています。',
+    logo: SairibasuLogo,
+    homepage: 'https://sairibus.com/',
+    x: 'https://x.com/sairi_doukoukai',
+    instagram: 'https://www.instagram.com/sairi_doukoukai/',
+  },
+  {
+    name: 'GDG on Campus Osaka',
+    description:
+      'Google Developersのサポートのもと活動をしている大阪大学支部です。現在GDSCは世界の2100以上の大学に展開しています。',
+    logo: GdscOsakaLogo,
+    homepage: 'https://gdsc-osaka.jp/',
+    github: 'https://github.com/gdsc-osaka',
+    x: 'https://x.com/GDSC_osaka',
+    instagram: 'https://www.instagram.com/gdgoc_osaka/',
+  },
+  {
+    name: 'GGC',
+    description:
+      '大阪大学の箕面キャンパスと豊中キャンパスを拠点に活動している言語サークルです。名前のGGCは、語学・言語学サークル（Gogaku Gengogaku Circle）の略です。現在約90名のメンバーが所属しています。',
+    logo: GgcLogo,
+    homepage: 'https://oulcggc.org/',
+    github: 'https://github.com/oulcggc',
+    x: 'https://x.com/oulcggc',
+    instagram: 'https://www.instagram.com/oulcggc/',
+  },
+  {
+    name: 'Wani Hackase',
+    description:
+      'Wani Hackaseは、大阪大学のCTFサークルで、初心者～中級者向けのJeopardy形式CTFや勉強会を通じてサイバーセキュリティ技術を磨く活動を行っています。新入生も年間を通して歓迎されており、興味があれば気軽に参加してスキルアップを目指せる環境が整っています。',
+    logo: WanihackaseLogo,
+    homepage: 'https://wanictf.org/about/',
+    github: 'https://github.com/wani-hackase',
+    x: 'https://x.com/wanictf',
+  },
+  {
+    name: 'Robohan',
+    description:
+      'Robohanは、大阪大学公認のロボット製作団体で、NHK学生ロボコンへの出場や特別賞の受賞などの実績を持ち、優勝を目指して日々ロボット製作に取り組んでいます。新入生も参加できる環境が整っており、実践的な技術やチームワークを学びながら、自らの創造性を活かせる絶好の機会です。',
+    logo: RobohanLogo,
+    homepage: 'https://www.robohan.net/',
+    github: 'https://github.com/RobohanOU',
+    x: 'https://x.com/Robohan_',
+  },
+]
+---
+
+<ul class="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-5">
+  {circles.map((c) => <CircleListItem {...c} />)}
+</ul>
