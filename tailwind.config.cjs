@@ -6,6 +6,7 @@ const colors = {
   secondary: '#f1f2f7',
   discord: '#5865f2',
   peing: '#5eb9ba',
+  marshmallow: '#F3979B',
 }
 
 const dropShadowLight = (color) => `0 4px 8px ${rgba(color, 0.6)}`
@@ -34,6 +35,8 @@ module.exports = {
         'discord-heavy': dropShadowHeavy(colors.discord),
         'peing-light': dropShadowLight(colors.peing),
         'peing-heavy': dropShadowHeavy(colors.peing),
+        'marshmallow-light': dropShadowLight(colors.marshmallow),
+        'marshmallow-heavy': dropShadowHeavy(colors.marshmallow),
       },
       typography: (theme) => ({
         DEFAULT: {
