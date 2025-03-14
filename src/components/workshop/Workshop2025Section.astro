@@ -1,0 +1,90 @@
+---
+import Section from '@/components/common/Section.astro'
+import WorkshopCard from './WorkshopCard.astro'
+
+export interface Item {
+  date: Date
+  title: string
+  description: string
+  place?: string
+}
+
+export function date(
+  month: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
+  date: number,
+  hour?: number,
+  minute?: number,
+) {
+  return hour === undefined
+    ? new Date(2025, month - 1, date)
+    : minute === undefined
+      ? new Date(2025, month - 1, date, hour)
+      : new Date(2025, month - 1, date, hour, minute)
+}
+
+export const items: Item[] = [
+  {
+    date: date(4, 12),
+    title: 'ガイダンス・環境構築',
+    description:
+      '開発に必須のツールであるVSCodeのインストールやPythonの導入などを行います。',
+  },
+  {
+    date: date(4, 21),
+    title: 'Linux (Bash)',
+    description:
+      'サーバや組み込み用途で広く利用されているOSであるLinuxについて学びます。',
+  },
+  {
+    date: date(4, 28),
+    title: 'Git/GitHub',
+    description:
+      'ソースコードの編集履歴管理システムであるGitの基礎を学びます。共同開発に役立ちます。',
+  },
+  {
+    date: date(5, 12),
+    title: 'C# (1日目)',
+    description: 'C#の基礎を学びます。C#はUnityでも使用されています。',
+  },
+  {
+    date: date(5, 19),
+    title: 'C# (2日目)',
+    description: 'C#の基礎を学びます。C#はUnityでも使用されています。',
+  },
+  {
+    date: date(5, 26),
+    title: 'C# (3日目)',
+    description: 'C#の基礎を学びます。C#はUnityでも使用されています。',
+  },
+  {
+    date: date(6, 16),
+    title: 'C# (4日目)',
+    description: 'C#の基礎を学びます。C#はUnityでも使用されています。',
+  },
+]
+
+const dateFormat = new Intl.DateTimeFormat('ja-JP', {
+  weekday: 'short',
+  month: 'numeric',
+  day: 'numeric',
+  // hour: '2-digit',
+  // minute: '2-digit',
+})
+---
+
+<Section background="secondary">
+  <Fragment slot="title">2025年度の講習会</Fragment>
+  <div class="flex flex-col gap-5">
+    <p>
+      2025年度の講習会について情報をまとめています。開始時刻や開催場所などの詳細や他の講習会については随時更新します。是非お気軽にご参加ください！
+    </p>
+    <p>各回1～3時間程度の予定となっています。途中退室も可能です。</p>
+    <ul class="flex flex-wrap gap-5">
+      {
+        items.map(({ date, ...item }) => (
+          <WorkshopCard {...item} date={dateFormat.format(date)} />
+        ))
+      }
+    </ul>
+  </div>
+</Section>
