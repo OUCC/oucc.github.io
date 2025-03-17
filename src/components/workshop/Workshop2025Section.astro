@@ -79,7 +79,7 @@ const dateFormat = new Intl.DateTimeFormat('ja-JP', {
       2025年度の講習会について情報をまとめています。開始時刻や開催場所などの詳細や他の講習会については随時更新します。是非お気軽にご参加ください！
     </p>
     <p>各回1～3時間程度の予定となっています。途中退室も可能です。</p>
-    <ul class="flex flex-wrap gap-5">
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-5">
       {
         items.map(({ date, ...item }) => (
           <WorkshopCard {...item} date={dateFormat.format(date)} />
