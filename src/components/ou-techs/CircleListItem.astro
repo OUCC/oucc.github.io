@@ -5,12 +5,13 @@ import GithubIcon from '@fortawesome/fontawesome-free/svgs/brands/github.svg'
 import XtwitterIcon from '@fortawesome/fontawesome-free/svgs/brands/x-twitter.svg'
 import InstagramIcon from '@fortawesome/fontawesome-free/svgs/brands/instagram.svg'
 import { Image } from 'astro:assets'
+import type { OUTechsCirclesName } from '@/@types/ou-techs-members'
 
 type SvgComponent = typeof import('*.svg').default
 
 interface Props {
   logo: ImageMetadata | SvgComponent
-  name: string
+  name: OUTechsCirclesName
   description: string
   homepage: string
   github?: string

@@ -1,19 +1,46 @@
 ---
 import Icon from '@/components/common/Icon.astro'
+import type { OUTechsCirclesName } from '@/@types/ou-techs-members'
+import { circles } from '../ou-techs/CircleList.astro'
 interface Props {
   title: string
   date: string
   description: string
   place?: string
+  circleNames?: OUTechsCirclesName[]
 }
 
-const { title, date, description, place } = Astro.props
+const { title, date, description, place, circleNames } = Astro.props
+const clubInfos = circles.filter((c) => circleNames?.includes(c.name))
 ---
 
 <li
   class="flex flex-1 flex-col gap-2 rounded-xl border border-slate-300 bg-white p-5 drop-shadow"
 >
   <h2 class="text-xl font-bold">{title}</h2>
+  <p class="flex items-center gap-2 text-slate-600">
+    {
+      circleNames && clubInfos ? (
+        <span class="flex items-center gap-1">
+          <span>
+            by
+            {clubInfos
+              .map((c) => (
+                <a
+                  href={c.homepage}
+                  target="_blank"
+                  class="aspect-square rounded-full p-1 hover:bg-gray-200/100"
+                  title={`${c.name}公式サイト`}
+                >
+                  {c.name}
+                </a>
+              ))
+              .reduce((prev, curr) => [prev, ' & ', curr])}
+          </span>
+        </span>
+      ) : null
+    }
+  </p>
   <p class="flex items-center gap-2 text-slate-600">
     <Icon name="clock" alt="開催日時" class="w-4" />
     <span>{date}</span>
