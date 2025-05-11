@@ -4,7 +4,7 @@ description: 大規模言語モデル(LLM)がキャラクター表現に「実�
 category: tech
 author: herring101
 tags:
-  - [llm]
+  - llm
 ---
 
 # まるで生きているみたい？ LLM がキャラクター表現にもたらす革命的進化とは
