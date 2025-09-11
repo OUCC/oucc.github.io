@@ -3,7 +3,7 @@ title: Cygamesハッカソン感想記事
 description: Cygamesハッカソンを開催して参加してきました。その感想を書こうかな
 author: yuuma
 category: club
-tags: [Unity]
+tags: [unity]
 ---
 ## はじめに
 8/15～8/29の2週間で株式会社Cygamesの協賛の元ハッカソンをやってきました\( °∀° )/。テーマは学園祭で展示するゲームということでOUCCの内部事情が浮き出てますね。
