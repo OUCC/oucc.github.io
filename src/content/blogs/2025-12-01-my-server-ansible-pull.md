@@ -1,6 +1,6 @@
 ---
 title: 自宅サーバーをAnsible Pullを使ってGitHubから構成管理する
-description: ""
+description: "自宅サーバー(Raspberry Pi 5)をAnsible Pullでコード管理する「Pull型」デプロイ環境の構築録。BunやDockerを活用した自動ロールバック・事前テスト機構の実装についても解説します。"
 category: tech
 author: miyaji
 tags: [advent-calendar, ansible]
@@ -171,4 +171,3 @@ Ansible の Playbook は `service` モジュールを使って systemd 経由で
 
 そのため、しばらくはこの Ansible Pull + 自作ラッパーの構成を育てていくつもりです。手作りの楽しさと実用性のバランスが良く、今のところとても気に入っています。
 
-```
