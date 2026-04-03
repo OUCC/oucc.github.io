@@ -1,0 +1,49 @@
+---
+import Section from '@/components/common/Section.astro'
+import WorkshopCard from './WorkshopCard.astro'
+import type { ComponentProps } from 'astro/types'
+
+export interface Item
+  extends Omit<ComponentProps<typeof WorkshopCard>, 'date'> {
+  date?: Date
+}
+export function date(
+  month: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12,
+  date: number,
+  hour?: number,
+  minute?: number,
+) {
+  return hour === undefined
+    ? new Date(2026, month - 1, date)
+    : minute === undefined
+      ? new Date(2026, month - 1, date, hour)
+      : new Date(2026, month - 1, date, hour, minute)
+}
+
+export const items: Item[] = []
+
+const dateFormat = new Intl.DateTimeFormat('ja-JP', {
+  weekday: 'short',
+  month: 'numeric',
+  day: 'numeric',
+  // hour: '2-digit',
+  // minute: '2-digit',
+})
+---
+
+<Section background="secondary">
+  <Fragment slot="title">2026年度のOUCCの講習会</Fragment>
+  <div class="flex flex-col gap-5">
+    <p>
+      2026年度の講習会をサーオリ後に発表します。
+      開始時刻や開催場所などの詳細ついては随時更新します。是非お気軽にご参加ください！
+    </p>
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-5">
+      {
+        items.map(({ date, ...item }) => (
+          <WorkshopCard {...item} date={dateFormat.format(date)} />
+        ))
+      }
+    </ul>
+  </div>
+</Section>
