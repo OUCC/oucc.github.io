@@ -45,34 +45,34 @@ export const items: Item[] = [
   {
     date: date(5, 12, 18, 30),
     title: 'C#/Unity①',
-    place: '未定',
+    place: undefined,
     description:
       'ゲーム開発をはじめ幅広い用途で用いられる言語であるC#を扱います。本格的なゲームエンジンであるUnityを使用してゲーム開発を行います。',
   },
   {
     date: date(5, 13, 18, 30),
     title: 'Python①',
-    place: '未定',
+    place: undefined,
     description: '文法がシンプルで学びやすい言語であるPythonを扱います。',
   },
   {
     date: date(5, 19, 18, 30),
     title: 'C#/Unity②',
-    place: '未定',
+    place: undefined,
     description:
       'ゲーム開発をはじめ幅広い用途で用いられる言語であるC#を扱います。本格的なゲームエンジンであるUnityを使用してゲーム開発を行います。',
   },
   {
     date: date(5, 20, 18, 30),
     title: 'Python②',
-    place: '未定',
+    place: undefined,
     description:
       'Pythonのゲームライブラリである、Pyxelを使用して簡単なゲームを開発することを目指します。',
   },
   {
     date: date(5, 26, 18, 30),
     title: 'C#/Unity③',
-    place: '未定',
+    place: undefined,
     description:
       'ゲーム開発をはじめ幅広い用途で用いられる言語であるC#を扱います。本格的なゲームエンジンであるUnityを使用してゲーム開発を行います。',
   },
@@ -80,7 +80,7 @@ export const items: Item[] = [
     date: undefined,
     title: 'C/C++',
     circleNames: ['RAINBOU'],
-    place: '未定',
+    place: undefined,
     description:
       'OSや組み込みシステムなど、高速な処理が求められる分野で広く用いられる言語であるC/C++を扱います。阪大の競技プログラミングサークルであるRAINBOUが担当します',
   },
@@ -110,7 +110,7 @@ const dateFormatWithoutTime = new Intl.DateTimeFormat('ja-JP', {
     </p>
     <ul class="grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-5">
       {
-        items.map(({ date, ...item }) => (
+        items.map(({ date, place, ...item }) => (
           <WorkshopCard
             {...item}
             date={
@@ -120,6 +120,7 @@ const dateFormatWithoutTime = new Intl.DateTimeFormat('ja-JP', {
                   ? dateFormat.format(date)
                   : dateFormatWithoutTime.format(date)
             }
+            place={place ?? '未定'}
           />
         ))
       }
