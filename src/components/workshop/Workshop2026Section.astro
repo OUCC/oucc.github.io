@@ -50,7 +50,9 @@ const dateFormatWithoutTime = new Intl.DateTimeFormat('ja-JP', {
           <WorkshopCard
             {...item}
             date={
-              date?.getHours()
+              date === undefined
+                ? '未定'
+                : date !== undefined && date.getHours() !== 0
                 ? dateFormat.format(date)
                 : dateFormatWithoutTime.format(date)
             }
