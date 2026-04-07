@@ -20,7 +20,71 @@ export function date(
       : new Date(2026, month - 1, date, hour, minute)
 }
 
-export const items: Item[] = []
+export const items: Item[] = [
+  {
+    date: date(4, 20, 18, 30),
+    title: 'ガイダンス・環境構築',
+    place: '共C306',
+    description:
+      'OUCCの紹介と環境構築、開発に必要なツールの使い方の講習(基礎講習)を行います。ガイダンス・環境構築は両日とも内容は同一です。',
+  },
+  {
+    date: date(4, 23, 18, 30),
+    title: 'ガイダンス・環境構築',
+    place: '共C306',
+    description:
+      'OUCCの紹介と環境構築、開発に必要なツールの使い方の講習(基礎講習)を行います。ガイダンス・環境構築は両日とも内容は同一です。',
+  },
+  {
+    date: date(4, 28, 18, 30),
+    title: '基礎講習(Git, shellなど)',
+    place: '豊中共創棟B棟',
+    description:
+      '豊中共創棟B棟は場所がわかりづらいため、全学教育共通棟前で集合してから移動します。',
+  },
+  {
+    date: date(5, 12, 18, 30),
+    title: 'C#/Unity①',
+    place: '未定',
+    description:
+      'ゲーム開発をはじめ幅広い用途で用いられる言語であるC#を扱います。本格的なゲームエンジンであるUnityを使用してゲーム開発を行います。',
+  },
+  {
+    date: date(5, 13, 18, 30),
+    title: 'Python①',
+    place: '未定',
+    description: '文法がシンプルで学びやすい言語であるPythonを扱います。',
+  },
+  {
+    date: date(5, 19, 18, 30),
+    title: 'C#/Unity②',
+    place: '未定',
+    description:
+      'ゲーム開発をはじめ幅広い用途で用いられる言語であるC#を扱います。本格的なゲームエンジンであるUnityを使用してゲーム開発を行います。',
+  },
+  {
+    date: date(5, 20, 18, 30),
+    title: 'Python②',
+    place: '未定',
+    description:
+      'Pythonのゲームライブラリである、Pyxelを使用して簡単なゲームを開発することを目指します。',
+  },
+  {
+    date: date(5, 26, 18, 30),
+    title: 'C#/Unity③',
+    place: '未定',
+    description:
+      'ゲーム開発をはじめ幅広い用途で用いられる言語であるC#を扱います。本格的なゲームエンジンであるUnityを使用してゲーム開発を行います。',
+  },
+  {
+    date: undefined,
+    title: 'C/C++',
+    circleNames: ['RAINBOU'],
+    place: '未定',
+    description:
+      'OSや組み込みシステムなど、高速な処理が求められる分野で広く用いられる言語であるC/C++を扱います。阪大の競技プログラミングサークルであるRAINBOUが担当します',
+  },
+]
 
 const dateFormat = new Intl.DateTimeFormat('ja-JP', {
   weekday: 'short',
@@ -41,7 +105,7 @@ const dateFormatWithoutTime = new Intl.DateTimeFormat('ja-JP', {
   <Fragment slot="title">2026年度のOUCCの講習会</Fragment>
   <div class="flex flex-col gap-5">
     <p>
-      2026年度の講習会をサーオリ後に発表します。
+      2026年度の講習会について情報をまとめています。
       開始時刻や開催場所などの詳細ついては随時更新します。是非お気軽にご参加ください！
     </p>
     <ul class="grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-5">
@@ -53,8 +117,8 @@ const dateFormatWithoutTime = new Intl.DateTimeFormat('ja-JP', {
               date === undefined
                 ? '未定'
                 : date !== undefined && date.getHours() !== 0
-                ? dateFormat.format(date)
-                : dateFormatWithoutTime.format(date)
+                  ? dateFormat.format(date)
+                  : dateFormatWithoutTime.format(date)
             }
           />
         ))
