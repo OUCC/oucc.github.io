@@ -1,14 +1,16 @@
-<div
-  class="mt-12 flex w-full flex-col gap-5 rounded-xl border border-slate-300 bg-white p-5 pt-0 drop-shadow-contrast"
->
-  <div class="flex justify-center">
-    <div
-      class="-mb-12 -translate-y-12 rounded-full border border-slate-300 bg-white p-4 drop-shadow-contrast"
-    >
-      <slot name="icon" />
+<div class="drop-shadow-contrast">
+  <div
+    class="mt-12 flex w-full flex-col gap-5 rounded-xl border border-slate-300 bg-white p-5 pt-0"
+  >
+    <div class="flex justify-center">
+      <div
+        class="-mb-12 -translate-y-12 rounded-full border border-slate-300 bg-white p-4 drop-shadow-contrast"
+      >
+        <slot name="icon" />
+      </div>
     </div>
-  </div>
-  <div class="text-justify-ja">
-    <slot />
+    <div class="text-justify-ja">
+      <slot />
+    </div>
   </div>
 </div>
