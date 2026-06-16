@@ -79,8 +79,8 @@ const { Content } = await render(blog)
     .prose code:not(pre > *)::before {
       @apply content-none;
     }
-    .prose
-      > *:where(:not(h1, h2, h3, h4, h5, h6, pre, iframe, img, svg, table)) {
+
+    .prose > *:where(:not(pre, iframe, img, svg, table)) {
       @apply mx-4;
     }
     .prose > *:where(h1, h2) {
