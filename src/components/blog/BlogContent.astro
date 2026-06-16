@@ -32,9 +32,9 @@ const { Content } = await render(blog)
     {blog.data.title}
   </h1>
   <article
-    class="my-10 w-full max-w-padded-container bg-white p-4 md:rounded-2xl"
+    class="my-10 w-full max-w-padded-container bg-white p-8 md:rounded-2xl"
   >
-    <div class="mb-1 p-1 text-lg">
+    <div class="mb-1 pb-1 text-lg">
       <a
         class="flex items-center gap-2 hover:underline"
         href={`/blog/authors/${author.id}/`}
@@ -42,7 +42,7 @@ const { Content } = await render(blog)
       >
     </div>
     <TagSmallList blogCategory={blog.data.category} tags={tags} />
-    <div class="flex gap-3 p-2 text-sm text-gray-700">
+    <div class="flex gap-3 py-2 text-sm text-gray-700">
       {
         blogMeta.updateDate && (
           <div>
@@ -80,15 +80,12 @@ const { Content } = await render(blog)
       @apply content-none;
     }
 
-    .prose > *:where(:not(pre, iframe, img, svg, table)) {
-      @apply mx-4;
-    }
     .prose > *:where(h1, h2) {
       @apply border-b-2;
     }
 
     .prose > table {
-      @apply block w-full overflow-x-auto whitespace-nowrap px-2;
+      @apply block w-full overflow-x-auto whitespace-nowrap;
     }
   }
 </style>
