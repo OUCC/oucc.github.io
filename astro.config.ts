@@ -10,7 +10,11 @@ import RemarkLinkRewrite, {
 import { getFormatUrl } from './src/utils/validateUrl'
 import pagefind from './src/integrations/pagefind'
 
-const { SITE_URL } = loadEnv(process.env.NODE_ENV!, process.cwd(), '')
+const { SITE_URL } = loadEnv(
+  process.env.NODE_ENV ?? 'development',
+  process.cwd(),
+  '',
+)
 
 // https://astro.build/config
 export default defineConfig({
