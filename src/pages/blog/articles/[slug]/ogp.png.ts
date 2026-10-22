@@ -16,5 +16,9 @@ export async function GET({
 }: APIContext<Awaited<ReturnType<typeof getStaticPaths>>[number]['props']>) {
   const author = await getEntry(blog.data.author)
   const ogp = await createOgImage(blog.data.title, author.data.name)
-  return new Response(ogp)
+  return new Response(ogp, {
+    headers: {
+      'Content-Type': 'image/png',
+    },
+  })
 }

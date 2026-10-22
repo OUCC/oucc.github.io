@@ -91,4 +91,4 @@ Windowsにはライト・ダークテーマとは別にアクセントカラー�
 
 https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/whats-new/net90?view=netdesktop-9.0
 
-https://github.com/dotnet/wpf/blob/add-fluent-usage-documentation/Documentation/docs/using-fluent.md
+https://github.com/dotnet/wpf/blob/main/Documentation/docs/using-fluent.md

@@ -33,12 +33,12 @@ const composedTitle = title === undefined ? siteName : `${title} | ${siteName}`
 <!doctype html>
 <html lang="ja" prefix="og: https://ogp.me/ns/website#">
   <head>
-    <GoogleAnalytics />
+    {import.meta.env.PROD && <GoogleAnalytics />}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="icon" href="/favicon.webp" />
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
     <title>{composedTitle}</title>
     <slot name="header" />
     <meta property="og:url" content={canonicalUrl} />

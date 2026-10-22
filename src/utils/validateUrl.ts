@@ -14,7 +14,7 @@ export function getFormatUrl(base: string = import.meta.env.SITE) {
 
     if (url!.endsWith('/')) return path
     // ファイル拡張子
-    if (url!.match(/\.(a-zA-Z0-9)+$/)) return path
+    if (url!.match(/\.[a-zA-Z0-9]+$/)) return path
 
     return hash ? `${url}/#${hash}` : url + '/'
   }

@@ -9,7 +9,8 @@ type BlogMeta = {
   postDate: string
   updateDate?: string
 }
-const gitDiffs = validateArgs(chunkArray(process.argv.slice(2)))
+const rawArgs = process.argv.slice(2).filter((arg) => arg !== '--')
+const gitDiffs = validateArgs(chunkArray(rawArgs))
 if (gitDiffs === null) process.exit(1)
 updateBlogMeta(gitDiffs)
 
@@ -163,6 +164,11 @@ function predicateTargetFiles([status, file]: readonly [
 }
 
 function chunkArray(array: string[]) {
+  // 手動実行時など、引数に直接ファイルパスのみが渡された場合に対応
+  if (array.length > 0 && array.every((val) => val.startsWith('src/content'))) {
+    return array.map((filePath) => ['M', filePath])
+  }
+
   const result: string[][] = []
   let tempArray: string[] = []
 

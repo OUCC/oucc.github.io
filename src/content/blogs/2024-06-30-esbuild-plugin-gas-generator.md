@@ -14,7 +14,7 @@ ESModuleとタイトルに書きましたがESModuleをバンドルできると�
 
 https://github.com/miyaji255/esbuild-plugin-gas-generator
 
-https://www.npmjs.com/package/esbuild-plugin-gas-generator
+[npm: esbuild-plugin-gas-generator](https://www.npmjs.com/package/esbuild-plugin-gas-generator)
 
 ## 使い方
 
