@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config'
 import { loadEnv } from 'vite'
+import astroExpressiveCode, { definePlugin } from 'astro-expressive-code'
 import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
 import mdx from '@astrojs/mdx'
@@ -9,6 +10,25 @@ import RemarkLinkRewrite, {
 } from 'remark-link-rewrite'
 import { getFormatUrl } from './src/utils/validateUrl'
 import pagefind from './src/integrations/pagefind'
+
+// lang:filename 記法をタイトルに変換
+const colonFilenamePlugin = () =>
+  definePlugin({
+    name: 'support-colon-filename',
+    hooks: {
+      preprocessLanguage: ({ codeBlock }) => {
+        if (codeBlock.language.includes(':')) {
+          const colonIdx = codeBlock.language.indexOf(':')
+          const lang = codeBlock.language.slice(0, colonIdx)
+          const title = codeBlock.language.slice(colonIdx + 1)
+          codeBlock.language = lang
+          if (title) {
+            codeBlock.props.title = title
+          }
+        }
+      },
+    },
+  })
 
 const { SITE_URL } = loadEnv(
   process.env.NODE_ENV ?? 'development',
@@ -58,5 +78,14 @@ export default defineConfig({
       ],
     ],
   },
-  integrations: [tailwind(), pagefind(), sitemap(), mdx()],
+  integrations: [
+    astroExpressiveCode({
+      plugins: [colonFilenamePlugin()],
+      themes: ['material-theme-darker'],
+    }),
+    tailwind(),
+    pagefind(),
+    sitemap(),
+    mdx(),
+  ],
 })

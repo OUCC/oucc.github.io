@@ -76,9 +76,7 @@ cron ではなく systemd の timer を使用して `ansible-pull` を定期実�
 
 構成としては、実行用の `.service` と、スケジュール用の `.timer` をペアで作成します。
 
-`my-server-ansible-pull.service`:
-
-```ini
+```ini:my-server-ansible-pull.service
 [Unit]
 Description=CI 成功コミットのみ反映する ansible-pull デプロイ
 
@@ -90,9 +88,7 @@ User=root
 Group=root
 ```
 
-`my-server-ansible-pull.timer`:
-
-```ini
+```ini:my-server-ansible-pull.timer
 [Unit]
 Description=定期デプロイチェック (my-server)
 
